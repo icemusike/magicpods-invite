@@ -2740,12 +2740,30 @@ body {
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 1.5rem;
-    line-height: 1.1;
+    line-height: 1.2;
     background: linear-gradient(135deg, #ffffff, #e2e8f0);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.webinar-hero .hero-title .gradient-text {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b, #ec4899, #db2777);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-pulse 3s ease-in-out infinite;
+    display: inline-block;
+}
+
+@keyframes gradient-pulse {
+    0%, 100% { 
+        background: linear-gradient(135deg, #fbbf24, #f59e0b, #ec4899, #db2777);
+    }
+    50% { 
+        background: linear-gradient(135deg, #f59e0b, #ec4899, #db2777, #fbbf24);
+    }
 }
 
 .hero-lead {
@@ -2763,14 +2781,18 @@ body {
     display: grid;
     grid-template-columns: 1.3fr 1fr;
     gap: 5rem;
-    align-items: start;
+    align-items: center;
     max-width: 1400px;
     margin: 0 auto;
+    min-height: 600px;
 }
 
 /* Webinar Video Styling */
 .webinar-hero .video-container {
     position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .webinar-hero .video-wrapper {
@@ -2830,6 +2852,10 @@ body {
     min-width: 420px;
     transform: perspective(1000px) rotateY(-2deg);
     transition: all 0.4s ease;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .optin-card:hover {
@@ -3084,6 +3110,9 @@ body {
         0 4px 12px rgba(0, 0, 0, 0.04),
         inset 0 1px 0 rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
 }
 
 .bullet-item::before {
@@ -3129,6 +3158,35 @@ body {
     box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
 }
 
+/* Bullet Icon Styling */
+.bullet-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b, #ec4899, #db2777);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 8px 25px rgba(251, 191, 36, 0.3);
+    transition: all 0.3s ease;
+}
+
+.bullet-icon i {
+    font-size: 1.5rem;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.bullet-item:hover .bullet-icon {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(251, 191, 36, 0.4);
+}
+
+.bullet-item:hover .bullet-icon i {
+    transform: scale(1.1);
+}
+
 /* Add icon styling for bullet items */
 .bullet-item strong {
     color: transparent;
@@ -3137,34 +3195,14 @@ body {
     background-clip: text;
     font-weight: 800;
     font-size: 1.1rem;
-    position: relative;
-    display: inline-block;
-}
-
-.bullet-item strong::before {
-    content: '✨';
-    position: absolute;
-    left: -2rem;
-    top: 0;
-    background: linear-gradient(135deg, #fbbf24, #ec4899);
-    font-size: 1.2rem;
-    animation: sparkle 2s ease-in-out infinite;
-}
-
-@keyframes sparkle {
-    0%, 100% { 
-        transform: scale(1) rotate(0deg);
-        opacity: 0.8;
-    }
-    50% { 
-        transform: scale(1.2) rotate(180deg);
-        opacity: 1;
-    }
 }
 
 /* Enhanced bullet item content */
-.bullet-item {
-    position: relative;
+.bullet-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }
 
 .bullet-item > * {
@@ -3184,55 +3222,95 @@ body {
 
 /* Webinar Meta */
 .webinar-meta {
-    padding: 4rem 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    padding: 6rem 0;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.webinar-meta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="meta-stars" width="30" height="30" patternUnits="userSpaceOnUse"><circle cx="15" cy="15" r="1" fill="%23ffffff" opacity="0.08"/><circle cx="5" cy="25" r="0.5" fill="%23fbbf24" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23meta-stars)"/></svg>') repeat;
+    pointer-events: none;
+}
+
+.webinar-meta .container {
+    position: relative;
+    z-index: 2;
 }
 
 .meta-details {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    max-width: 600px;
-    margin: 0 auto 3rem;
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    gap: 3rem;
+    max-width: 800px;
+    margin: 0 auto 4rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    padding: 3rem;
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .meta-details dt {
-    font-weight: 700;
-    color: var(--primary-color);
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .meta-details dd {
-    color: var(--text-primary);
+    color: white;
     font-weight: 600;
-    font-size: 1rem;
+    font-size: 1.25rem;
     margin: 0;
+    line-height: 1.4;
 }
 
-.primary-cta {
+.webinar-meta .primary-cta {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, #fbbf24, #f59e0b, #ec4899, #db2777);
     color: white;
-    padding: 1.25rem 2.5rem;
-    border-radius: 12px;
+    padding: 1.5rem 3rem;
+    border-radius: 20px;
     text-decoration: none;
-    font-size: 1.125rem;
-    font-weight: 700;
-    transition: all 0.3s ease;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    font-size: 1.25rem;
+    font-weight: 800;
+    transition: all 0.4s ease;
+    box-shadow: 
+        0 20px 40px rgba(251, 191, 36, 0.3),
+        0 8px 25px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
-.primary-cta:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+.webinar-meta .primary-cta:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 30px 60px rgba(251, 191, 36, 0.4),
+        0 15px 35px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.webinar-meta .primary-cta i {
+    font-size: 1.3rem;
 }
 
 /* Why Reserve Section */
@@ -3660,9 +3738,25 @@ body {
         font-size: 2.2rem;
     }
     
-    .bullet-item strong::before {
-        left: -1.5rem;
-        font-size: 1rem;
+    .bullet-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+    
+    .bullet-icon {
+        align-self: center;
+    }
+    
+    .webinar-meta .meta-details {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 2rem;
+    }
+    
+    .webinar-meta .primary-cta {
+        padding: 1.25rem 2rem;
+        font-size: 1.1rem;
     }
     
     .step-number {
@@ -3742,11 +3836,29 @@ body {
     .bullet-item {
         padding: 1.5rem;
         border-radius: 24px;
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
     }
     
-    .bullet-item strong::before {
-        left: -1.2rem;
-        font-size: 0.9rem;
+    .bullet-icon {
+        width: 50px;
+        height: 50px;
+        align-self: center;
+    }
+    
+    .bullet-icon i {
+        font-size: 1.2rem;
+    }
+    
+    .webinar-meta .meta-details {
+        padding: 1.5rem;
+        gap: 1.5rem;
+    }
+    
+    .webinar-meta .primary-cta {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
     }
     
     .footer-links {
