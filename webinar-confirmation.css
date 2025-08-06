@@ -1,0 +1,876 @@
+/* =================================
+   WEBINAR CONFIRMATION PAGE STYLES
+   ================================= */
+
+/* CSS Variables */
+:root {
+    --primary-color: #6366f1;
+    --primary-dark: #4f46e5;
+    --secondary-color: #f59e0b;
+    --success-color: #10b981;
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+    --text-light: #9ca3af;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f9fafb;
+    --bg-accent: #f3f4f6;
+    --border-color: #e5e7eb;
+    --border-light: #f3f4f6;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --gradient-primary: linear-gradient(135deg, #fbbf24, #f59e0b, #ec4899, #db2777);
+    --gradient-hero: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-success: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0.4;
+        transform: scale(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* 1. Enhanced Header */
+.confirm-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+    background-size: 400% 400%;
+    animation: gradient-shift 8s ease-in-out infinite;
+    color: white;
+    text-align: center;
+    padding: 6rem 2rem;
+    position: relative;
+    overflow: hidden;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23ffffff" opacity="0.1"/><circle cx="5" cy="5" r="0.5" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>') repeat;
+    pointer-events: none;
+}
+
+.confirm-header::after {
+    content: '🎉';
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 3rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.confirm-header .container {
+    position: relative;
+    z-index: 2;
+    animation: fadeInUp 1s ease-out;
+}
+
+.confirm-header h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #ffffff, #f1f5f9, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+.confirm-header .status {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: inline-block;
+    font-weight: 600;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. Enhanced Check Email */
+.check-email {
+    background: white;
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.check-email::before {
+    content: '📧';
+    position: absolute;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 4rem;
+    background: white;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.check-email h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.check-email p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* 3. Enhanced Countdown */
+.countdown {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.countdown h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+}
+
+#confirm-timer {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#confirm-timer .timer-item {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(99, 102, 241, 0.1);
+    min-width: 120px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+#confirm-timer .timer-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    background-size: 200% 100%;
+    animation: gradient-shift 3s ease-in-out infinite;
+}
+
+#confirm-timer .timer-item:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(99, 102, 241, 0.2);
+}
+
+#confirm-timer .timer-number {
+    display: block;
+    font-size: 3rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+#confirm-timer .timer-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+/* 4. Enhanced Video Section */
+.video-intro {
+    background: white;
+    padding: 6rem 2rem;
+    text-align: center;
+    position: relative;
+}
+
+.video-intro h2 {
+    font-size: 3rem;
+    font-weight: 800;
+    max-width: 800px;
+    margin: 0 auto 2rem;
+    background: linear-gradient(135deg, #1e293b, #475569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+.video-intro p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.7;
+}
+
+.video-intro .video-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 
+        0 40px 80px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(45deg, #fbbf24, #f59e0b, #ec4899, #db2777);
+    padding: 6px;
+    transition: all 0.3s ease;
+}
+
+.video-intro .video-wrapper:hover {
+    transform: translateY(-10px);
+    box-shadow: 
+        0 50px 100px rgba(0, 0, 0, 0.2),
+        0 0 50px rgba(251, 191, 36, 0.3);
+}
+
+.video-intro .video-wrapper > div {
+    border-radius: 18px;
+    overflow: hidden;
+    background: #000;
+}
+
+/* 5. Enhanced Webinar Details */
+.webinar-details {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 6rem 2rem;
+    position: relative;
+}
+
+.webinar-details .container {
+    max-width: 800px;
+}
+
+.webinar-details h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+    position: relative;
+    padding-left: 1rem;
+}
+
+.webinar-details h3::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+}
+
+.webinar-details dl {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 1.5rem 3rem;
+    margin-bottom: 3rem;
+}
+
+.webinar-details dt {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.webinar-details dd {
+    font-weight: 500;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-left: 0;
+}
+
+.webinar-details p {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+/* 6. Enhanced Next Steps */
+.next-steps {
+    background: white;
+    padding: 6rem 2rem;
+}
+
+.next-steps h2 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 4rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.next-steps .step {
+    background: linear-gradient(135deg, #ffffff, #f8fafc);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    margin-bottom: 3rem;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(99, 102, 241, 0.05);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    animation: slideInLeft 0.6s ease-out;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.next-steps .step::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+    background: var(--gradient-primary);
+    transition: width 0.3s ease;
+}
+
+.next-steps .step:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.12),
+        0 0 0 1px rgba(99, 102, 241, 0.1);
+}
+
+.next-steps .step:hover::before {
+    width: 12px;
+}
+
+.next-steps .step-num {
+    position: static;
+    width: 70px;
+    height: 70px;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 2rem;
+    flex-shrink: 0;
+    box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
+}
+
+.step-content {
+    flex: 1;
+}
+
+.next-steps .step h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.next-steps .step p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.next-steps .step ul {
+    margin: 1.5rem 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.next-steps .step li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+.next-steps .step li::before {
+    content: '✨';
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
+}
+
+/* Button Styles */
+.calendar-buttons, .share-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.next-steps .btn {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.next-steps .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.next-steps .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+.next-steps .btn:hover::before {
+    left: 100%;
+}
+
+/* Form Styles */
+.next-steps form {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-top: 2rem;
+    border: 2px solid rgba(99, 102, 241, 0.1);
+    display: grid;
+    gap: 1rem;
+}
+
+.next-steps form label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.next-steps form input, .next-steps form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    background: white;
+}
+
+.next-steps form input:focus, .next-steps form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    transform: translateY(-2px);
+}
+
+.next-steps form button.submit {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.next-steps form button.submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+}
+
+.next-steps .tip {
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+/* 7. Enhanced Hosts Section */
+.hosts {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 6rem 2rem;
+}
+
+.hosts h2 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 4rem;
+    color: var(--text-primary);
+}
+
+.host-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.host-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.host-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--gradient-primary);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.host-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 
+        0 30px 60px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(99, 102, 241, 0.1);
+}
+
+.host-card:hover::before {
+    transform: scaleX(1);
+}
+
+.host-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 2rem;
+    border: 4px solid white;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.host-card:hover .host-image {
+    transform: scale(1.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.host-card h3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.host-card .role {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.host-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+/* 8. Live Bonus Reminder */
+.live-bonus-reminder {
+    background: var(--gradient-primary);
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.live-bonus-reminder::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="sparkles" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23sparkles)"/></svg>') repeat;
+    animation: float 6s ease-in-out infinite;
+}
+
+.live-bonus-reminder .reminder {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem 3rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    animation: pulse 3s ease-in-out infinite;
+}
+
+/* 9. Enhanced Footer */
+.confirm-footer {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    padding: 4rem 2rem 2rem;
+    text-align: center;
+    color: white;
+    position: relative;
+}
+
+.confirm-footer .disclaimer {
+    font-size: 1rem;
+    opacity: 0.8;
+    margin: 0;
+}
+
+.confirm-footer a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.confirm-footer a:hover {
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .confirm-header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .confirm-header {
+        padding: 4rem 1rem;
+        min-height: 50vh;
+    }
+    
+    #confirm-timer {
+        gap: 1rem;
+    }
+    
+    #confirm-timer .timer-item {
+        min-width: 100px;
+        padding: 1.5rem 1rem;
+    }
+    
+    #confirm-timer .timer-number {
+        font-size: 2rem;
+    }
+    
+    .next-steps .step {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .next-steps .step-num {
+        margin: 0 auto 1.5rem;
+    }
+    
+    .video-intro h2 {
+        font-size: 2rem;
+    }
+    
+    .host-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .calendar-buttons, .share-buttons {
+        justify-content: center;
+    }
+    
+    .container {
+        padding: 0 1rem;
+    }
+    
+    .webinar-details dl {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .confirm-header h1 {
+        font-size: 2rem;
+    }
+    
+    .video-intro h2 {
+        font-size: 1.75rem;
+    }
+    
+    .next-steps h2, .hosts h2 {
+        font-size: 2rem;
+    }
+    
+    #confirm-timer .timer-item {
+        min-width: 80px;
+        padding: 1rem 0.5rem;
+    }
+    
+    #confirm-timer .timer-number {
+        font-size: 1.5rem;
+    }
+}

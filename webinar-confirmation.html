@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webinar Registration Confirmed - MagicPods AI</title>
+    <meta name="description" content="Your seat is confirmed for the MagicPods AI launch webinar. Get ready to see AI turn text into podcasts live!">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="webinar-confirmation.css">
+</head>
+<body>
+
+    <!-- 1. Header Section -->
+    <header class="confirm-header">
+        <div class="container">
+            <h1>Registration Confirmed</h1>
+            <p class="status">Your spot is reserved</p>
+        </div>
+    </header>
+
+    <!-- 2. Check Email Section -->
+    <section class="check-email">
+        <div class="container">
+            <h2>Check Your Email</h2>
+            <p>for your unique join link and access details</p>
+        </div>
+    </section>
+
+    <!-- 3. Countdown Timer Section -->
+    <section class="countdown" aria-label="Webinar Starts In">
+        <div class="container">
+            <h2>Webinar Starts In</h2>
+            <div class="timer" id="confirm-timer">
+                <!-- JS will populate this -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Video Intro Section -->
+    <section class="video-intro">
+        <div class="container">
+            <h2>You’re All Set for the MagicPods AI Launch Webinar!</h2>
+            <p>Watch this short video and get ready to see AI turn any text into binge-worthy podcasts—plus learn how you could win FREE lifetime access!</p>
+            <div class="video-wrapper">
+                <!-- Placeholder for Vimeo/YouTube Iframe -->
+                <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1107697441?color=6366f1&title=0&byline=0&portrait=0&badge=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Webinar Details Section -->
+    <section class="webinar-details">
+        <div class="container">
+            <h3>Webinar Details</h3>
+            <dl>
+                <dt>Date & Time</dt>
+                <dd>Tuesday, August 19 2025 · 10 AM EST / 7 AM PST / 3 PM BST</dd>
+                <dt>Session Length</dt>
+                <dd>60-minute live demo + Q&A</dd>
+            </dl>
+            <h3>Your Join Link</h3>
+            <p>We’ve emailed your unique access link to the address you provided. Reminder email will arrive 1 hour before we go live.</p>
+        </div>
+    </section>
+
+    <!-- 6. Next Steps Section -->
+    <section class="next-steps">
+        <div class="container">
+            <h2>Next Steps</h2>
+            <!-- STEP 1: Add to Calendar -->
+            <article class="step add-calendar">
+                <span class="step-num">1</span>
+                <div class="step-content">
+                    <h3>Add to Calendar</h3>
+                    <p>Lock in your seat and set a reminder so you don't miss:</p>
+                    <ul>
+                        <li>Live AI podcast production demo</li>
+                        <li>Chance to win 10 FREE lifetime licences</li>
+                        <li>Exclusive early-bird bonuses revealed live</li>
+                    </ul>
+                    <div class="calendar-buttons">
+                        <a href="#" class="btn" data-cal="google">Google Calendar</a>
+                        <a href="#" class="btn" data-cal="outlook">Outlook Calendar</a>
+                        <a href="#" class="btn" data-cal="ics">iCal (.ics)</a>
+                    </div>
+                </div>
+            </article>
+            <!-- STEP 2: Influence the Demo -->
+            <article class="step influence-demo">
+                <span class="step-num">2</span>
+                <div class="step-content">
+                    <h3>Influence the Live Demo</h3>
+                    <p>Your idea could be featured! Adrian will pick one attendee's concept and build it in front of everyone.</p>
+                    <form id="idea-submit">
+                        <label for="pod_name">Podcast Name:</label>
+                        <input type="text" id="pod_name" name="pod_name">
+                        <label for="pod_desc">Short Description:</label>
+                        <textarea id="pod_desc" name="pod_desc" rows="3"></textarea>
+                        <button type="submit" class="submit">Submit Your Idea</button>
+                    </form>
+                    <small class="tip">Keep it simple & focused for the best chance!</small>
+                </div>
+            </article>
+            <!-- STEP 3: Share with Others -->
+            <article class="step share">
+                <span class="step-num">3</span>
+                <div class="step-content">
+                    <h3>Share with Others</h3>
+                    <p>Know someone who dreams of launching a podcast without mics or editing? Invite them and boost their chance to snag FREE access.</p>
+                    <div class="share-buttons">
+                        <a href="#" class="btn share" data-net="facebook">Facebook</a>
+                        <a href="#" class="btn share" data-net="twitter">Twitter</a>
+                        <a href="#" class="btn share" data-net="linkedin">LinkedIn</a>
+                        <a href="#" class="btn share" data-net="email">Email</a>
+                        <a href="#" class="btn share" data-net="copy">Copy Link</a>
+                        <a href="#" class="btn share" data-net="sms">SMS</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 7. Hosts Section -->
+    <section class="hosts">
+        <div class="container">
+            <h2>Meet Your Hosts</h2>
+            <div class="host-grid">
+                <!-- Host 1: Adrian -->
+                <article class="host-card">
+                    <img src="images/adrian.webp" alt="Adrian Isfan" class="placeholder host-image">
+                    <h3>Adrian Isfan</h3>
+                    <span class="role">Co-Founder & Product Lead</span>
+                    <p>Multiple 7-figure AI launches under his belt. Adrian will run the live build and show the monetisation game-plan.</p>
+                </article>
+                <!-- Host 2: Pankaj -->
+                <article class="host-card">
+                    <img src="images/pankaj.webp" alt="Pankaj Malav" class="placeholder host-image">
+                    <h3>Pankaj Malav</h3>
+                    <span class="role">Co-Founder & Chief Engineer</span>
+                    <p>Architect of the MagicPods AI engine that converts any content into high-engagement podcast episodes.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. Live Bonus Reminder Section -->
+    <section class="live-bonus-reminder">
+        <div class="container">
+            <p class="reminder">🚀 The 10 FREE Lifetime Accounts are reserved for live attendees only. Be there or miss out!</p>
+        </div>
+    </section>
+
+    <!-- 9. Footer Section -->
+    <footer class="confirm-footer">
+        <div class="container">
+            <p class="disclaimer">
+                <a href="#">Terms & Conditions</a> · 
+                <a href="#">Privacy Policy</a> · 
+                <a href="#">Contact Us</a>
+            </p>
+        </div>
+    </footer>
+
+    <script src="webinar-confirmation.js"></script>
+</body>
+</html>
