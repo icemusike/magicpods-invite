@@ -2713,10 +2713,12 @@ body {
 /* Webinar Hero Section */
 .webinar-hero {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-    padding: 8rem 0 6rem;
+    padding: 6rem 0 4rem;
     min-height: 100vh;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .webinar-hero::before {
@@ -2737,15 +2739,15 @@ body {
 
 .webinar-hero .hero-title {
     color: white;
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     font-weight: 800;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    background: linear-gradient(135deg, #ffffff, #e2e8f0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    margin-bottom: 2rem;
+    line-height: 1.3;
+    text-align: center;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .webinar-hero .hero-title .gradient-text {
@@ -2755,6 +2757,9 @@ body {
     background-clip: text;
     animation: gradient-pulse 3s ease-in-out infinite;
     display: inline-block;
+    font-weight: 900;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 @keyframes gradient-pulse {
@@ -2766,45 +2771,49 @@ body {
     }
 }
 
-.hero-lead {
-    font-size: 1.35rem;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1.6;
+.webinar-hero .hero-content {
+    text-align: center;
     margin-bottom: 4rem;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-.hero-grid {
+.webinar-hero .hero-lead {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.webinar-hero .hero-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr;
-    gap: 5rem;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
     align-items: center;
-    max-width: 1400px;
+    max-width: 1300px;
     margin: 0 auto;
-    min-height: 600px;
+    padding: 0 2rem;
 }
 
 /* Webinar Video Styling */
 .webinar-hero .video-container {
     position: relative;
-    height: 100%;
-    display: flex;
-    align-items: center;
+    width: 100%;
 }
 
 .webinar-hero .video-wrapper {
     position: relative;
-    max-width: 100%;
-    margin: 0;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
     padding: 4px;
     background: linear-gradient(45deg, #fbbf24, #f59e0b, #ec4899, #db2777);
     background-size: 200% 200%;
-    border-radius: 28px;
+    border-radius: 20px;
     box-shadow: 
-        0 40px 80px -12px rgba(0, 0, 0, 0.4),
+        0 25px 50px rgba(0, 0, 0, 0.3),
         0 0 0 1px rgba(255, 255, 255, 0.1);
     animation: animated-gradient-border 4s ease-in-out infinite;
     transition: all 0.4s ease;
@@ -2822,7 +2831,7 @@ body {
     padding-top: 56.25%;
     height: 0;
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: 16px;
     background: #000;
 }
 
@@ -2833,36 +2842,34 @@ body {
     width: 100%;
     height: 100%;
     border: 0;
-    border-radius: 24px;
+    border-radius: 16px;
 }
 
 /* Opt-in Card */
 .optin-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
-    border-radius: 32px;
-    padding: 3rem;
+    border-radius: 24px;
+    padding: 2.5rem;
     box-shadow: 
-        0 40px 80px -12px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(255, 255, 255, 0.2),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    position: sticky;
-    top: 2rem;
-    min-width: 420px;
-    transform: perspective(1000px) rotateY(-2deg);
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    transform: none;
     transition: all 0.4s ease;
     height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .optin-card:hover {
-    transform: perspective(1000px) rotateY(0deg) translateY(-5px);
+    transform: translateY(-8px) scale(1.02);
     box-shadow: 
-        0 50px 100px -12px rgba(0, 0, 0, 0.4),
-        0 0 50px rgba(99, 102, 241, 0.1);
+        0 35px 70px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .registered-count {
@@ -3690,25 +3697,37 @@ body {
     }
     
     .webinar-hero {
-        padding: 4rem 0 3rem;
+        padding: 4rem 0 2rem;
         min-height: auto;
     }
     
     .webinar-hero .hero-title {
         font-size: 2.2rem;
+        line-height: 1.3;
+        margin-bottom: 1.5rem;
     }
     
-    .hero-lead {
+    .webinar-hero .hero-lead {
         font-size: 1.125rem;
-        margin-bottom: 2rem;
+        margin-bottom: 2.5rem;
+        padding: 0 1rem;
     }
     
-    .hero-grid {
-        gap: 2rem;
+    .webinar-hero .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 0 1rem;
+    }
+    
+    .webinar-hero .video-wrapper {
+        max-width: 100%;
     }
     
     .optin-card {
         padding: 1.5rem;
+        max-width: 100%;
+        margin: 0;
+        border-radius: 20px;
     }
     
     .timer-grid {
