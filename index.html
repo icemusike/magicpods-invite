@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MagicPods AI - AI-Powered Podcast Creation</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <img src="images/Magicpods_logo_dark.png" alt="MagicPods AI" class="logo">
+            </div>
+            <div class="nav-links">
+                <a href="#statistics">Podcasts Stats</a>
+                <a href="#webinar">Register For Webinar</a>
+            </div>
+            <a href="#activation" class="nav-cta-btn">Claim Your Access Key</a>
+        </nav>
+    </header>
+
+    <!-- Sticky Scarcity Bar -->
+    <div class="sticky-scarcity-bar">
+        <div class="scarcity-bar-content">
+            <i class="fas fa-key"></i>
+            <span>Golden Keys Remaining: <span class="remaining-count">200</span></span>
+            <div class="progress-bar-scarcity">
+                <div class="progress-fill-scarcity" style="width: 80%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="invitation-badge">
+                <i class="fas fa-crown"></i>
+                <span>Congratulations, You've been invited!</span>
+            </div>
+            <h1 class="hero-title">
+                Turn your Ideas, Blog, scripts into 
+                <span class="gradient-text">viral podcasts</span> 
+                in just 3 simple steps
+            </h1>
+            <p class="hero-subtitle">
+                Completely free if you got a golden key access invitation.
+            </p>
+            
+            <!-- Video Player -->
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <div class="video-player-container">
+                        <iframe 
+                            src="https://player.vimeo.com/video/1107663505?color=6366f1&title=0&byline=0&portrait=0&badge=0&controls=1&background=0&responsive=1&dnt=1&quality=720p" 
+                            frameborder="0" 
+                            allow="autoplay; fullscreen; picture-in-picture; encrypted-media" 
+                            allowfullscreen
+                            title="MagicPods AI Demo">
+                        </iframe>
+                    </div>
+                </div>
+                <script src="https://player.vimeo.com/api/player.js"></script>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scarcity Section -->
+    <section class="scarcity-section">
+        <div class="container">
+            <div class="scarcity-content">
+                <h2 class="scarcity-title">Exclusive Limited Availability</h2>
+                <div class="scarcity-stats">
+                    <div class="scarcity-main">
+                        <div class="stat-group">
+                            <span class="stat-label">Only</span>
+                            <span class="stat-number-large">250</span>
+                            <span class="stat-label">lifetime accounts will ever be issued</span>
+                        </div>
+                        
+                        <div class="stat-group">
+                            <span class="stat-label">And just</span>
+                            <span class="stat-number-large warning">200</span>
+                            <span class="stat-label">spots remain available</span>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill" data-progress="80"></div>
+                            </div>
+                            <span class="progress-text">80% remaining</span>
+                        </div>
+                    </div>
+                    
+                    <div class="scarcity-urgency">
+                        <div class="urgency-stat">
+                            <span class="urgency-label">Already</span>
+                            <span class="urgency-number" id="joinedToday">50</span>
+                            <span class="urgency-label">builders have joined today</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="scarcity-description">
+                    Complete our simple 2-step activation process below to secure your free xBesh account. 
+                    Enter your email, then submit your Golden Key code to get immediate access.
+                </p>
+                
+                <p class="scarcity-cta">
+                    <strong>Claim your exclusive spot before they're all gone!</strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Golden Key Activation Widget -->
+    <section class="activation-section">
+        <div class="container">
+            <div class="activation-widget">
+                <h2 class="activation-title">Activate Your Golden Key Access</h2>
+                
+                <div class="activation-steps">
+                    <div class="step-indicator">
+                        <div class="step active" data-step="1">1</div>
+                        <div class="step-line"></div>
+                        <div class="step" data-step="2">2</div>
+                    </div>
+                </div>
+                
+                <form class="activation-form" id="activationForm">
+                    <div class="form-step active" data-step="1">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+                        </div>
+                        <button type="button" class="btn-next" onclick="nextStep()">
+                            Continue
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <p class="privacy-note">
+                            <i class="fas fa-lock"></i>
+                            We hate spam and promise to keep your email safe. Unsubscribe anytime.
+                        </p>
+                    </div>
+                    
+                    <div class="form-step" data-step="2">
+                        <div class="form-group">
+                            <label for="goldenKey">Your Golden Key</label>
+                            <input type="text" id="goldenKey" name="goldenKey" placeholder="Enter your Golden Key" required>
+                            <small>Enter the Golden Key you received from your invitation.</small>
+                            
+                            <!-- Console Simulation -->
+                            <div class="console-container" id="keyConsole">
+                                <div id="consoleContent"></div>
+                                <span class="console-cursor"></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-activate">
+                            <i class="fas fa-unlock"></i>
+                            Unlock My Free Access
+                        </button>
+                        <button type="button" class="btn-back" onclick="prevStep()">
+                            <i class="fas fa-arrow-left"></i>
+                            Back
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Podcast Industry Statistics Section -->
+    <section class="statistics-section">
+        <div class="container">
+            <div class="statistics-header">
+                <h2>Key Podcast Industry Statistics</h2>
+                <div class="stats-badge">
+                    <span>2020-2025 & BEYOND</span>
+                </div>
+            </div>
+            
+            <div class="statistics-grid">
+                <!-- Global Podcast Listeners -->
+                <div class="stat-card global-listeners">
+                    <div class="stat-icon">
+                        <div class="listener-icons">
+                            <div class="listener-avatar"></div>
+                            <div class="listener-avatar"></div>
+                            <div class="listener-avatar"></div>
+                            <div class="listener-avatar"></div>
+                        </div>
+                    </div>
+                    <h3>Global Podcast Listeners</h3>
+                    <div class="stat-data">
+                        <div class="stat-item">
+                            <span class="year">2020:</span>
+                            <span class="value highlighted">383 million</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="year">2023:</span>
+                            <span class="value">506.9 million</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="year">2024:</span>
+                            <span class="value">546.7 million</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="year">2025:</span>
+                            <span class="value">584.1 million</span>
+                        </div>
+                    </div>
+                    <div class="stat-projection">
+                        <span class="projection-text">2027 (Projected)</span>
+                        <span class="projection-value">651.7 million</span>
+                    </div>
+                </div>
+
+                <!-- US Podcast Listeners -->
+                <div class="stat-card us-listeners">
+                    <div class="stat-icon">
+                        <div class="growth-chart">
+                            <div class="chart-bar" style="height: 30%"></div>
+                            <div class="chart-bar" style="height: 60%"></div>
+                            <div class="chart-bar" style="height: 100%"></div>
+                        </div>
+                    </div>
+                    <h3>US Podcast Listeners</h3>
+                    <div class="stat-data">
+                        <div class="stat-item">
+                            <span class="icon">📈</span>
+                            <span class="text">2020: 37% of US population</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="icon">📊</span>
+                            <span class="text">2025: 55% of US population</span>
+                        </div>
+                    </div>
+                    <div class="stat-projection">
+                        <span class="projection-text">2025: 158 million</span>
+                        <span class="projection-sub">monthly listeners</span>
+                    </div>
+                </div>
+
+                <!-- Podcast Market Size -->
+                <div class="stat-card market-size">
+                    <div class="stat-icon">
+                        <div class="dollar-chart">
+                            <span class="dollar-sign">$</span>
+                            <div class="growth-arrow">↗</div>
+                        </div>
+                    </div>
+                    <h3>Podcast Market Size</h3>
+                    <div class="stat-data">
+                        <div class="stat-item">
+                            <span class="icon">📈</span>
+                            <span class="text">2024: $30.8 - $36.3 billion</span>
+                        </div>
+                        <div class="stat-item highlighted">
+                            <span class="icon">🎯</span>
+                            <span class="text">2025: $32.5 - $38.4 billion</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="icon">🚀</span>
+                            <span class="text">2030: $131 - $134 billion</span>
+                        </div>
+                    </div>
+                    <div class="stat-projection">
+                        <span class="projection-text">2032: $173.5 billion</span>
+                        <span class="projection-sub">(CAGR: 27%)</span>
+                    </div>
+                </div>
+
+                <!-- Ad Revenue -->
+                <div class="stat-card ad-revenue">
+                    <div class="stat-icon">
+                        <div class="ad-icon">
+                            <div class="ad-frame">Ad</div>
+                            <div class="revenue-line"></div>
+                        </div>
+                    </div>
+                    <h3>Ad Revenue (US)</h3>
+                    <div class="stat-data">
+                        <div class="stat-item">
+                            <span class="icon">💰</span>
+                            <span class="text">2024: Over $4 billion</span>
+                        </div>
+                    </div>
+                    <div class="stat-projection">
+                        <span class="projection-text">2030 (Projected):</span>
+                        <span class="projection-value">$12 billion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Everything you need to create amazing podcasts</h2>
+                <p>From concept to distribution, our AI handles the heavy lifting</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <h3>AI Voice Generation</h3>
+                    <p>Choose from dozens of realistic AI voices or clone your own. Multiple speakers, different accents, perfect pronunciation every time.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3>Smart Script Writing</h3>
+                    <p>Just provide your topic or outline. Our AI creates engaging, well-structured scripts with natural conversation flow and compelling storytelling.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3>Automatic Editing</h3>
+                    <p>Professional-grade editing with background music, sound effects, smooth transitions, and perfect audio levels - all done automatically.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>One-Click Distribution</h3>
+                    <p>Publish to Spotify, Apple Podcasts, Google Podcasts, and 20+ other platforms simultaneously with optimized metadata and artwork.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics & Insights</h3>
+                    <p>Track performance across all platforms. Understand your audience with detailed analytics and AI-powered content recommendations.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>From idea to published podcast in under 10 minutes. What used to take hours or days now happens in minutes with AI acceleration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section class="social-proof">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Creators on Waitlist</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">50,000+</div>
+                    <div class="stat-label">Podcasts Generated</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">4.9/5</div>
+                    <div class="stat-label">Creator Rating</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">30 sec</div>
+                    <div class="stat-label">Average Setup Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Real Results from Real Users</h2>
+                <p>See how creators are transforming their content and income with MagicPods AI</p>
+            </div>
+            <div class="testimonials-grid">
+                <!-- Kevin's Testimonial -->
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <div class="quote-mark">"</div>
+                        <h3 class="testimonial-headline">I didn't speak a word, and I still made $300. That's magic.</h3>
+                    </div>
+                    <div class="testimonial-story">
+                        <p>Kevin from Manchester was tired of trying to start a YouTube channel with his rusty webcam and zero editing skills.</p>
+                        <p>He used MagicPods AI to turn PLR articles into engaging two-person podcast videos, complete with voices, captions, and viral-style visuals.</p>
+                        <p>He uploaded 5 videos to YouTube in a weekend, each with affiliate links in the description.</p>
+                        <p><strong>A month later? 3K+ views and 15 affiliate sales.</strong></p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="images/kevin.png" alt="Kevin profile picture">
+                        </div>
+                        <div class="author-info">
+                            <strong>Kevin</strong>
+                            <span>UK • YouTuber</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jake's Testimonial -->
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <div class="quote-mark">"</div>
+                        <h3 class="testimonial-headline">This isn't a review. It's a show. And it sells.</h3>
+                    </div>
+                    <div class="testimonial-story">
+                        <p>Jake from Boston was struggling to stand out in crowded JVZoo promotions.</p>
+                        <p>He started using MagicPods AI to convert his product reviews into friendly debate-style video podcasts "The Skeptic vs. The Superfan."</p>
+                        <p>He embedded the videos on his bonus pages and posted Reels to build curiosity.</p>
+                        <p><strong>Conversions shot up by 43%.</strong></p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="images/jake.png" alt="Jake profile picture">
+                        </div>
+                        <div class="author-info">
+                            <strong>Jake</strong>
+                            <span>US • Affiliate Marketer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chloe's Testimonial -->
+                <div class="testimonial-card">
+                    <div class="testimonial-quote">
+                        <div class="quote-mark">"</div>
+                        <h3 class="testimonial-headline">People actually watch, comment, and ask questions now.</h3>
+                    </div>
+                    <div class="testimonial-story">
+                        <p>Chloe from London runs an Instagram page giving small biz tips.</p>
+                        <p>Using MagicPods AI, she creates 2-minute AI podcast clips with talking avatars discussing hot topics like "How to use AI for content" or "Instagram algorithm myths."</p>
+                        <p>Every clip ends with a CTA to DM her for strategy sessions.</p>
+                        <p><strong>She went from 400 to 2,200 followers in 30 days.</strong></p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="images/chloe.png" alt="Chloe profile picture">
+                        </div>
+                        <div class="author-info">
+                            <strong>Chloe</strong>
+                            <span>UK • Social Media Expert</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Webinar Section -->
+    <section class="webinar-section">
+        <div class="container">
+            <div class="webinar-content">
+                <div class="webinar-badge">
+                    <i class="fas fa-video"></i>
+                    <span>Live Event</span>
+                </div>
+                <h2>Join Us Live For the MagicPods Release Webinar</h2>
+                <p>Don't miss your chance to see MagicPods AI in action and get exclusive bonuses - including a chance to win a FREE Golden Key!</p>
+                
+                <div class="webinar-details">
+                    <div class="webinar-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>August 19th, 2025 - 10:00 AM EST</span>
+                    </div>
+                </div>
+                
+                <div class="countdown-container">
+                    <div class="countdown-timer" id="countdown">
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="days">00</span>
+                            <span class="countdown-label">Days</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="hours">00</span>
+                            <span class="countdown-label">Hours</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="minutes">00</span>
+                            <span class="countdown-label">Minutes</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="countdown-number" id="seconds">00</span>
+                            <span class="countdown-label">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="webinar-cta-btn">
+                    <i class="fas fa-play-circle"></i>
+                    Reserve my free spot now
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="footer-logo-container">
+                            <img src="images/magicpods-logo.png" alt="MagicPods AI" class="logo footer-logo">
+                        </div>
+                        <p class="footer-description">Transforming podcast creation with artificial intelligence. Turn your ideas into viral podcasts in just 3 simple steps.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Product</h4>
+                            <a href="#features">Features</a>
+                            <a href="#statistics">Podcast Stats</a>
+                            <a href="#activation">Get Access</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Support</h4>
+                            <a href="#webinar">Live Webinar</a>
+                            <a href="#help">Help Center</a>
+                            <a href="#contact">Contact Support</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Legal</h4>
+                            <a href="#privacy">Privacy Policy</a>
+                            <a href="#terms">Terms of Service</a>
+                            <a href="#refund">Refund Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 MagicPods AI. All rights reserved.</p>
+                </div>
+            </div>
+            
+            <div class="footer-disclaimer">
+                <p><strong>Disclaimer:</strong><br>
+                Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo® is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
