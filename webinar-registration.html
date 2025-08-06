@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MagicPods AI Webinar Registration - Live Podcast Creation in 60 Minutes</title>
+    <meta name="description" content="Watch us create a viral video podcast live in 60 minutes. Free webinar registration - only 200 seats available.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Site Header -->
+    <header class="site-header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <img src="images/Magicpods_logo_dark.png" alt="MagicPods AI" class="logo">
+            </div>
+            <div class="header-meta">
+                <span class="early-bird-text">Early Bird Seats Left</span>
+                <a href="#" class="login-link">Login / My Seat</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero webinar-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Your Podcast Ships in 60 Minutes—Watch Us Do It LIVE on August 19</h1>
+                <p class="hero-lead">See how complete beginners turn any text or URL into viral video podcasts using a single AI prompt—no camera, no mic.</p>
+                
+                <div class="hero-grid">
+                    <!-- Video Placeholder -->
+                    <div class="video-container">
+                        <div class="video-wrapper">
+                            <div class="video-player-container">
+                                <video class="webinar-video" poster="images/webinar-preview.jpg" controls>
+                                    <source src="#" type="video/mp4">
+                                    <!-- Iframe ready for embedding -->
+                                    Your browser does not support the video tag.
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Opt-in Card -->
+                    <aside class="optin-card">
+                        <div class="registered-count">
+                            Already Registered <strong>195 / 200</strong>
+                        </div>
+                        <small class="seats-remaining">Only 5 spots remaining • live updating</small>
+                        
+                        <ul class="recent-regs">
+                            <li class="reg-item">
+                                <span class="reg-name">Sarah M.</span>
+                                <span class="reg-time">2 min ago</span>
+                            </li>
+                            <li class="reg-item">
+                                <span class="reg-name">Mike R.</span>
+                                <span class="reg-time">5 min ago</span>
+                            </li>
+                            <li class="reg-item">
+                                <span class="reg-name">Jessica L.</span>
+                                <span class="reg-time">8 min ago</span>
+                            </li>
+                        </ul>
+                        
+                        <div class="timer" id="top-timer" aria-label="Webinar countdown">
+                            <div class="timer-grid">
+                                <div class="timer-item">
+                                    <span class="timer-number" id="days-top">12</span>
+                                    <span class="timer-label">Days</span>
+                                </div>
+                                <div class="timer-item">
+                                    <span class="timer-number" id="hours-top">08</span>
+                                    <span class="timer-label">Hours</span>
+                                </div>
+                                <div class="timer-item">
+                                    <span class="timer-number" id="minutes-top">45</span>
+                                    <span class="timer-label">Minutes</span>
+                                </div>
+                                <div class="timer-item">
+                                    <span class="timer-number" id="seconds-top">23</span>
+                                    <span class="timer-label">Seconds</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <form class="webinar-optin" id="webinar-optin" action="#" method="POST">
+                            <div class="form-group">
+                                <input type="text" name="fullname" placeholder="Your Name *" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Email Address *" required>
+                            </div>
+                            <input type="hidden" name="webinar_date" value="Tue, Aug 19 2025 10 AM EST">
+                            <button type="submit" class="btn-register">
+                                <i class="fas fa-lock"></i>
+                                Reserve My Seat — FREE
+                            </button>
+                            <small class="secure-note">
+                                <i class="fas fa-shield-alt"></i>
+                                Secure registration • 100% free
+                            </small>
+                        </form>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Different Section -->
+    <section class="why-different">
+        <div class="container">
+            <h2 class="section-title">Why This Webinar Is Different</h2>
+            <ul class="bullets">
+                <li class="bullet-item">
+                    <strong>Live Build-Along:</strong> Host creates a video-podcast from blank screen to published episode before the 60-minute timer ends.
+                </li>
+                <li class="bullet-item">
+                    <strong>Co-Creation Hot Seat:</strong> Chat your 7-word idea—one attendee's topic gets produced live.
+                </li>
+                <li class="bullet-item">
+                    <strong>Prompt Vault Giveaway:</strong> Grab the exact scripts that auto-generate intros, outros, and viral hooks.
+                </li>
+                <li class="bullet-item">
+                    <strong>10 FREE Lifetime Licences:</strong> Randomly awarded in the first five minutes—must be present to win.
+                </li>
+                <li class="bullet-item">
+                    <strong>Early-Bird Bonuses:</strong> Exclusive upgrades for live, engaged viewers.
+                </li>
+                <li class="bullet-item">
+                    <strong>Founders' Q&A:</strong> Get every question answered on the spot.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Webinar Meta Section -->
+    <section class="webinar-meta">
+        <div class="container">
+            <dl class="meta-details">
+                <dt>Date</dt>
+                <dd>Tuesday, August 19, 2025</dd>
+                <dt>Time</dt>
+                <dd>10 AM EST / 7 AM PST / 3 PM BST</dd>
+            </dl>
+            <a href="#webinar-optin" class="primary-cta">
+                <i class="fas fa-calendar-plus"></i>
+                Reserve My Seat — FREE
+            </a>
+        </div>
+    </section>
+
+    <!-- Why Reserve Section -->
+    <section class="why-reserve">
+        <div class="container">
+            <h2 class="section-title">Why You Should Reserve Your Seat</h2>
+            <div class="grid-3col">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h3 class="benefit-title">60-Second Demo</h3>
+                    <p class="benefit-desc">Watch a podcast go from idea to HD export—live.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-file-download"></i>
+                    </div>
+                    <h3 class="benefit-title">Steal the Prompt File</h3>
+                    <p class="benefit-desc">Copy/paste scripts that craft captions, waveforms & thumbnails automatically.</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3 class="benefit-title">Early-Bird Bonuses</h3>
+                    <p class="benefit-desc">Unlock premium voices, avatars & templates only available to live attendees.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hosts Section -->
+    <section class="hosts">
+        <div class="container">
+            <h2 class="section-title">Meet Your Hosts</h2>
+            <div class="host-grid">
+                <div class="host-card">
+                    <img src="images/adrian-isfan.jpg" alt="Adrian Isfan" class="host-image placeholder">
+                    <h3 class="host-name">Adrian Isfan</h3>
+                    <span class="host-role">Co-Founder & Product Lead</span>
+                    <p class="host-bio">Creator of multiple 7-figure AI launches (LeadsGorilla, CallFluent AI). Adrian will walk you through the live build and monetization blueprint.</p>
+                </div>
+                <div class="host-card">
+                    <img src="images/pankaj-malav.jpg" alt="Pankaj Malav" class="host-image placeholder">
+                    <h3 class="host-name">Pankaj Malav</h3>
+                    <span class="host-role">Co-Founder & Chief Engineer</span>
+                    <p class="host-bio">The technical brain behind MagicPods AI. Pankaj reveals the engine that converts any content into engagement-boosting podcast shows.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- In 60 Minutes Section -->
+    <section class="in-60-min">
+        <div class="container">
+            <h2 class="section-title">In 60 Minutes You'll…</h2>
+            <ol class="steps">
+                <li class="step-item">
+                    <span class="step-number">1</span>
+                    <div class="step-content">
+                        <h3>Erase the Content Bottleneck</h3>
+                        <p>turn blogs & PDFs into episodes.</p>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <span class="step-number">2</span>
+                    <div class="step-content">
+                        <h3>Monetize Before You Record</h3>
+                        <p>apply the Prompt→Proof→Pre-Sale method we demo.</p>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <span class="step-number">3</span>
+                    <div class="step-content">
+                        <h3>Clone Our Exact Playbook</h3>
+                        <p>download the Rapid-Launch Checklist.</p>
+                    </div>
+                </li>
+                <li class="step-item">
+                    <span class="step-number">4</span>
+                    <div class="step-content">
+                        <h3>Grab the Ultimate Bundle</h3>
+                        <p>lifetime access at a launch-only price.</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Countdown Strip -->
+    <section class="countdown-strip" aria-label="Webinar Starts In">
+        <div class="container">
+            <div class="countdown-content">
+                <div class="timer" id="bottom-timer">
+                    <div class="timer-grid">
+                        <div class="timer-item">
+                            <span class="timer-number" id="days-bottom">12</span>
+                            <span class="timer-label">Days</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="hours-bottom">08</span>
+                            <span class="timer-label">Hours</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="minutes-bottom">45</span>
+                            <span class="timer-label">Minutes</span>
+                        </div>
+                        <div class="timer-item">
+                            <span class="timer-number" id="seconds-bottom">23</span>
+                            <span class="timer-label">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="limited-seats">Limited Seats Available</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-list">
+                <details class="faq-item">
+                    <summary class="faq-question">Do I need tech skills?</summary>
+                    <div class="faq-answer">
+                        <p>No—if you can copy & paste, you're good.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Is it really free to attend?</summary>
+                    <div class="faq-answer">
+                        <p>Yes, 100% free. Seats are limited, though.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">Will there be a replay?</summary>
+                    <div class="faq-answer">
+                        <p>A replay link will be emailed, but bonuses & prizes are live-only.</p>
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-question">What if I can't attend live?</summary>
+                    <div class="faq-answer">
+                        <p>Register anyway so you'll receive the replay.</p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <div class="final-cta-content">
+                <h2 class="final-cta-title">Ready to Ship Your Podcast Idea?</h2>
+                <p class="small-date">Tuesday • Aug 19 • 10 AM EST</p>
+                <a href="#webinar-optin" class="primary-cta">
+                    <i class="fas fa-rocket"></i>
+                    Reserve My Seat — FREE
+                </a>
+                <small class="hurry-text">Hurry! Seats are limited.</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="footer-logo-container">
+                            <img src="images/magicpods-logo.png" alt="MagicPods AI" class="logo footer-logo">
+                        </div>
+                        <p class="footer-description">Transforming podcast creation with artificial intelligence. Turn your ideas into viral podcasts in just 3 simple steps.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Webinar</h4>
+                            <a href="#webinar-optin">Register Now</a>
+                            <a href="#faq">FAQ</a>
+                            <a href="#hosts">Meet Hosts</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Support</h4>
+                            <a href="#help">Help Center</a>
+                            <a href="#contact">Contact Support</a>
+                            <a href="#technical">Technical Requirements</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Legal</h4>
+                            <a href="#privacy">Privacy Policy</a>
+                            <a href="#terms">Terms of Service</a>
+                            <a href="#refund">Refund Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 MagicPods AI. All rights reserved.</p>
+                </div>
+            </div>
+            
+            <div class="footer-disclaimer">
+                <p><strong>Disclaimer:</strong><br>
+                Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo® is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="webinar-script.js"></script>
+</body>
+</html>
