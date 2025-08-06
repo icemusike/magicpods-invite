@@ -1758,27 +1758,57 @@ body {
 
 @media (max-width: 768px) {
     .nav {
-        padding: 1rem;
+        padding: 0.75rem 1rem;
     }
     
     .nav-links {
         display: none;
     }
     
+    .nav-cta-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
     .logo {
         height: 35px;
     }
     
+    .sticky-scarcity-bar {
+        padding: 0.5rem;
+        margin-top: 65px;
+    }
+    
+    .scarcity-bar-content {
+        font-size: 0.9rem;
+        gap: 0.75rem;
+    }
+    
     .hero {
-        padding: 5rem 1rem 3rem;
+        padding: 1.5rem 1rem 3rem;
+        min-height: 90vh;
+    }
+    
+    .hero-content {
+        gap: 1.5rem;
+    }
+    
+    .invitation-badge {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.2rem;
+        margin-bottom: 0.5rem;
     }
     
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+        line-height: 1.1;
+        margin-bottom: 0.5rem;
     }
     
     .hero-subtitle {
-        font-size: 1.125rem;
+        font-size: 1.1rem;
+        line-height: 1.4;
+        margin-bottom: 1rem;
     }
     
     .video-container {
@@ -1797,6 +1827,58 @@ body {
         background: linear-gradient(45deg, #fbbf24, #f59e0b, #ec4899, #db2777);
         background-size: 200% 200%;
         animation: videoGradientShift 4s ease-in-out infinite;
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+    }
+    
+    .scarcity-section {
+        padding: 3rem 1rem;
+    }
+    
+    .scarcity-stats {
+        padding: 2rem 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .scarcity-main {
+        gap: 1.5rem;
+    }
+    
+    .stat-number-large {
+        font-size: 2.5rem;
+    }
+    
+    .activation-section {
+        padding: 3rem 1rem;
+    }
+    
+    .activation-widget {
+        padding: 2rem 1.5rem;
+        max-width: 100%;
+    }
+    
+    .form-group input, .form-group select {
+        padding: 1rem;
+        font-size: 1rem;
+        border-radius: 8px;
+        min-height: 44px; /* iOS touch target size */
+    }
+    
+    .btn-next, .btn-activate, .btn-back {
+        padding: 1.25rem 1.5rem;
+        font-size: 1.1rem;
+        min-height: 50px;
+        border-radius: 12px;
+    }
+    
+    .console-container {
+        margin-top: 1rem;
+        border-radius: 8px;
+        max-height: 200px;
+    }
+    
+    .privacy-note {
+        font-size: 0.85rem;
+        margin-top: 1rem;
     }
     
     .video-wrapper iframe {
@@ -1805,9 +1887,103 @@ body {
         border-radius: 13px;
     }
     
-    .scarcity-section {
-        padding: 4rem 0;
+    .testimonials {
+        padding: 3rem 1rem;
     }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .testimonial-card {
+        padding: 2rem 1.5rem;
+        margin: 0;
+    }
+    
+    .testimonial-headline {
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .testimonial-story {
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .author-avatar {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .statistics-section {
+        padding: 3rem 1rem;
+    }
+    
+    .statistics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .stat-card {
+        padding: 1.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2rem;
+    }
+    
+    .stat-label {
+        font-size: 0.9rem;
+    }
+    
+    .webinar-section {
+        padding: 3rem 1rem;
+    }
+    
+    .webinar-badge {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .webinar-title {
+        font-size: 1.8rem;
+        line-height: 1.2;
+    }
+    
+    .webinar-subtitle {
+        font-size: 1rem;
+    }
+    
+    .countdown-container {
+        margin: 2rem 0;
+    }
+    
+    .countdown-timer {
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .countdown-item {
+        min-width: 70px;
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .countdown-number {
+        font-size: 1.5rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.75rem;
+    }
+    
+    .webinar-cta-btn {
+        padding: 1.25rem 2rem;
+        font-size: 1.1rem;
+        border-radius: 12px;
+    }
+}
     
     .scarcity-title {
         font-size: 2rem;
@@ -1964,34 +2140,65 @@ body {
 }
 
 @media (max-width: 480px) {
-    .hero-title {
-        font-size: 1.75rem;
+    .nav {
+        padding: 0.5rem 0.75rem;
     }
     
-    .hero-subtitle {
-        font-size: 1rem;
-    }
-    
-    .invitation-badge {
-        font-size: 0.75rem;
-        padding: 0.5rem 1rem;
-    }
-    
-    .container {
-        padding: 0 15px;
+    .nav-cta-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+        border-radius: 20px;
     }
     
     .logo {
         height: 30px;
     }
     
-    .footer-logo {
-        height: 40px;
+    .sticky-scarcity-bar {
+        padding: 0.4rem 0.75rem;
+        margin-top: 58px;
     }
     
-    .footer-disclaimer p {
-        font-size: 0.65rem;
-        padding: 0 0.5rem;
+    .scarcity-bar-content {
+        font-size: 0.8rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .progress-bar-scarcity {
+        min-width: 100px;
+    }
+    
+    .hero {
+        padding: 1rem 0.75rem 2rem;
+        min-height: 85vh;
+    }
+    
+    .hero-content {
+        gap: 1.25rem;
+    }
+    
+    .invitation-badge {
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero-title {
+        font-size: 1.75rem;
+        line-height: 1.1;
+        margin-bottom: 0.75rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+    }
+    
+    .container {
+        padding: 0 15px;
     }
     
     .video-container {
@@ -2006,115 +2213,400 @@ body {
         aspect-ratio: 16/9;
         border-radius: 12px;
         position: relative;
-        padding: 3px;
+        padding: 2px;
         background: linear-gradient(45deg, #fbbf24, #f59e0b, #ec4899, #db2777);
         background-size: 200% 200%;
         animation: videoGradientShift 4s ease-in-out infinite;
+        box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.3);
     }
     
     .video-wrapper iframe {
         width: 100%;
         height: 100%;
-        border-radius: 9px;
+        border-radius: 10px;
+    }
+    
+    .scarcity-section {
+        padding: 2.5rem 0.75rem;
+    }
+    
+    .scarcity-stats {
+        padding: 1.5rem 1rem;
+        margin-bottom: 1rem;
+    }
+    
+    .scarcity-main {
+        gap: 1.25rem;
+    }
+    
+    .stat-number-large {
+        font-size: 2.25rem;
+    }
+    
+    .activation-section {
+        padding: 2.5rem 0.75rem;
+    }
+    
+    .activation-widget {
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+    }
+    
+    .step-indicators {
+        margin-bottom: 1.5rem;
+    }
+    
+    .step-indicator {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+    
+    .form-group label {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-group input, .form-group select {
+        padding: 1rem 0.75rem;
+        font-size: 1rem;
+        border-radius: 10px;
+        min-height: 48px;
+    }
+    
+    .btn-next, .btn-activate, .btn-back {
+        padding: 1.25rem 1.5rem;
+        font-size: 1rem;
+        min-height: 52px;
+        border-radius: 14px;
+        margin-bottom: 1rem;
+    }
+    
+    .console-container {
+        margin-top: 1rem;
+        border-radius: 10px;
+        max-height: 180px;
+        font-size: 0.8rem;
+    }
+    
+    .privacy-note {
+        font-size: 0.8rem;
+        margin-top: 1rem;
+        text-align: center;
+    }
+    
+    .testimonials {
+        padding: 2.5rem 0.75rem;
+    }
+    
+    .testimonials-grid {
+        gap: 1.5rem;
+    }
+    
+    .testimonial-card {
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+    }
+    
+    .testimonial-headline {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    .testimonial-story {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+    
+    .author-avatar {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .author-name {
+        font-size: 0.9rem;
+    }
+    
+    .author-title {
+        font-size: 0.8rem;
+    }
+    
+    .statistics-section {
+        padding: 2.5rem 0.75rem;
+    }
+    
+    .statistics-grid {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+    }
+    
+    .stat-card {
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+    
+    .stat-number {
+        font-size: 1.75rem;
+    }
+    
+    .stat-label {
+        font-size: 0.85rem;
+    }
+    
+    .webinar-section {
+        padding: 2.5rem 0.75rem;
+    }
+    
+    .webinar-badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .webinar-title {
+        font-size: 1.6rem;
+        line-height: 1.2;
+        margin-bottom: 0.75rem;
+    }
+    
+    .webinar-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .countdown-container {
+        margin: 1.5rem 0;
+    }
+    
+    .countdown-timer {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    
+    .countdown-item {
+        min-width: 65px;
+        padding: 0.6rem 0.4rem;
+        border-radius: 8px;
+    }
+    
+    .countdown-number {
+        font-size: 1.3rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.7rem;
+    }
+    
+    .webinar-cta-btn {
+        padding: 1.25rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 14px;
+        width: 100%;
+    }
+    
+    .footer-logo {
+        height: 40px;
+    }
+    
+    .footer-disclaimer p {
+        font-size: 0.65rem;
+        padding: 0 0.5rem;
     }
     
     .scarcity-stats {
         padding: 1.5rem 0.75rem;
     }
-    
-    .stat-number-large {
-        font-size: 1.75rem;
+}
+
+/* Ultra-small mobile devices */
+@media (max-width: 360px) {
+    .nav {
+        padding: 0.4rem 0.5rem;
     }
     
-    .progress-bar {
-        width: 200px;
-    }
-    
-    .console-container {
-        font-size: 0.7rem;
-        padding: 0.5rem;
-        max-height: 120px;
-    }
-    
-    /* Statistics Section Small Mobile */
-    .statistics-header h2 {
-        font-size: 1.75rem;
-    }
-    
-    .stats-badge {
-        padding: 0.5rem 1.5rem;
+    .nav-cta-btn {
         font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
     }
     
-    /* Statistics Section Small Mobile */
-    .statistics-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+    .logo {
+        height: 28px;
     }
     
-    .stat-card {
-        padding: 1.5rem 1rem;
+    .sticky-scarcity-bar {
+        padding: 0.3rem 0.5rem;
+        margin-top: 55px;
     }
     
-    .stat-card h3 {
-        font-size: 0.95rem;
-    }
-    
-    .stat-item {
-        font-size: 0.8rem;
-    }
-    
-    .stat-item .text {
-        font-size: 0.8rem;
-    }
-    
-    .projection-text {
+    .scarcity-bar-content {
         font-size: 0.75rem;
+        gap: 0.4rem;
     }
     
-    .projection-value {
-        font-size: 1rem;
+    .hero {
+        padding: 0.75rem 0.5rem 1.5rem;
+        min-height: 80vh;
     }
     
-    .projection-sub {
-        font-size: 0.65rem;
+    .hero-title {
+        font-size: 1.5rem;
+        line-height: 1.1;
     }
     
-    /* Testimonials Small Mobile */
-    .testimonial-card {
-        padding: 1.5rem 1rem;
-    }
-    
-    .testimonial-headline {
-        font-size: 1rem;
-        padding-left: 1rem;
-    }
-    
-    .quote-mark {
-        font-size: 2.5rem;
-        top: 0;
-        left: 0;
-    }
-    
-    .testimonial-story {
-        padding-left: 0.75rem;
-    }
-    
-    .testimonial-story p {
-        font-size: 0.875rem;
-    }
-    
-    .author-avatar {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .author-info strong {
+    .hero-subtitle {
         font-size: 0.9rem;
     }
     
-    .author-info span {
-        font-size: 0.8rem;
+    .invitation-badge {
+        font-size: 0.7rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .video-container {
+        padding: 0 0.25rem;
+        margin: 1rem 0;
+    }
+    
+    .video-wrapper {
+        border-radius: 10px;
+    }
+    
+    .scarcity-section, 
+    .activation-section, 
+    .testimonials, 
+    .statistics-section, 
+    .webinar-section {
+        padding: 2rem 0.5rem;
+    }
+    
+    .scarcity-stats, 
+    .activation-widget {
+        padding: 1.25rem 0.75rem;
+    }
+    
+    .stat-number-large {
+        font-size: 2rem;
+    }
+    
+    .form-group input {
+        padding: 0.9rem 0.6rem;
+        font-size: 0.95rem;
+    }
+    
+    .btn-next, .btn-activate, .btn-back {
+        padding: 1.1rem 1.25rem;
+        font-size: 0.95rem;
+    }
+    
+    .testimonial-card {
+        padding: 1.25rem 0.75rem;
+    }
+    
+    .webinar-title {
+        font-size: 1.4rem;
+    }
+    
+    .countdown-item {
+        min-width: 60px;
+        padding: 0.5rem 0.3rem;
+    }
+    
+    .countdown-number {
+        font-size: 1.2rem;
+    }
+}
+
+/* Mobile-specific touch enhancements */
+@media (hover: none) and (pointer: coarse) {
+    /* Touch device optimizations */
+    .btn-next, .btn-activate, .btn-back, .nav-cta-btn, .webinar-cta-btn {
+        transition: all 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .btn-next:active, .btn-activate:active, .btn-back:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    .nav-cta-btn:active {
+        transform: scale(0.95);
+    }
+    
+    .webinar-cta-btn:active {
+        transform: scale(0.98);
+    }
+    
+    /* Touch-friendly input fields */
+    .form-group input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        transform: scale(1.02);
+    }
+    
+    /* Smoother scrolling on touch devices */
+    .console-container {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    /* Better touch targets for small elements */
+    .step-indicator {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    /* Prevent zoom on input focus on iOS */
+    input[type="text"], input[type="email"] {
+        font-size: 16px;
+    }
+}
+
+/* Dark mode support for mobile devices */
+@media (prefers-color-scheme: dark) {
+    .video-wrapper {
+        box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+    }
+    
+    .scarcity-stats {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+    }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .video-wrapper {
+        animation: none;
+    }
+    
+    .scarcity-stats::before {
+        animation: none;
+    }
+}
+
+/* Print styles for mobile */
+@media print {
+    .sticky-scarcity-bar,
+    .video-container,
+    .console-container,
+    .webinar-cta-btn {
+        display: none;
+    }
+    
+    .hero,
+    .scarcity-section,
+    .activation-section {
+        break-inside: avoid;
     }
 }
 
