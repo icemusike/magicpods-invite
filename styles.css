@@ -2115,18 +2115,30 @@ body {
     
     .footer-main {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 2.5rem;
         text-align: center;
     }
     
     .footer-links {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
         grid-column: span 1;
+        margin-top: 1rem;
     }
     
     .footer-brand {
         max-width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .footer-column h4 {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+    
+    .footer-column a {
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
     }
     
     .footer-logo {
@@ -3024,23 +3036,54 @@ body {
     z-index: 2;
 }
 
+.why-different .section-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, #1e293b, #475569, #64748b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+}
+
+.why-different .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #fbbf24, #ec4899, #db2777);
+    border-radius: 2px;
+}
+
 .bullets {
     list-style: none;
     padding: 0;
-    margin-top: 3rem;
+    margin-top: 4rem;
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bullet-item {
     background: white;
-    padding: 2.5rem;
-    border-radius: 24px;
-    border: 1px solid rgba(99, 102, 241, 0.1);
-    transition: all 0.4s ease;
+    padding: 3rem;
+    border-radius: 32px;
+    border: 1px solid rgba(99, 102, 241, 0.08);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.08),
+        0 4px 12px rgba(0, 0, 0, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
 }
 
 .bullet-item::before {
@@ -3048,21 +3091,96 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    width: 4px;
+    width: 6px;
     height: 100%;
     background: linear-gradient(180deg, #fbbf24, #f59e0b, #ec4899, #db2777);
+    border-radius: 0 32px 32px 0;
+}
+
+.bullet-item::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(251, 191, 36, 0.05) 90deg, transparent 180deg, rgba(236, 72, 153, 0.05) 270deg, transparent 360deg);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
 }
 
 .bullet-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-    border-color: rgba(99, 102, 241, 0.2);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 
+        0 40px 80px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9),
+        0 0 0 1px rgba(251, 191, 36, 0.2);
+    border-color: rgba(251, 191, 36, 0.3);
 }
 
-.bullet-item strong {
-    color: var(--primary-color);
-    font-weight: 700;
+.bullet-item:hover::after {
+    opacity: 1;
 }
+
+.bullet-item:hover::before {
+    background: linear-gradient(180deg, #fbbf24, #f59e0b, #ec4899, #db2777);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+}
+
+/* Add icon styling for bullet items */
+.bullet-item strong {
+    color: transparent;
+    background: linear-gradient(135deg, #fbbf24, #ec4899, #db2777);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: 800;
+    font-size: 1.1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.bullet-item strong::before {
+    content: '✨';
+    position: absolute;
+    left: -2rem;
+    top: 0;
+    background: linear-gradient(135deg, #fbbf24, #ec4899);
+    font-size: 1.2rem;
+    animation: sparkle 2s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+    0%, 100% { 
+        transform: scale(1) rotate(0deg);
+        opacity: 0.8;
+    }
+    50% { 
+        transform: scale(1.2) rotate(180deg);
+        opacity: 1;
+    }
+}
+
+/* Enhanced bullet item content */
+.bullet-item {
+    position: relative;
+}
+
+.bullet-item > * {
+    position: relative;
+    z-index: 2;
+}
+
+.bullet-item p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #475569;
+    margin: 0;
+    font-weight: 500;
+}
+
+
 
 /* Webinar Meta */
 .webinar-meta {
@@ -3530,12 +3648,21 @@ body {
     
     .bullets,
     .steps {
-        gap: 1rem;
+        gap: 1.5rem;
     }
     
     .bullet-item,
     .step-item {
-        padding: 1.25rem;
+        padding: 2rem;
+    }
+    
+    .why-different .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .bullet-item strong::before {
+        left: -1.5rem;
+        font-size: 1rem;
     }
     
     .step-number {
@@ -3606,5 +3733,29 @@ body {
     .primary-cta {
         padding: 1rem 1.5rem;
         font-size: 1rem;
+    }
+    
+    .why-different .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .bullet-item {
+        padding: 1.5rem;
+        border-radius: 24px;
+    }
+    
+    .bullet-item strong::before {
+        left: -1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    
+    .footer-column {
+        margin-bottom: 1rem;
     }
 }
