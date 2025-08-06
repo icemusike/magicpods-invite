@@ -31,17 +31,20 @@
                 <p class="hero-lead">See how complete beginners turn any text or URL into viral video podcasts using a single AI prompt—no camera, no mic.</p>
                 
                 <div class="hero-grid">
-                    <!-- Video Placeholder -->
+                    <!-- Vimeo Video -->
                     <div class="video-container">
                         <div class="video-wrapper">
                             <div class="video-player-container">
-                                <video class="webinar-video" poster="images/webinar-preview.jpg" controls>
-                                    <source src="#" type="video/mp4">
-                                    <!-- Iframe ready for embedding -->
-                                    Your browser does not support the video tag.
-                                </video>
+                                <iframe
+                                    src="https://player.vimeo.com/video/1107697441?color=6366f1&title=0&byline=0&portrait=0&badge=0&controls=1&background=0&responsive=1&dnt=1&quality=720p"
+                                    frameborder="0"
+                                    allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+                                    allowfullscreen
+                                    title="MagicPods AI Webinar Preview">
+                                </iframe>
                             </div>
                         </div>
+                        <script src="https://player.vimeo.com/api/player.js"></script>
                     </div>
                     
                     <!-- Opt-in Card -->
@@ -318,8 +321,8 @@
         </div>
     </section>
 
-    <!-- Site Footer -->
-    <footer class="site-footer">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-main">
@@ -332,16 +335,16 @@
                     
                     <div class="footer-links">
                         <div class="footer-column">
-                            <h4>Webinar</h4>
-                            <a href="#webinar-optin">Register Now</a>
-                            <a href="#faq">FAQ</a>
-                            <a href="#hosts">Meet Hosts</a>
+                            <h4>Product</h4>
+                            <a href="index.html#features">Features</a>
+                            <a href="index.html#statistics">Podcast Stats</a>
+                            <a href="index.html#activation">Get Access</a>
                         </div>
                         <div class="footer-column">
                             <h4>Support</h4>
+                            <a href="#webinar-optin">Live Webinar</a>
                             <a href="#help">Help Center</a>
                             <a href="#contact">Contact Support</a>
-                            <a href="#technical">Technical Requirements</a>
                         </div>
                         <div class="footer-column">
                             <h4>Legal</h4>
