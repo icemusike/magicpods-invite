@@ -12,6 +12,33 @@
     
     <link rel="shortcut icon" type="images/png" href="images/favicon.webp"/>
 
+    <style>
+        /* Message styles */
+        .message {
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-weight: 500;
+            text-align: center;
+            display: none;
+        }
+        
+        .message.success {
+            background: #10b981;
+            color: white;
+            border: 1px solid #059669;
+        }
+        
+        .message.error {
+            background: #ef4444;
+            color: white;
+            border: 1px solid #dc2626;
+        }
+        
+        .message.show {
+            display: block;
+        }
+    </style>
 
 <script src="js/jquery.min.js"></script>    
 </head>
@@ -205,10 +232,21 @@
     <section class="activation-section" id="activation">
         <div class="container">
 
-
             <div class="row m-0">            
                 <div class="col-12 activation-widget">
                 <h2 class="activation-title">Activate Your Golden Key Access</h2>
+                
+                <!-- Message container -->
+                <div id="messageContainer">
+                    <div id="successMessage" class="message success">
+                        <i class="fas fa-check-circle"></i>
+                        <span id="successText"></span>
+                    </div>
+                    <div id="errorMessage" class="message error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="errorText"></span>
+                    </div>
+                </div>
                 
                 <div class="activation-steps">
                     <div class="step-indicator">
@@ -683,21 +721,86 @@ $(function () {
     updateNavbar();
     $(window).on('scroll', updateNavbar);
   });
-  </script>
 
+// Show message function
+function showMessage(text, isSuccess) {
+    // Hide all messages first
+    document.getElementById('successMessage').classList.remove('show');
+    document.getElementById('errorMessage').classList.remove('show');
+    
+    // Show appropriate message
+    if (isSuccess) {
+        document.getElementById('successText').textContent = text;
+        document.getElementById('successMessage').classList.add('show');
+    } else {
+        document.getElementById('errorText').textContent = text;
+        document.getElementById('errorMessage').classList.add('show');
+    }
+    
+    // Auto hide after 8 seconds
+    setTimeout(() => {
+        document.getElementById('successMessage').classList.remove('show');
+        document.getElementById('errorMessage').classList.remove('show');
+    }, 8000);
+}
 
-<script>
+// Step navigation functions
+function nextStep() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    
+    if (!firstName || !email) {
+        showMessage('Please fill in your name and email address.', false);
+        return;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        showMessage('Please enter a valid email address.', false);
+        return;
+    }
+    
+    // Move to step 2
+    const currentStep = document.querySelector('.form-step.active');
+    const nextStep = document.querySelector('.form-step[data-step="2"]');
+    const currentStepIndicator = document.querySelector('.step.active');
+    const nextStepIndicator = document.querySelector('.step[data-step="2"]');
+    
+    currentStep.classList.remove('active');
+    nextStep.classList.add('active');
+    currentStepIndicator.classList.remove('active');
+    nextStepIndicator.classList.add('active');
+}
 
-// Simple form submission for Golden Key activation
+function prevStep() {
+    // Move to step 1
+    const currentStep = document.querySelector('.form-step.active');
+    const prevStep = document.querySelector('.form-step[data-step="1"]');
+    const currentStepIndicator = document.querySelector('.step.active');
+    const prevStepIndicator = document.querySelector('.step[data-step="1"]');
+    
+    currentStep.classList.remove('active');
+    prevStep.classList.add('active');
+    currentStepIndicator.classList.remove('active');
+    prevStepIndicator.classList.add('active');
+}
+
+// Form submission handler
 document.getElementById('activationForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    const firstName = document.getElementById('firstName').value;
-    const email = document.getElementById('email').value;
-    const goldenKey = document.getElementById('goldenKey').value;
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const goldenKey = document.getElementById('goldenKey').value.trim();
+    
+    if (!firstName || !email || !goldenKey) {
+        showMessage('Please fill in all required fields.', false);
+        return;
+    }
     
     const submitBtn = document.querySelector('.btn-activate');
-    submitBtn.innerHTML = 'Activating...';
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Activating...';
     submitBtn.disabled = true;
     
     try {
@@ -714,24 +817,30 @@ document.getElementById('activationForm').addEventListener('submit', async funct
         const result = await response.json();
         
         if (response.ok) {
-            alert('Success! Check your email for login credentials.');
+            showMessage(result.message || 'Account created successfully. Login credentials have been sent to your email.', true);
             document.getElementById('activationForm').reset();
+            
+            // Reset to step 1
+            const steps = document.querySelectorAll('.step');
+            const formSteps = document.querySelectorAll('.form-step');
+            
+            steps.forEach(step => step.classList.remove('active'));
+            formSteps.forEach(step => step.classList.remove('active'));
+            
+            steps[0].classList.add('active');
+            formSteps[0].classList.add('active');
         } else {
-            alert('Error: ' + result.message);
+            showMessage(result.message || 'Activation failed. Please try again.', false);
         }
         
     } catch (error) {
-        alert('Network error. Please try again.');
+        showMessage('Network error. Please check your connection and try again.', false);
     }
     
-    submitBtn.innerHTML = '<i class="fas fa-unlock"></i> Unlock My Free Access';
+    submitBtn.innerHTML = originalText;
     submitBtn.disabled = false;
 });
 </script>
-
-
-
-
 
 </body>
 </html>
