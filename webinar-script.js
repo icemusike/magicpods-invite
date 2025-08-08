@@ -2,6 +2,8 @@
 // WEBINAR REGISTRATION PAGE SCRIPT
 // ================================
 
+
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     initCountdownTimers();
@@ -427,3 +429,4 @@ if (typeof module !== 'undefined' && module.exports) {
         trackWebinarRegistration
     };
 }
+
