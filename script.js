@@ -993,6 +993,9 @@ function addConsoleMessage(text, type = 'info') {
     const consoleContainer = document.getElementById('keyConsole');
     const line = document.createElement('div');
     line.className = `console-line ${type}`;
+    line.style.pointerEvents = 'auto';
+    line.style.position = 'relative';
+    line.style.zIndex = '2';
     
     // Create timestamp
     const timestamp = new Date().toLocaleTimeString('en-US', { 
@@ -1023,8 +1026,12 @@ function addConsoleMessage(text, type = 'info') {
     }
     
     // Auto scroll to bottom with smooth behavior
+    // Multiple rAF frames to ensure after layout/paint
     requestAnimationFrame(() => {
-        consoleContent.scrollTop = consoleContent.scrollHeight + 400;
+        consoleContent.scrollTop = consoleContent.scrollHeight + 2000;
+        requestAnimationFrame(() => {
+            consoleContent.scrollTop = consoleContent.scrollHeight + 2000;
+        });
     });
     
     // Update cursor status

@@ -48,6 +48,7 @@
             border: 1px solid rgba(167,139,250,.25);
             position: relative;
             overflow: hidden;
+            isolation: isolate; /* ensure z-index layering works inside */
             box-shadow: 
                 0 16px 40px -12px rgba(0,0,0,.4),
                 0 4px 12px -4px rgba(0,0,0,.2),
@@ -140,6 +141,8 @@
             flex: 1;
             font-weight: 600;
             color: #e5e7eb;
+            background: rgba(255,255,255,.02);
+            padding-right: 6px;
         }
         .console-line.info .console-line-content { color: #e5e7eb; }
         .console-line.warning .console-line-content { color: #fcd34d; }
