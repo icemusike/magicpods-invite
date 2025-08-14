@@ -38,12 +38,32 @@ let lastValidatedKey = '';
 let isKeyValidating = false;
 let validateKeyTimer = null;
 let simulationTimeouts = [];
+let consoleMessages = [];
 
 function clearSimulationTimeouts() {
     if (simulationTimeouts.length) {
         simulationTimeouts.forEach(id => clearTimeout(id));
         simulationTimeouts = [];
     }
+}
+
+function rehydrateConsoleFromBuffer() {
+    const consoleContent = document.getElementById('consoleContent');
+    if (!consoleContent) return;
+    // Rebuild from buffer to ensure persistence
+    consoleContent.innerHTML = '';
+    consoleMessages.forEach(({ text, type, ts }) => {
+        const line = document.createElement('div');
+        line.className = `console-line ${type}`;
+        const timestamp = ts || new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const icon = type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : type === 'error' ? 'fa-times-circle' : 'fa-terminal';
+        line.innerHTML = `
+            <i class="console-icon fas ${icon}"></i>
+            <div class="console-line-content">${text}</div>
+            <div class="console-line-timestamp">${timestamp}</div>
+        `;
+        consoleContent.appendChild(line);
+    });
 }
 
 function collectUtmParams() {
@@ -623,7 +643,8 @@ function simulateKeyValidation(key) {
         console.removeAttribute('data-lines');
         console.classList.remove('expanded');
     }
-    // Never wipe existing content (removed: consoleContent.innerHTML = '')
+    // Ensure previous lines are present from buffer
+    rehydrateConsoleFromBuffer();
     const messages = [
         { text: 'Initializing Golden Key validation system...', type: 'info', delay: 0 },
         { text: 'Connecting to MagicPods AI validation node...', type: 'info', delay: 500 },
@@ -698,6 +719,7 @@ async function performKeyValidation(goldenKey) {
     const consoleContent = document.getElementById('consoleContent');
     // Ensure container is visible and retains previous messages
     if (consoleContent) {
+        rehydrateConsoleFromBuffer();
         const count = consoleContent.querySelectorAll('.console-line').length;
         if (count >= 2) {
             consoleBox.classList.add('expanded');
@@ -989,6 +1011,7 @@ function addConsoleMessage(text, type = 'info') {
     `;
     
     consoleContent.appendChild(line);
+    consoleMessages.push({ text, type, ts: timestamp });
     // Ensure the line remains visible and not overwritten
     line.style.willChange = 'transform, opacity';
     
