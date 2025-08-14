@@ -488,17 +488,18 @@ function initCountdownTimer() {
         // Update DOM (main and inline clones)
         const ids = [
             ['days','hours','minutes','seconds'],
-            ['days-inline','hours-inline','minutes-inline','seconds-inline']
+            ['days-inline','hours-inline','minutes-inline','seconds-inline'],
+            ['days-activate','hours-activate','minutes-activate','seconds-activate']
         ];
         ids.forEach(([dId,hId,mId,sId]) => {
             const daysEl = document.getElementById(dId);
             const hoursEl = document.getElementById(hId);
             const minutesEl = document.getElementById(mId);
             const secondsEl = document.getElementById(sId);
-            if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
-            if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
-            if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
-            if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
         });
         
         // If countdown is over
