@@ -77,6 +77,8 @@
             line-height: 1.5;
             letter-spacing: 0.3px;
             white-space: pre-wrap;
+            position: relative;
+            z-index: 2; /* keep above any decorative pseudo-elements */
         }
         .console-container.expanded #consoleContent { max-height: 480px; }
         #consoleContent::-webkit-scrollbar { 
@@ -106,6 +108,7 @@
             transition: all .2s ease;
             position: relative;
             animation: line-slide-in .3s ease-out;
+            z-index: 2;
         }
         @keyframes line-slide-in {
             from { opacity: 0; transform: translateX(-10px); }
@@ -161,6 +164,8 @@
             background: rgba(167,139,250,.1);
             border-radius: 8px;
             margin: 8px 0;
+            position: relative;
+            z-index: 2;
         }
         .console-cursor::before {
             content: '';
@@ -191,6 +196,7 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(167,139,250,.5), transparent);
             animation: scan-line 3s ease-in-out infinite;
+            z-index: 1; /* ensure below content */
         }
         @keyframes scan-line {
             0%, 100% { opacity: 0; transform: translateX(-100%); }
