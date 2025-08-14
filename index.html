@@ -9,6 +9,98 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Step 2: Make Golden Key input full width and on-brand */
+        .activation-section .activation-form .form-step[data-step="2"] .form-group { width: 100%; }
+        .activation-section .activation-form .form-step[data-step="2"] label { display: block; width: 100%; }
+        .activation-section .activation-form .form-step[data-step="2"] input[type="text"]#goldenKey {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            height: 56px;
+            font-size: 1.05rem;
+            border-radius: 14px;
+            border: 1.5px solid rgba(123, 97, 255, 0.4);
+            outline: none;
+            padding: 0.9rem 1rem;
+            background: #0b0a16;
+            color: #fff;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03), 0 12px 34px -14px rgba(123,97,255,.35);
+        }
+        .activation-section .activation-form .form-step[data-step="2"] input#goldenKey:focus {
+            border-color: #a78bfa;
+            box-shadow: 0 0 0 3px rgba(167,139,250,.25), inset 0 0 0 1px rgba(255,255,255,0.06);
+        }
+        .activation-section .activation-form .form-step[data-step="2"] small {
+            display: block;
+            margin-top: 8px;
+            color: var(--text-secondary, #8b8aa6);
+        }
+
+        /* Hyper-realistic console styling */
+        .console-container { 
+            display: none; 
+            width: 100%;
+            margin-top: 16px;
+            background: radial-gradient(120% 100% at 0% 0%, rgba(33,26,62,.35) 0%, rgba(15,12,36,.85) 60%, #0b0a16 100%);
+            color: #e6e6ff;
+            border-radius: 16px;
+            border: 1px solid rgba(167,139,250,.35);
+            padding: 14px 16px 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px -12px rgba(0,0,0,.6), inset 0 0 0 1px rgba(255,255,255,.04);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+        }
+        .console-container.show { display: block; }
+        .console-container:before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(transparent 0, rgba(255,255,255,.04) 2px, transparent 2px);
+            background-size: 100% 28px; /* subtle scanlines */
+            pointer-events: none;
+            opacity: .35;
+        }
+        .console-container:after {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(90deg,#ffee68, #f870d0, #6a8dff);
+            filter: blur(12px);
+            opacity: .25;
+            z-index: -1;
+        }
+        #consoleContent {
+            max-height: 220px;
+            overflow: auto;
+            padding-right: 4px;
+            scrollbar-width: thin;
+        }
+        #consoleContent::-webkit-scrollbar { width: 8px; }
+        #consoleContent::-webkit-scrollbar-thumb { background: linear-gradient(#a78bfa, #f472b6); border-radius: 8px; }
+        #consoleContent::-webkit-scrollbar-track { background: transparent; }
+        .console-line { 
+            line-height: 1.5; 
+            letter-spacing: .2px; 
+            padding: 3px 0; 
+            border-left: 2px solid transparent; 
+        }
+        .console-line.info { color: #c5c4ff; border-left-color: rgba(167,139,250,.35); }
+        .console-line.warning { color: #ffe58f; border-left-color: rgba(255,229,143,.45); }
+        .console-line.success { color: #a7f3d0; border-left-color: rgba(16,185,129,.45); }
+        .console-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 16px;
+            background: #ffee68; /* brand accent */
+            margin-left: 6px;
+            animation: blink 1s step-end infinite;
+            border-radius: 2px;
+            vertical-align: -2px;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+    </style>
     
     <link rel="shortcut icon" type="images/png" href="images/favicon.webp"/>
 

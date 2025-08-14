@@ -151,14 +151,12 @@ async function handleActivationSubmit(e) {
         await new Promise(resolve => setTimeout(resolve, 400));
         addConsoleMessage(`🔐 Validating key: ${goldenKey}`);
         
-        // Make API call to validate the golden key (POST per spec)
-        const response = await fetch('https://api.magicpodsai.com/app/voucher-validate', {
-            method: 'POST',
+        // Make API call to validate the golden key (GET per spec)
+        const response = await fetch(`https://api.magicpodsai.com/app/voucher-validate?code=${encodeURIComponent(goldenKey)}`, {
+            method: 'GET',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ code: goldenKey })
+                'Accept': 'application/json'
+            }
         });
         
         if (!response.ok) {
