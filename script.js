@@ -627,6 +627,7 @@ function simulateKeyValidation(key) {
     }
     
     console.classList.add('show');
+    console.classList.add('expanded');
     if (progress && progressFill && progress.classList.contains('show') === false) {
         progress.classList.add('show');
         progressFill.style.width = '18%';
@@ -993,6 +994,7 @@ function addConsoleMessage(text, type = 'info') {
     const consoleContainer = document.getElementById('keyConsole');
     const line = document.createElement('div');
     line.className = `console-line ${type}`;
+    line.style.opacity = '1';
     line.style.pointerEvents = 'auto';
     line.style.position = 'relative';
     line.style.zIndex = '2';

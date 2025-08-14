@@ -110,11 +110,14 @@
             position: relative;
             animation: line-slide-in .3s ease-out;
             z-index: 2;
+            opacity: 1 !important; /* hard-stop any accidental opacity:0 */
         }
         @keyframes line-slide-in {
-            from { opacity: 0; transform: translateX(-10px); }
+            from { opacity: .001; transform: translateX(-6px); }
             to { opacity: 1; transform: translateX(0); }
         }
+        /* Fallback type-in animation if any external CSS injects opacity:0 */
+        @keyframes typeIn { to { opacity: 1; } }
         .console-line:hover {
             background: rgba(255,255,255,.03);
             transform: translateX(2px);
@@ -143,6 +146,7 @@
             color: #e5e7eb;
             background: rgba(255,255,255,.02);
             padding-right: 6px;
+            opacity: 1 !important;
         }
         .console-line.info .console-line-content { color: #e5e7eb; }
         .console-line.warning .console-line-content { color: #fcd34d; }
