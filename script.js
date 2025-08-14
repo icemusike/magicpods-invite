@@ -605,24 +605,26 @@ function simulateKeyValidation(key) {
         setTimeout(()=>progressFill.style.width='30%', 150);
     }
     consoleContent.innerHTML = '';
+    console.removeAttribute('data-lines');
+    console.classList.remove('expanded');
     
     const messages = [
-        { text: '> Initializing Golden Key validation...', type: 'info', delay: 0 },
-        { text: '> Connecting to MagicPods AI servers...', type: 'info', delay: 800 },
-        { text: '> Key format: PROCESSING ⏳', type: 'success', delay: 1600 },
-        { text: '> Checking key authenticity...', type: 'warning', delay: 2400 }
+        { text: 'Initializing Golden Key validation system...', type: 'info', delay: 0 },
+        { text: 'Establishing secure connection to MagicPods AI...', type: 'info', delay: 800 },
+        { text: 'Key format validation: PASSED ✓', type: 'success', delay: 1600 },
+        { text: 'Performing cryptographic authenticity check...', type: 'info', delay: 2400 }
     ];
     
     // Add more specific validation based on key length
-    if (key.length >= 6) {
+    if (key.length >= 8) {
         messages.push(
-            { text: '> Scanning quantum database...', type: 'info', delay: 3200 },
-            { text: '> Cross-referencing invitation logs...', type: 'warning', delay: 4000 },
-            { text: '> Status: ⏳ VALIDATION PENDING', type: 'warning', delay: 4800 }
+            { text: 'Scanning distributed validation database...', type: 'info', delay: 3200 },
+            { text: 'Cross-referencing with invitation registry...', type: 'info', delay: 4000 },
+            { text: 'Awaiting final validation response...', type: 'warning', delay: 4800 }
         );
-    } else {
+    } else if (key.length >= 6) {
         messages.push(
-            { text: '> Key incomplete...', type: 'warning', delay: 3200 }
+            { text: 'Processing key with basic validation...', type: 'warning', delay: 3200 }
         );
     }
     
@@ -673,15 +675,15 @@ async function performKeyValidation(goldenKey) {
     
     isKeyValidating = true;
     consoleEl.classList.add('show');
-    addConsoleMessage('🔍 Connecting to MagicPods AI validation server...');
+    addConsoleMessage('Establishing secure connection to validation server...');
     await new Promise(r => setTimeout(r, 300));
     // Progress advance
     const progressFill = document.getElementById('keyProgressFill');
     if (progressFill) progressFill.style.width = '55%';
-    addConsoleMessage('📡 Sending Golden Key for verification...');
+    addConsoleMessage('Transmitting Golden Key for server verification...');
     await new Promise(r => setTimeout(r, 300));
     if (progressFill) progressFill.style.width = '75%';
-    addConsoleMessage(`🔐 Validating key: ${goldenKey}`);
+    addConsoleMessage(`Processing validation request for key: ${goldenKey.substring(0,4)}****`);
 
     try {
         const response = await fetch(`https://api.magicpodsai.com/app/voucher-validate?code=${encodeURIComponent(goldenKey)}`, {
@@ -694,8 +696,10 @@ async function performKeyValidation(goldenKey) {
 
         if (result.isValid && result.isRedeemable) {
             lastValidatedKey = goldenKey;
-            addConsoleMessage('✅ Valid key. Preparing your VIP trial...','success');
-            await new Promise(r => setTimeout(r, 900));
+            addConsoleMessage('Key validation successful: APPROVED ✓','success');
+            await new Promise(r => setTimeout(r, 500));
+            addConsoleMessage('Initializing VIP trial activation sequence...','success');
+            await new Promise(r => setTimeout(r, 400));
             if (progressFill) progressFill.style.width = '100%';
 
             // Build magic link if provided, otherwise fallback
@@ -883,20 +887,44 @@ function openPremiumModal({ variant = 'success', title = '', body = '', actions 
 
 function addConsoleMessage(text, type = 'info') {
     const consoleContent = document.getElementById('consoleContent');
+    const consoleContainer = document.getElementById('keyConsole');
     const line = document.createElement('div');
     line.className = `console-line ${type}`;
-    line.textContent = text;
+    
+    // Create timestamp
+    const timestamp = new Date().toLocaleTimeString('en-US', { 
+        hour12: false, 
+        hour: '2-digit', 
+        minute: '2-digit', 
+        second: '2-digit' 
+    });
+    
+    line.innerHTML = `
+        <div class="console-line-content">${text}</div>
+        <div class="console-line-timestamp">${timestamp}</div>
+    `;
     
     consoleContent.appendChild(line);
     
-    // Auto scroll to bottom
-    const console = document.getElementById('keyConsole');
-    console.scrollTop = console.scrollHeight;
+    // Auto-expand based on line count
+    const lineCount = consoleContent.children.length;
+    if (lineCount >= 5) {
+        consoleContainer.setAttribute('data-lines', Math.min(lineCount, 8).toString());
+        consoleContainer.classList.add('expanded');
+    }
     
-    // Add animation delay
-    setTimeout(() => {
-        line.style.animationDelay = '0s';
-    }, 100);
+    // Auto scroll to bottom
+    consoleContent.scrollTop = consoleContent.scrollHeight;
+    
+    // Update cursor status
+    const cursor = consoleContainer.querySelector('.console-cursor');
+    if (cursor && type === 'success') {
+        cursor.innerHTML = '<i class="fas fa-check-circle"></i> Validation complete';
+        cursor.style.color = '#10b981';
+    } else if (cursor && (type === 'warning' || type === 'error')) {
+        cursor.innerHTML = '<i class="fas fa-exclamation-circle"></i> Process complete';
+        cursor.style.color = '#f59e0b';
+    }
 }
 
 // Track signup (replace with actual analytics)
