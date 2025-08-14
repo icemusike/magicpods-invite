@@ -485,16 +485,21 @@ function initCountdownTimer() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
         
-        // Update DOM
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-        
-        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
-        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
-        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
-        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        // Update DOM (main and inline clones)
+        const ids = [
+            ['days','hours','minutes','seconds'],
+            ['days-inline','hours-inline','minutes-inline','seconds-inline']
+        ];
+        ids.forEach(([dId,hId,mId,sId]) => {
+            const daysEl = document.getElementById(dId);
+            const hoursEl = document.getElementById(hId);
+            const minutesEl = document.getElementById(mId);
+            const secondsEl = document.getElementById(sId);
+            if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+            if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+        });
         
         // If countdown is over
         if (distance < 0) {
