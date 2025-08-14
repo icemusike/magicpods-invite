@@ -662,20 +662,21 @@
                     <div class="scarcity-main">
                         <div class="stat-group">
                             <span class="stat-label">Only</span>
-                            <span class="stat-number-large">250</span>
-                            <span class="stat-label">lifetime accounts will ever be issued</span>
+                            <span class="stat-number-large" id="totalSpots">250</span>
+                            <span class="stat-label">VIP Early free Access accounts will ever be issued</span>
                         </div>
                         
                         <div class="stat-group">
                             <span class="stat-label">And just</span>
-                            <span class="stat-number-large warning">200</span>
+                            <span class="stat-number-large warning" id="spotsRemaining">200</span>
                             <span class="stat-label">spots remain available</span>
                         </div>
                         
                         <div class="progress-container">
                             <div class="progress-bar">
-                                <div class="progress-fill" data-progress="80">
-                            <span class="progress-text">80% remaining</span></div>
+                                <div class="progress-fill" id="scarcityProgress" data-progress="80">
+                                    <span class="progress-text" id="scarcityProgressText">80% remaining</span>
+                                </div>
                             </div>
                         </div>
 

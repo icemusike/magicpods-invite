@@ -515,11 +515,10 @@ function initCountdownTimer() {
 
 // Initialize Progress Bars
 function initProgressBars() {
-    const progressFill = document.querySelector('.progress-fill');
-    if (progressFill) {
+    const progressFill = document.getElementById('scarcityProgress');
+    if (!progressFill) return;
         const progress = progressFill.getAttribute('data-progress');
         progressFill.style.width = progress + '%';
-    }
 }
 
 // Scroll Animations
@@ -578,26 +577,47 @@ function initVideoPlayer() {
 // Urgency Counters (simulate real-time updates)
 function initUrgencyCounters() {
     const joinedTodayEl = document.getElementById('joinedToday');
-    if (joinedTodayEl) {
-        let currentCount = 50;
-        
-        // Randomly increase the counter every 30-60 seconds
-        setInterval(() => {
-            if (Math.random() > 0.7) { // 30% chance each interval
-                currentCount += Math.floor(Math.random() * 3) + 1; // Increase by 1-3
-                joinedTodayEl.textContent = currentCount;
-                
-                // Add animation effect
-                joinedTodayEl.style.transform = 'scale(1.2)';
-                joinedTodayEl.style.color = '#ef4444';
-                
-                setTimeout(() => {
-                    joinedTodayEl.style.transform = 'scale(1)';
-                    joinedTodayEl.style.color = '#ef4444';
-                }, 300);
-            }
-        }, 30000); // Check every 30 seconds
+    const spotsRemainingEl = document.getElementById('spotsRemaining');
+    const totalSpotsEl = document.getElementById('totalSpots');
+    const progressFill = document.getElementById('scarcityProgress');
+    const progressText = document.getElementById('scarcityProgressText');
+
+    if (!joinedTodayEl || !spotsRemainingEl || !totalSpotsEl || !progressFill) return;
+
+    let joinedToday = parseInt(joinedTodayEl.textContent, 10) || 50;
+    let remaining = parseInt(spotsRemainingEl.textContent, 10) || 200;
+    const total = parseInt(totalSpotsEl.textContent, 10) || 250;
+
+    function updateProgressUI() {
+        const percent = Math.max(0, Math.min(100, Math.round((remaining / total) * 100)));
+        progressFill.setAttribute('data-progress', String(percent));
+        progressFill.style.width = percent + '%';
+        if (progressText) progressText.textContent = percent + '% remaining';
     }
+
+    function animateBump(el) {
+        el.style.transform = 'scale(1.2)';
+        setTimeout(() => { el.style.transform = 'scale(1)'; }, 200);
+    }
+
+    updateProgressUI();
+
+    // Randomly simulate sign-ups every 10–30 seconds
+    setInterval(() => {
+        const shouldChange = Math.random() > 0.55; // ~45% of ticks skip
+        if (!shouldChange) return;
+
+        const delta = Math.floor(Math.random() * 3) + 1; // 1-3 joins
+        // Increase joined, decrease remaining by same delta but never below 0
+        joinedToday += delta;
+        remaining = Math.max(0, remaining - delta);
+
+        joinedTodayEl.textContent = joinedToday;
+        spotsRemainingEl.textContent = remaining;
+        animateBump(joinedTodayEl);
+        animateBump(spotsRemainingEl);
+        updateProgressUI();
+    }, Math.floor(Math.random() * 20000) + 10000); // 10–30s
 }
 
 // Golden Key input simulation trigger
