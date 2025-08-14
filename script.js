@@ -96,21 +96,15 @@ function nextStep() {
         timestamp: new Date().toISOString()
     });
 
-    // Redirect to webinar registration with query params to prefill
-    const qs = new URLSearchParams({ fullname: firstName, email }).toString();
-    window.location.href = `webinar-registration.html?${qs}#webinar-optin`;
-
-    // If redirect is blocked, preserve original step behavior as fallback
-    try {
-        currentStep.classList.remove('active');
-        nextStepEl.classList.add('active');
-        stepIndicators[0].classList.remove('active');
-        stepIndicators[1].classList.add('active');
-        setTimeout(() => {
-            const keyEl = document.getElementById('goldenKey');
-            if (keyEl) keyEl.focus();
-        }, 100);
-    } catch (_) {}
+    // Proceed to Step 2 in-place
+    currentStep.classList.remove('active');
+    nextStepEl.classList.add('active');
+    stepIndicators[0].classList.remove('active');
+    stepIndicators[1].classList.add('active');
+    setTimeout(() => {
+        const keyEl = document.getElementById('goldenKey');
+        if (keyEl) keyEl.focus();
+    }, 100);
 }
 
 function prevStep() {
@@ -197,9 +191,22 @@ async function handleActivationSubmit(e) {
             
             await new Promise(resolve => setTimeout(resolve, 800));
             
-            showErrorWithWebinarCTA('Golden Key has been claimed already - Register for Webinar to get another chance!');
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
+            showErrorWithWebinarCTA('Golden Key has been claimed already — continue to register for our webinar to claim one of 10 extra keys.');
+            // Notify N8N and redirect to webinar registration with prefill
+            sendLeadToN8N({
+                event: 'index_key_redeemed_already',
+                firstName,
+                email,
+                goldenKey,
+                page: window.location.href,
+                referrer: document.referrer || undefined,
+                timestamp: new Date().toISOString()
+            });
+            setTimeout(() => {
+                const qs = new URLSearchParams({ fullname: firstName, email }).toString();
+                window.location.href = `webinar-registration.html?${qs}#webinar-optin`;
+            }, 1200);
+            return;
             
         } else {
             // Invalid key
@@ -208,9 +215,22 @@ async function handleActivationSubmit(e) {
             
             await new Promise(resolve => setTimeout(resolve, 500));
             
-            showError('Invalid Golden Key. Please check your invitation email for the correct code.');
-            submitBtn.innerHTML = originalText;
-            submitBtn.disabled = false;
+            showError('Invalid Golden Key. Continue to register for our webinar to claim one of 10 extra keys.');
+            // Notify N8N and redirect to webinar registration with prefill
+            sendLeadToN8N({
+                event: 'index_key_invalid',
+                firstName,
+                email,
+                goldenKey,
+                page: window.location.href,
+                referrer: document.referrer || undefined,
+                timestamp: new Date().toISOString()
+            });
+            setTimeout(() => {
+                const qs = new URLSearchParams({ fullname: firstName, email }).toString();
+                window.location.href = `webinar-registration.html?${qs}#webinar-optin`;
+            }, 1200);
+            return;
         }
         
     } catch (error) {

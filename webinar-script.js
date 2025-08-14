@@ -120,20 +120,31 @@ async function handleWebinarSubmit(e) {
     submitBtn.disabled = true;
     
     try {
-        // Simulate API call - replace with actual endpoint
-        await new Promise(resolve => setTimeout(resolve, 2000));
+        // Send registration to N8N
+        await fetch('https://callflujent.app.n8n.cloud/webhook-test/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                event: 'webinar_registration',
+                name: fullName,
+                email,
+                webinar_date: form.querySelector('input[name="webinar_date"]').value,
+                page: window.location.href,
+                referrer: document.referrer || undefined,
+                timestamp: new Date().toISOString()
+            })
+        });
         
         // Track registration
         trackWebinarRegistration(email, fullName);
         
-        // Show success
+        // Optional UI feedback then redirect
         showRegistrationSuccess(fullName);
-        
-        // Update registration count
         updateRegistrationCount();
         
-        // Reset form
-        form.reset();
+        setTimeout(() => {
+            window.location.href = 'webinar-confirmation.html';
+        }, 1000);
         
     } catch (error) {
         console.error('Registration error:', error);
