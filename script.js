@@ -610,21 +610,21 @@ function simulateKeyValidation(key) {
     
     const messages = [
         { text: 'Initializing Golden Key validation system...', type: 'info', delay: 0 },
-        { text: 'Establishing secure connection to MagicPods AI...', type: 'info', delay: 800 },
-        { text: 'Key format validation: PASSED ✓', type: 'success', delay: 1600 },
-        { text: 'Performing cryptographic authenticity check...', type: 'info', delay: 2400 }
+        { text: 'Establishing secure connection to MagicPods AI...', type: 'info', delay: 600 },
+        { text: 'Key format validation: PASSED ✓', type: 'success', delay: 1200 },
+        { text: 'Performing cryptographic authenticity check...', type: 'info', delay: 1800 }
     ];
     
     // Add more specific validation based on key length
     if (key.length >= 8) {
         messages.push(
-            { text: 'Scanning distributed validation database...', type: 'info', delay: 3200 },
-            { text: 'Cross-referencing with invitation registry...', type: 'info', delay: 4000 },
-            { text: 'Awaiting final validation response...', type: 'warning', delay: 4800 }
+            { text: 'Scanning distributed validation database...', type: 'info', delay: 2400 },
+            { text: 'Cross-referencing with invitation registry...', type: 'info', delay: 3000 },
+            { text: 'Awaiting server validation response...', type: 'warning', delay: 3600 }
         );
     } else if (key.length >= 6) {
         messages.push(
-            { text: 'Processing key with basic validation...', type: 'warning', delay: 3200 }
+            { text: 'Processing key with basic validation...', type: 'warning', delay: 2400 }
         );
     }
     
@@ -675,15 +675,18 @@ async function performKeyValidation(goldenKey) {
     
     isKeyValidating = true;
     consoleEl.classList.add('show');
-    addConsoleMessage('Establishing secure connection to validation server...');
-    await new Promise(r => setTimeout(r, 300));
+    addConsoleMessage('Establishing secure TLS connection...');
+    await new Promise(r => setTimeout(r, 600));
     // Progress advance
     const progressFill = document.getElementById('keyProgressFill');
-    if (progressFill) progressFill.style.width = '55%';
-    addConsoleMessage('Transmitting Golden Key for server verification...');
-    await new Promise(r => setTimeout(r, 300));
-    if (progressFill) progressFill.style.width = '75%';
-    addConsoleMessage(`Processing validation request for key: ${goldenKey.substring(0,4)}****`);
+    if (progressFill) progressFill.style.width = '35%';
+    addConsoleMessage('Authenticating with MagicPods validation endpoint...');
+    await new Promise(r => setTimeout(r, 700));
+    if (progressFill) progressFill.style.width = '60%';
+    addConsoleMessage(`Transmitting encrypted key: ${goldenKey.substring(0,4)}****`);
+    await new Promise(r => setTimeout(r, 600));
+    if (progressFill) progressFill.style.width = '80%';
+    addConsoleMessage('Running cryptographic validation algorithms...');
 
     try {
         const response = await fetch(`https://api.magicpodsai.com/app/voucher-validate?code=${encodeURIComponent(goldenKey)}`, {
@@ -696,11 +699,13 @@ async function performKeyValidation(goldenKey) {
 
         if (result.isValid && result.isRedeemable) {
             lastValidatedKey = goldenKey;
-            addConsoleMessage('Key validation successful: APPROVED ✓','success');
             await new Promise(r => setTimeout(r, 500));
-            addConsoleMessage('Initializing VIP trial activation sequence...','success');
+            addConsoleMessage('Validation complete: KEY APPROVED ✓','success');
             await new Promise(r => setTimeout(r, 400));
+            addConsoleMessage('Initializing VIP access privileges...','success');
+            await new Promise(r => setTimeout(r, 300));
             if (progressFill) progressFill.style.width = '100%';
+            addConsoleMessage('Account activation ready for deployment','success');
 
             // Build magic link if provided, otherwise fallback
             const magicLink = result.magicLink || `https://app.magicpodsai.com/onboarding?ml=${encodeURIComponent(goldenKey)}&n=${encodeURIComponent(firstName)}&e=${encodeURIComponent(email)}`;
@@ -915,15 +920,19 @@ function addConsoleMessage(text, type = 'info') {
     
     consoleContent.appendChild(line);
     
-    // Auto-expand based on line count
+    // Auto-expand based on line count with immediate effect
     const lineCount = consoleContent.children.length;
-    if (lineCount >= 5) {
-        consoleContainer.setAttribute('data-lines', Math.min(lineCount, 8).toString());
-        consoleContainer.classList.add('expanded');
+    if (lineCount >= 3) {
+        consoleContainer.setAttribute('data-lines', Math.min(lineCount, 7).toString());
+        if (lineCount >= 4) {
+            consoleContainer.classList.add('expanded');
+        }
     }
     
-    // Auto scroll to bottom
-    consoleContent.scrollTop = consoleContent.scrollHeight;
+    // Auto scroll to bottom with smooth behavior
+    setTimeout(() => {
+        consoleContent.scrollTop = consoleContent.scrollHeight;
+    }, 50);
     
     // Update cursor status
     const cursor = consoleContainer.querySelector('.console-cursor');
