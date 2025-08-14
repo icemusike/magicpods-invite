@@ -19,12 +19,38 @@ function initConfirmationCountdown() {
     // Set the webinar date - August 19, 2025 10:00 AM ET
     const webinarDate = new Date('2025-08-19T10:00:00-04:00').getTime();
 
+    // Create static timer structure once
+    countdownEl.innerHTML = `
+        <div class="timer-item">
+            <span class="timer-number" id="days-timer">00</span>
+            <span class="timer-label">Days</span>
+        </div>
+        <div class="timer-item">
+            <span class="timer-number" id="hours-timer">00</span>
+            <span class="timer-label">Hours</span>
+        </div>
+        <div class="timer-item">
+            <span class="timer-number" id="minutes-timer">00</span>
+            <span class="timer-label">Minutes</span>
+        </div>
+        <div class="timer-item">
+            <span class="timer-number" id="seconds-timer">00</span>
+            <span class="timer-label">Seconds</span>
+        </div>
+    `;
+
+    // Get references to number elements
+    const daysEl = document.getElementById('days-timer');
+    const hoursEl = document.getElementById('hours-timer');
+    const minutesEl = document.getElementById('minutes-timer');
+    const secondsEl = document.getElementById('seconds-timer');
+
     function updateCountdown() {
         const now = new Date().getTime();
         const distance = webinarDate - now;
 
         if (distance < 0) {
-            countdownEl.innerHTML = '<div class="timer-ended" style="font-size: 2rem; color: #ef4444; font-weight: 800; animation: pulse 2s infinite;">🎉 The webinar has started!</div>';
+            countdownEl.innerHTML = '<div class="timer-ended" style="font-size: 2rem; color: #ef4444; font-weight: 800;">🎉 The webinar has started!</div>';
             return;
         }
 
@@ -33,24 +59,11 @@ function initConfirmationCountdown() {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        countdownEl.innerHTML = `
-            <div class="timer-item" style="animation-delay: 0s;">
-                <span class="timer-number">${days.toString().padStart(2, '0')}</span>
-                <span class="timer-label">Days</span>
-            </div>
-            <div class="timer-item" style="animation-delay: 0.1s;">
-                <span class="timer-number">${hours.toString().padStart(2, '0')}</span>
-                <span class="timer-label">Hours</span>
-            </div>
-            <div class="timer-item" style="animation-delay: 0.2s;">
-                <span class="timer-number">${minutes.toString().padStart(2, '0')}</span>
-                <span class="timer-label">Minutes</span>
-            </div>
-            <div class="timer-item" style="animation-delay: 0.3s;">
-                <span class="timer-number">${seconds.toString().padStart(2, '0')}</span>
-                <span class="timer-label">Seconds</span>
-            </div>
-        `;
+        // Update only the numbers, keeping structure intact
+        if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+        if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+        if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+        if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
     }
 
     updateCountdown();
@@ -340,7 +353,7 @@ function personalizeConfirmationHeader(){
     
     if(titleEl){
         if(firstName){
-            titleEl.innerHTML=`Congratulations ${firstName} <br class="d-none d-lg-block"/> You're In & All Set For <span class="banner-headline-span1">MagicPods AI Webinar!</span>`;
+            titleEl.innerHTML=`Congratulations <span class="banner-headline-span1">${firstName}</span> <br class="d-none d-lg-block"/> You're In & All Set For <span class="banner-headline-span1">MagicPods AI Webinar!</span>`;
         } else {
             titleEl.innerHTML=`Congratulations <br class="d-none d-lg-block"/> You're In & All Set For <span class="banner-headline-span1">MagicPods AI Webinar!</span>`;
         }

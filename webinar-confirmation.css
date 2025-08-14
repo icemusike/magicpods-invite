@@ -976,30 +976,7 @@ body {
     animation: pulse 3s ease-in-out infinite;
 }
 
-/* 9. Enhanced Footer */
-.confirm-footer {
-    background: linear-gradient(135deg, #1e293b, #334155);
-    padding: 4rem 2rem 2rem;
-    text-align: center;
-    color: white;
-    position: relative;
-}
 
-.confirm-footer .disclaimer {
-    font-size: 1rem;
-    opacity: 0.8;
-    margin: 0;
-}
-
-.confirm-footer a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.confirm-footer a:hover {
-    color: white;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -57,10 +57,13 @@
                             <div class="video-box-inner">											
                                 <div class="autoplayer-area">
                                     <div class="autoplayer-subarea autoplayer-subarea-16-by-9">
-                                        <div style="padding:56.25% 0 0 0;position:relative;">
-                                            <iframe src="https://player.vimeo.com/video/1107697441?color=6366f1&title=0&byline=0&portrait=0&badge=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                        <div id="autoplayer"></div>
+                                    </div>
+                                    <div class="autoplayer-overlay">
+                                        <div class="autoplayer-overlay-background"></div>
+                                        <div class="autoplayer-overlay-content">
+                                            <span class="animated infinite pulse inline-block">🔊 Sound on (30s preview)</span>
                                         </div>
-                                        <script src="https://player.vimeo.com/api/player.js"></script>
                                     </div>
                                 </div>		
                             </div>
@@ -230,19 +233,85 @@
         </div>
     </section>
 
-    <!-- 9. Footer Section -->
-    <footer class="confirm-footer">
+    <!-- Footer -->
+    <footer class="footer">
         <div class="container">
-            <p class="disclaimer">
-                <a href="#">Terms & Conditions</a> · 
-                <a href="#">Privacy Policy</a> · 
-                <a href="#">Contact Us</a>
-            </p>
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                         <div class="footer-logo-container">
+                            <img src="images/magicpodslogo.png" alt="MagicPods AI" class="logo footer-logo">
+                        </div>
+                        <p class="footer-description">Transforming podcast creation with artificial intelligence. Turn your ideas into viral podcasts in just 3 simple steps.</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Product</h4>
+                            <a href="index.html#features">Features</a>
+                            <a href="index.html#statistics">Podcast Stats</a>
+                            <a href="index.html#activation">Get Access</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Support</h4>
+                            <a href="webinar-registration.html">Live Webinar</a>
+                            <a href="#help">Help Center</a>
+                            <a href="#contact">Contact Support</a>
+                        </div>
+                        <div class="footer-column">
+                            <h4>Legal</h4>
+                            <a href="#privacy">Privacy Policy</a>
+                            <a href="#terms">Terms of Service</a>
+                            <a href="#refund">Refund Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2025 MagicPods AI. All rights reserved.</p>
+                </div>
+            </div>
+            
+            <div class="footer-disclaimer">
+                <p><strong>Disclaimer:</strong><br>
+                Please note that this product does not provide any guarantee of income or success. The results achieved by the product owner or any other individuals mentioned are not indicative of future success or earnings. This website is not affiliated with FaceBook or any of its associated entities. Once you navigate away from FaceBook, the responsibility for the content and its usage lies solely with the user. All content on this website, including but not limited to text, images, and multimedia, is protected by copyright law and the Digital Millennium Copyright Act. Unauthorized copying, duplication, modification, or theft, whether intentional or unintentional, is strictly prohibited. Violators will be prosecuted to the fullest extent of the law. We want to clarify that JVZoo serves as the retailer for the products featured on this site. JVZoo® is a registered trademark of BBC Systems Inc., a Florida corporation located at 1809 E. Broadway Street, Suite 125, Oviedo, FL 32765, USA, and is used with permission. The role of JVZoo as a retailer does not constitute an endorsement, approval, or review of these products or any claims, statements, or opinions used in their promotion.</p>
+            </div>
         </div>
     </footer>
 
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>    
+    <!-- Auto Play Video CSS -->
+    <link href="css/autoplay.css" type="text/css" rel="stylesheet"/>
+    <!-- Auto Play Video JS -->
+    <script src="js/autoplay2.js" type="application/javascript"></script>
+    <script async src="js/player.js"></script>
+    <script async src="https://www.youtube.com/iframe_api"></script> 
+
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="webinar-confirmation.js"></script>
+
+    <script>
+        ////nav-bar////   
+        $(function () {
+            var $nav = $('#nav-bar');
+
+            // Scroll function
+            function updateNavbar() {
+                var scrollY = $(window).scrollTop();
+                if (scrollY > 50) {
+                    $nav.addClass('scrolled');
+                } else {
+                    $nav.removeClass('scrolled');
+                }
+            }
+
+            // Run immediately on load and bind scroll
+            updateNavbar();
+            $(window).on('scroll', updateNavbar);
+        });
+    </script>
 </body>
 </html>
