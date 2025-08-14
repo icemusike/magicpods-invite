@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     initInteractiveEffects();
     addEnhancedStyling();
+    personalizeConfirmationHeader();
 });
 
 function initConfirmationCountdown() {
@@ -326,6 +327,25 @@ function addEnhancedStyling() {
         }
     `;
     document.head.appendChild(style);
+}
+
+function personalizeConfirmationHeader(){
+    const params=new URLSearchParams(location.search);
+    const fullname=params.get('fullname')||'';
+    const keyValid=(params.get('key_valid')||'').toLowerCase()==='true';
+    const titleEl=document.getElementById('confirmTitle');
+    const statusEl=document.getElementById('confirmStatus');
+    const vipBadge=document.getElementById('vipBadge');
+    const firstName=fullname?fullname.split(' ')[0]:'';
+    if(titleEl){
+        if(keyValid){
+            if(vipBadge) vipBadge.style.display='inline-flex';
+            titleEl.innerHTML=`<span style="background: linear-gradient(135deg,#ffee68,#f870d0); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Welcome${firstName?`, ${firstName}`:''}</span> — You’re In!`;
+            if(statusEl) statusEl.textContent='Front-row VIP seat reserved';
+        }else if(firstName){
+            titleEl.innerHTML=`${firstName}, you’re in!`;
+        }
+    }
 }
 
 // Helper Functions

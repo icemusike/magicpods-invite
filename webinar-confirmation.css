@@ -176,6 +176,11 @@ body {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
+/* VIP badge */
+.vip-badge{
+    display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);padding:.5rem 1rem;border-radius:999px;font-weight:800;margin-bottom:1rem}
+.vip-badge i{color:#fbbf24}
+
 /* 2. Enhanced Check Email */
 .check-email {
     background: white;
