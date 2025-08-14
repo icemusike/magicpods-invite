@@ -814,15 +814,26 @@ async function performKeyValidation(goldenKey) {
 
 function showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, headlineText) {
     const qs = new URLSearchParams({ fullname: firstName, email }).toString();
+    const subHeadline = `Don't Worry — There's Still Hope To Grab One...<br/><strong>You could win 1 of 10 Golden Keys live.</strong>`;
+    const countdown = `
+        <div class="mp-countdown" id="mpCountdown">
+            <div class="mpc-item"><div class="mpc-num" id="mpc-days">00</div><div class="mpc-label">Days</div></div>
+            <div class="mpc-item"><div class="mpc-num" id="mpc-hours">00</div><div class="mpc-label">Hours</div></div>
+            <div class="mpc-item"><div class="mpc-num" id="mpc-mins">00</div><div class="mpc-label">Minutes</div></div>
+            <div class="mpc-item"><div class="mpc-num" id="mpc-secs">00</div><div class="mpc-label">Seconds</div></div>
+        </div>
+    `;
     openPremiumModal({
         variant: 'warning',
-        title: headlineText,
-        body: `But there’s still hope—register for our VIP Launch Webinar on Aug 19 @ 10:00 AM Eastern and you could win 1 of 10 Golden Keys live.`,
+        title: 'This Key has already been claimed by someone else...',
+        body: `${subHeadline}${countdown}`,
         actions: [
-            { label: 'Register for the VIP Webinar', href: `webinar-registration.html?${qs}#webinar-optin`, target: '_blank', primary: true }
+            { label: 'Secure My Seat Now', href: `webinar-registration.html?${qs}#webinar-optin`, target: '_blank', primary: true }
         ],
-        boosters: true
+        boosters: false
     });
+    // Start countdown inside modal
+    startModalCountdown('Aug 19, 2025 10:00:00 EST');
     // Send lead with context
     sendLeadToN8N({
         event: headlineText.includes('claimed') ? 'index_key_redeemed_already' : 'index_key_invalid',
@@ -919,6 +930,30 @@ function openPremiumModal({ variant = 'success', title = '', body = '', actions 
             document.removeEventListener('keydown', escListener);
         }
     });
+}
+
+// Countdown utility for modal
+function startModalCountdown(targetDateStr) {
+    const target = new Date(targetDateStr).getTime();
+    function update() {
+        const now = new Date().getTime();
+        let diff = Math.max(0, target - now);
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        diff %= (1000 * 60 * 60 * 24);
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        diff %= (1000 * 60 * 60);
+        const mins = Math.floor(diff / (1000 * 60));
+        diff %= (1000 * 60);
+        const secs = Math.floor(diff / 1000);
+        const dEl = document.getElementById('mpc-days');
+        if (!dEl) return; // modal closed
+        document.getElementById('mpc-days').textContent = String(days).padStart(2,'0');
+        document.getElementById('mpc-hours').textContent = String(hours).padStart(2,'0');
+        document.getElementById('mpc-mins').textContent = String(mins).padStart(2,'0');
+        document.getElementById('mpc-secs').textContent = String(secs).padStart(2,'0');
+        if (target - now > 0) setTimeout(update, 1000);
+    }
+    update();
 }
 
 function addConsoleMessage(text, type = 'info') {
