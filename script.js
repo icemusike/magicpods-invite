@@ -745,10 +745,33 @@ async function performKeyValidation(goldenKey) {
         console.error('Validation error:', error);
         addConsoleMessage('❌ Network error occurred.');
         addConsoleMessage('🔄 Please check your connection and try again.');
-        showError('Network error. Please check your connection and try again.');
+        const progressFill = document.getElementById('keyProgressFill');
+        if (progressFill) progressFill.style.width = '100%';
+        // Premium warning modal for error/unknown status
+        const qs = new URLSearchParams({ fullname: firstName, email }).toString();
+        openPremiumModal({
+            variant: 'warning',
+            title: "We couldn't verify your key right now",
+            body: 'This could be an invalid key or a temporary network issue. Join our VIP Launch Webinar on Aug 19 @ 10:00 AM Eastern to get another chance to win a Golden Key live.',
+            actions: [
+                { label: 'Register for the VIP Webinar', href: `webinar-registration.html?${qs}#webinar-optin`, target: '_blank', primary: true }
+            ],
+            boosters: true
+        });
+        // Track incident
+        sendLeadToN8N({
+            event: 'index_key_validation_error',
+            firstName,
+            email,
+            goldenKey,
+            page: window.location.href,
+            referrer: document.referrer || undefined,
+            ...utm,
+            timestamp: new Date().toISOString()
+        });
         const submitBtn = document.querySelector('#activationForm .btn-activate');
         if (submitBtn) {
-            submitBtn.innerHTML = 'Unlock My Free Access';
+            submitBtn.innerHTML = 'Try Another Key';
             submitBtn.disabled = false;
         }
     } finally {
