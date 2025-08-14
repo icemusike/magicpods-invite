@@ -137,14 +137,16 @@ async function handleWebinarSubmit(e) {
         
         // Track registration
         trackWebinarRegistration(email, fullName);
-        
-        // Optional UI feedback then redirect
+        // Update UI
         showRegistrationSuccess(fullName);
         updateRegistrationCount();
-        
+        // Build redirect URL passing user data and any key info from query
+        const qp = new URLSearchParams(window.location.search);
+        const hadKeyValid = qp.get('key_valid') || qp.get('keyValid') || '';
+        const params = new URLSearchParams({ fullname: fullName, email, key_valid: hadKeyValid });
         setTimeout(() => {
-            window.location.href = 'webinar-confirmation.html';
-        }, 1000);
+            window.location.href = `webinar-confirmation.html?${params.toString()}`;
+        }, 800);
         
     } catch (error) {
         console.error('Registration error:', error);
