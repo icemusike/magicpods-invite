@@ -590,6 +590,8 @@ document.addEventListener('input', function(e) {
 function simulateKeyValidation(key) {
     const console = document.getElementById('keyConsole');
     const consoleContent = document.getElementById('consoleContent');
+    const progress = document.getElementById('keyProgress');
+    const progressFill = document.getElementById('keyProgressFill');
     
     if (key.length <= 6) {
         console.classList.remove('show');
@@ -597,6 +599,11 @@ function simulateKeyValidation(key) {
     }
     
     console.classList.add('show');
+    if (progress && progressFill) {
+        progress.classList.add('show');
+        progressFill.style.width = '18%';
+        setTimeout(()=>progressFill.style.width='30%', 150);
+    }
     consoleContent.innerHTML = '';
     
     const messages = [
@@ -629,9 +636,16 @@ function simulateKeyValidation(key) {
 
 function scheduleKeyValidation(value, immediate = false) {
     const submitBtn = document.querySelector('#activationForm .btn-activate');
+    const progress = document.getElementById('keyProgress');
+    const progressFill = document.getElementById('keyProgressFill');
     if (submitBtn) {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Validating...';
+    }
+    if (progress && progressFill) {
+        progress.classList.add('show');
+        progressFill.style.width = '12%';
+        setTimeout(()=>progressFill.style.width='35%', 150);
     }
     if (validateKeyTimer) {
         clearTimeout(validateKeyTimer);
@@ -661,8 +675,12 @@ async function performKeyValidation(goldenKey) {
     consoleEl.classList.add('show');
     addConsoleMessage('🔍 Connecting to MagicPods AI validation server...');
     await new Promise(r => setTimeout(r, 300));
+    // Progress advance
+    const progressFill = document.getElementById('keyProgressFill');
+    if (progressFill) progressFill.style.width = '55%';
     addConsoleMessage('📡 Sending Golden Key for verification...');
     await new Promise(r => setTimeout(r, 300));
+    if (progressFill) progressFill.style.width = '75%';
     addConsoleMessage(`🔐 Validating key: ${goldenKey}`);
 
     try {
@@ -678,6 +696,7 @@ async function performKeyValidation(goldenKey) {
             lastValidatedKey = goldenKey;
             addConsoleMessage('✅ Valid key. Preparing your VIP trial...','success');
             await new Promise(r => setTimeout(r, 900));
+            if (progressFill) progressFill.style.width = '100%';
 
             // Build magic link if provided, otherwise fallback
             const magicLink = result.magicLink || `https://app.magicpodsai.com/onboarding?ml=${encodeURIComponent(goldenKey)}&n=${encodeURIComponent(firstName)}&e=${encodeURIComponent(email)}`;
@@ -713,11 +732,13 @@ async function performKeyValidation(goldenKey) {
             // Already claimed
             addConsoleMessage('🔒 This key has been claimed already.','warning');
             await new Promise(r => setTimeout(r, 500));
+            if (progressFill) progressFill.style.width = '100%';
             showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, 'This key has already been claimed.');
         } else {
             // Invalid
             addConsoleMessage('❌ Invalid or expired key.','warning');
             await new Promise(r => setTimeout(r, 400));
+            if (progressFill) progressFill.style.width = '100%';
             showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, 'This key appears invalid or expired.');
         }
     } catch (error) {
@@ -732,6 +753,8 @@ async function performKeyValidation(goldenKey) {
         }
     } finally {
         isKeyValidating = false;
+        const progress = document.getElementById('keyProgress');
+        if (progress) setTimeout(()=>progress.classList.remove('show'), 900);
     }
 }
 

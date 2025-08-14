@@ -53,6 +53,7 @@
             font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
         }
         .console-container.show { display: block; }
+        .console-container.expanded #consoleContent { max-height: 420px; }
         .console-container:before {
             content: '';
             position: absolute;
@@ -72,20 +73,18 @@
             z-index: -1;
         }
         #consoleContent {
-            max-height: 220px;
+            max-height: 240px;
             overflow: auto;
             padding-right: 4px;
             scrollbar-width: thin;
+            transition: max-height .35s ease;
+            font-size: 13.5px;
+            line-height: 1.6;
         }
         #consoleContent::-webkit-scrollbar { width: 8px; }
         #consoleContent::-webkit-scrollbar-thumb { background: linear-gradient(#a78bfa, #f472b6); border-radius: 8px; }
         #consoleContent::-webkit-scrollbar-track { background: transparent; }
-        .console-line { 
-            line-height: 1.5; 
-            letter-spacing: .2px; 
-            padding: 3px 0; 
-            border-left: 2px solid transparent; 
-        }
+        .console-line { letter-spacing: .2px; padding: 4px 8px; border-left: 2px solid transparent; border-radius: 6px; background: rgba(255,255,255,.03); margin: 3px 0; text-shadow: 0 1px 0 rgba(0,0,0,.35); }
         .console-line.info { color: #c5c4ff; border-left-color: rgba(167,139,250,.35); }
         .console-line.warning { color: #ffe58f; border-left-color: rgba(255,229,143,.45); }
         .console-line.success { color: #a7f3d0; border-left-color: rgba(16,185,129,.45); }
@@ -100,6 +99,11 @@
             vertical-align: -2px;
         }
         @keyframes blink { 50% { opacity: 0; } }
+
+        /* Console progress bar (above console) */
+        .console-progress { display:none; width:100%; height:8px; background: rgba(148,163,184,.18); border-radius: 999px; overflow:hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,.35); }
+        .console-progress.show { display:block; }
+        .console-progress-fill { height:100%; width:0%; background: linear-gradient(90deg,#ffee68,#f870d0,#6a8dff); transition: width .5s ease; }
 
         /* Premium modal overlay */
         .mp-modal-overlay {
@@ -391,6 +395,7 @@
                             <small>Enter the Golden Key you received from your invitation.</small>
                             
                             <!-- Console Simulation -->
+                            <div class="console-progress" id="keyProgress"><div class="console-progress-fill" id="keyProgressFill"></div></div>
                             <div class="console-container" id="keyConsole">
                                 <div id="consoleContent"></div>
                                 <span class="console-cursor"></span>
