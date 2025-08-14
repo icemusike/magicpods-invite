@@ -70,10 +70,17 @@ function initWebinarRegistrationPage() {
     const headlineEl = document.querySelector('.webinar-hero .banner-headline');
     if (headlineEl && fullname) {
         const firstName = escapeHtml(fullname.split(' ')[0]);
-        headlineEl.innerHTML = `
-            <span class="banner-headline-span1">${firstName}</span>, Your Podcast Ships in 60 <br class="d-none d-lg-block"/>
-            Minutes <span class="banner-headline-span1">Watch Us Do It LIVE</span><br class="d-none d-lg-block"/>
-            on August 19`;
+        // Determine VIP headline if user has a valid key flag in query (?key_valid=true)
+        const isVip = (params.get('key_valid') || '').toString().toLowerCase() === 'true';
+        if (isVip) {
+            headlineEl.innerHTML = `
+                <span class="banner-headline-span1">Welcome, Keyholder.</span> Ship a podcast in 60 <br class="d-none d-lg-block"/>
+                Minutes — watch us do it live on Aug 19`;
+        } else {
+            headlineEl.innerHTML = `
+                <span class="banner-headline-span1">${firstName}</span>, Your podcast ships in 60 <br class="d-none d-lg-block"/>
+                minutes. Watch us do it live on Aug 19 — save your seat to win a Golden Key.`;
+        }
     }
 
     // Submit -> redirect to confirmation with data
