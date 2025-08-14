@@ -149,6 +149,37 @@ function escapeHtml(unsafe) {
         .replace(/'/g, '&#039;');
 }
 
+// Read affiliate tracking from URL or previously saved cookie/localStorage
+function getAffiliateTracking() {
+    const qs = new URLSearchParams(window.location.search);
+    const getCookieData = () => {
+        try {
+            const c = document.cookie.split('; ').find(x => x.startsWith('mp_aff='));
+            if (c) return JSON.parse(decodeURIComponent(c.split('=')[1]));
+        } catch (_) { /* noop */ }
+        try {
+            const ls = localStorage.getItem('mp_aff');
+            if (ls) return JSON.parse(ls);
+        } catch (_) { /* noop */ }
+        return null;
+    };
+    const saved = getCookieData() || {};
+
+    const aidFromUrl = qs.get('aid');
+    const subIdFromUrl = qs.get('tid') || qs.get('subid') || qs.get('sub_id') || qs.get('sid');
+    const affiliateIdFromUrl = qs.get('aff') || qs.get('affiliate') || qs.get('affiliate_id') || qs.get('aff_id');
+
+    const payload = {
+        aff_source: saved.source || 'jvzoo',
+        aff_key: saved.affKey || undefined,
+        affiliate_id: affiliateIdFromUrl || saved.affVal || undefined,
+        sub_key: saved.subKey || undefined,
+        sub_id: subIdFromUrl || saved.subVal || undefined,
+        aid: aidFromUrl || saved.aid || (saved.affKey === 'aid' ? saved.affVal : undefined)
+    };
+    return payload;
+}
+
 function buildTagsForLead(utm) {
     const affiliateId = getAffiliateId();
     const tags = [];
@@ -199,6 +230,7 @@ function nextStep() {
     
     // Send lead to N8N (non-blocking)
     const utm = collectUtmParams();
+    const aff = getAffiliateTracking();
     sendLeadToN8N({
         event: 'index_lead_submit_step1',
         firstName,
@@ -206,6 +238,7 @@ function nextStep() {
         page: window.location.href,
         referrer: document.referrer || undefined,
         ...utm,
+        ...aff,
         timestamp: new Date().toISOString()
     });
 
@@ -866,6 +899,7 @@ async function performKeyValidation(goldenKey) {
                 page: window.location.href,
                 referrer: document.referrer || undefined,
                 ...utm,
+                ...getAffiliateTracking(),
                 timestamp: new Date().toISOString()
             });
 
@@ -922,6 +956,7 @@ async function performKeyValidation(goldenKey) {
             page: window.location.href,
             referrer: document.referrer || undefined,
             ...utm,
+            ...getAffiliateTracking(),
             timestamp: new Date().toISOString()
         });
         const submitBtn = document.querySelector('#activationForm .btn-activate');
@@ -968,6 +1003,7 @@ function showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, headline
         page: window.location.href,
         referrer: document.referrer || undefined,
         ...utm,
+        ...getAffiliateTracking(),
         timestamp: new Date().toISOString()
     });
     const submitBtn = document.querySelector('#activationForm .btn-activate');
