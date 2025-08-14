@@ -16,8 +16,8 @@ function initConfirmationCountdown() {
     const countdownEl = document.getElementById('confirm-timer');
     if (!countdownEl) return;
 
-    // Set the webinar date - August 19, 2025 10:00 AM EST
-    const webinarDate = new Date('Aug 19, 2025 10:00:00 EST').getTime();
+    // Set the webinar date - August 19, 2025 10:00 AM ET (daylight time safe)
+    const webinarDate = new Date('Aug 19, 2025 10:00:00 ET').getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
