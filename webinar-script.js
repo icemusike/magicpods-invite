@@ -121,7 +121,7 @@ async function handleWebinarSubmit(e) {
     
     try {
         // Send registration to N8N
-        await fetch('https://callflujent.app.n8n.cloud/webhook-test/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0', {
+        await fetch('https://callflujent.app.n8n.cloud/webhook/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

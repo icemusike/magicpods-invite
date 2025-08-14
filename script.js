@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // N8N webhook endpoint for lead capture
-const N8N_WEBHOOK_URL = 'https://callflujent.app.n8n.cloud/webhook-test/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0';
+const N8N_WEBHOOK_URL = 'https://callflujent.app.n8n.cloud/webhook/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0';
 
 // State for automatic key validation on Step 2
 let lastValidatedKey = '';
