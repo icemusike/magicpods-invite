@@ -617,8 +617,9 @@ function simulateKeyValidation(key) {
         return;
     }
     console.dataset.simulating = '1';
-    
-    if (consoleContent.childElementCount === 0) {
+
+    // Do NOT clear previous lines; keep history visible
+    if (consoleContent.querySelectorAll('.console-line').length === 0) {
         console.removeAttribute('data-lines');
         console.classList.remove('expanded');
     }
@@ -690,10 +691,19 @@ async function performKeyValidation(goldenKey) {
         return;
     }
     
-    // Stop any running simulation
+    // Stop any running simulation and allow new lines to append
     clearSimulationTimeouts();
     const consoleBox = document.getElementById('keyConsole');
     if (consoleBox) delete consoleBox.dataset.simulating;
+    const consoleContent = document.getElementById('consoleContent');
+    // Ensure container is visible and retains previous messages
+    if (consoleContent) {
+        const count = consoleContent.querySelectorAll('.console-line').length;
+        if (count >= 2) {
+            consoleBox.classList.add('expanded');
+            consoleBox.setAttribute('data-lines', Math.min(count, 6).toString());
+        }
+    }
     
     isKeyValidating = true;
     consoleEl.classList.add('show');
@@ -991,7 +1001,7 @@ function addConsoleMessage(text, type = 'info') {
     
     // Auto scroll to bottom with smooth behavior
     requestAnimationFrame(() => {
-        consoleContent.scrollTop = consoleContent.scrollHeight + 200;
+        consoleContent.scrollTop = consoleContent.scrollHeight + 400;
     });
     
     // Update cursor status
