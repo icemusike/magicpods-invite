@@ -489,7 +489,10 @@ function initCountdownTimer() {
         const ids = [
             ['days','hours','minutes','seconds'],
             ['days-inline','hours-inline','minutes-inline','seconds-inline'],
-            ['days-activate','hours-activate','minutes-activate','seconds-activate']
+            ['days-activate','hours-activate','minutes-activate','seconds-activate'],
+            // webinar-registration.html timers (top and bottom)
+            ['days-top','hours-top','minutes-top','seconds-top'],
+            ['days-bottom','hours-bottom','minutes-bottom','seconds-bottom']
         ];
         ids.forEach(([dId,hId,mId,sId]) => {
             const daysEl = document.getElementById(dId);
