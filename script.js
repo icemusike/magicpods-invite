@@ -33,6 +33,11 @@ document.addEventListener('DOMContentLoaded', function() {
 // N8N webhook endpoint for lead capture
 const N8N_WEBHOOK_URL = 'https://callflujent.app.n8n.cloud/webhook-test/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0';
 
+// State for automatic key validation on Step 2
+let lastValidatedKey = '';
+let isKeyValidating = false;
+let validateKeyTimer = null;
+
 function collectUtmParams() {
     const params = new URLSearchParams(window.location.search);
     return {
@@ -42,6 +47,24 @@ function collectUtmParams() {
         utm_term: params.get('utm_term') || undefined,
         utm_content: params.get('utm_content') || undefined
     };
+}
+
+function getAffiliateId() {
+    const params = new URLSearchParams(window.location.search);
+    return (
+        params.get('aff') ||
+        params.get('aff_id') ||
+        params.get('aid') ||
+        undefined
+    );
+}
+
+function buildTagsForLead(utm) {
+    const affiliateId = getAffiliateId();
+    const tags = [];
+    if (affiliateId) tags.push(`AFF_${affiliateId}`);
+    if (utm.utm_source) tags.push(`SOURCE_${utm.utm_source}`);
+    return tags;
 }
 
 async function sendLeadToN8N(payload) {
@@ -121,135 +144,10 @@ function prevStep() {
 
 async function handleActivationSubmit(e) {
     e.preventDefault();
-    
-    const firstName = document.getElementById('firstName').value.trim();
-    const email = document.getElementById('email').value.trim();
+    // On submit, trigger the same automatic flow used for live validation
     const goldenKey = document.getElementById('goldenKey').value.trim();
-    const submitBtn = e.target.querySelector('.btn-activate');
-    const console = document.getElementById('keyConsole');
-    
-    // Validate inputs
-    if (!firstName || !email || !goldenKey) {
-        showError('Please fill in all required fields');
-        return;
-    }
-    
-    // Show loading state
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Validating...';
-    submitBtn.disabled = true;
-    
-    // Show console and start validation animation
-    console.classList.add('show');
-    addConsoleMessage('🔍 Connecting to MagicPods AI validation server...');
-    
-    try {
-        // Add console messages for validation process
-        await new Promise(resolve => setTimeout(resolve, 400));
-        addConsoleMessage('📡 Sending Golden Key for verification...');
-        
-        await new Promise(resolve => setTimeout(resolve, 400));
-        addConsoleMessage(`🔐 Validating key: ${goldenKey}`);
-        
-        // Make API call to validate the golden key (GET per spec)
-        const response = await fetch(`https://api.magicpodsai.com/app/voucher-validate?code=${encodeURIComponent(goldenKey)}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json'
-            }
-        });
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const result = await response.json();
-        
-        await new Promise(resolve => setTimeout(resolve, 400));
-        
-        if (result.isValid && result.isRedeemable) {
-            // Success case - valid and redeemable
-            addConsoleMessage('✅ Golden Key validated successfully!');
-            addConsoleMessage('🎉 Key is available for redemption!');
-            addConsoleMessage('🚀 Activating your MagicPods AI access...');
-            
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Track successful signup
-            trackSignup(email, firstName);
-            
-            // Show designed success block below console
-            showSuccessWithConfetti(`🎉 Congrats, ${firstName}! You just unlocked your VIP Early FREE Access to MagicPods AI`);
-            const successBlock = document.createElement('div');
-            successBlock.style.cssText = 'margin-top: 1rem; background: #f0f9ff; border: 1px solid #bae6fd; color: #0c4a6e; padding: 1rem; border-radius: 12px;';
-            successBlock.innerHTML = `
-                <div style="font-weight:800; font-size:1.1rem; margin-bottom:0.5rem;">VIP Trial Activated</div>
-                <div style="margin-bottom:0.75rem;">Your VIP trial runs through Aug 19, 2025. Join the live session at 10:00 AM Eastern (17:00 Bucharest) for pro tips and bonuses.</div>
-                <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-                    <a href="#" id="vip-activate-link" class="primary-cta" style="background:#0ea5e9; color:#fff; padding:0.6rem 1rem; border-radius:10px; text-decoration:none; font-weight:700;">Activate My VIP Trial</a>
-                    <a href="webinar-registration.html?${encodeURIComponent('fullname')}=${encodeURIComponent(firstName)}&email=${encodeURIComponent(email)}" target="_blank" class="secondary-cta" style="background:#fff; border:1px solid #94a3b8; color:#0f172a; padding:0.6rem 1rem; border-radius:10px; text-decoration:none; font-weight:700;">Save My VIP Webinar Seat</a>
-                </div>
-            `;
-            console.appendChild(successBlock);
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Activated';
-            
-        } else if (result.isValid && !result.isRedeemable) {
-            // Key is valid but already claimed
-            addConsoleMessage('⚠️ Golden Key validated but already redeemed.');
-            addConsoleMessage('🔒 This key has been claimed already.');
-            
-            await new Promise(resolve => setTimeout(resolve, 800));
-            
-            showErrorWithWebinarCTA('This key has already been claimed. Register for our VIP Launch Webinar to win 1 of 10 Golden Keys live.');
-            // Notify N8N and redirect to webinar registration with prefill
-            sendLeadToN8N({
-                event: 'index_key_redeemed_already',
-                firstName,
-                email,
-                goldenKey,
-                page: window.location.href,
-                referrer: document.referrer || undefined,
-                timestamp: new Date().toISOString()
-            });
-            setTimeout(() => {
-                const qs = new URLSearchParams({ fullname: firstName, email }).toString();
-                window.location.href = `webinar-registration.html?${qs}#webinar-optin`;
-            }, 1200);
-            return;
-            
-        } else {
-            // Invalid key
-            addConsoleMessage('❌ Golden Key validation failed.');
-            addConsoleMessage('🚫 Invalid or expired key.');
-            
-            await new Promise(resolve => setTimeout(resolve, 500));
-            
-            showError('Invalid Golden Key. Register for our VIP Launch Webinar to win 1 of 10 Golden Keys live.');
-            // Notify N8N and redirect to webinar registration with prefill
-            sendLeadToN8N({
-                event: 'index_key_invalid',
-                firstName,
-                email,
-                goldenKey,
-                page: window.location.href,
-                referrer: document.referrer || undefined,
-                timestamp: new Date().toISOString()
-            });
-            setTimeout(() => {
-                const qs = new URLSearchParams({ fullname: firstName, email }).toString();
-                window.location.href = `webinar-registration.html?${qs}#webinar-optin`;
-            }, 1200);
-            return;
-        }
-        
-    } catch (error) {
-        console.error('Validation error:', error);
-        addConsoleMessage('❌ Network error occurred.');
-        addConsoleMessage('🔄 Please check your connection and try again.');
-        
-        showError('Network error. Please check your connection and try again.');
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
+    if (goldenKey && goldenKey.length >= 6) {
+        scheduleKeyValidation(goldenKey, true);
     }
 }
 
@@ -676,6 +574,10 @@ document.addEventListener('input', function(e) {
         // Trigger console simulation only if there's meaningful input
         if (value.length > 3) {
             simulateKeyValidation(value);
+            // Auto-start validation with debounce once key is reasonably complete
+            if (value.length >= 6) {
+                scheduleKeyValidation(value);
+            }
         } else {
             // Hide console if input is too short
             const console = document.getElementById('keyConsole');
@@ -723,6 +625,167 @@ function simulateKeyValidation(key) {
             addConsoleMessage(message.text, message.type);
         }, message.delay);
     });
+}
+
+function scheduleKeyValidation(value, immediate = false) {
+    const submitBtn = document.querySelector('#activationForm .btn-activate');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Validating...';
+    }
+    if (validateKeyTimer) {
+        clearTimeout(validateKeyTimer);
+    }
+    validateKeyTimer = setTimeout(() => performKeyValidation(value), immediate ? 0 : 700);
+}
+
+async function performKeyValidation(goldenKey) {
+    if (isKeyValidating || lastValidatedKey === goldenKey) return;
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const consoleEl = document.getElementById('keyConsole');
+    const submitBtn = document.querySelector('#activationForm .btn-activate');
+    const utm = collectUtmParams();
+    const tags = buildTagsForLead(utm);
+    
+    if (!firstName || !email) {
+        showError('Please complete Step 1 first.');
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = 'Unlock My Free Access';
+        }
+        return;
+    }
+    
+    isKeyValidating = true;
+    consoleEl.classList.add('show');
+    addConsoleMessage('🔍 Connecting to MagicPods AI validation server...');
+    await new Promise(r => setTimeout(r, 300));
+    addConsoleMessage('📡 Sending Golden Key for verification...');
+    await new Promise(r => setTimeout(r, 300));
+    addConsoleMessage(`🔐 Validating key: ${goldenKey}`);
+
+    try {
+        const response = await fetch(`https://api.magicpodsai.com/app/voucher-validate?code=${encodeURIComponent(goldenKey)}`, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const result = await response.json();
+        await new Promise(r => setTimeout(r, 400));
+
+        if (result.isValid && result.isRedeemable) {
+            lastValidatedKey = goldenKey;
+            addConsoleMessage('✅ Valid key. Preparing your VIP trial...','success');
+            await new Promise(r => setTimeout(r, 900));
+
+            // Build magic link if provided, otherwise fallback
+            const magicLink = result.magicLink || `https://app.magicpodsai.com/onboarding?ml=${encodeURIComponent(goldenKey)}&n=${encodeURIComponent(firstName)}&e=${encodeURIComponent(email)}`;
+            
+            // Send tags + event to N8N
+            sendLeadToN8N({
+                event: 'index_key_valid_auto',
+                firstName,
+                email,
+                goldenKey,
+                tags: ['KEY_VALID', 'VIP_TRIAL_ACTIVE', ...tags],
+                page: window.location.href,
+                referrer: document.referrer || undefined,
+                ...utm,
+                timestamp: new Date().toISOString()
+            });
+
+            // Success UI block
+            const successBlock = document.createElement('div');
+            successBlock.style.cssText = 'margin-top: 1rem; background: linear-gradient(180deg, rgba(16,185,129,.1), rgba(16,185,129,.05)); border: 1px solid rgba(16,185,129,.35); color: #d1fae5; padding: 1rem; border-radius: 12px;';
+            successBlock.innerHTML = `
+                <div style="font-weight:800; font-size:1.05rem; margin-bottom:0.5rem;">🎉 Congrats, ${firstName}! You just unlocked your VIP Early FREE Access to MagicPods.</div>
+                <div style="margin-bottom:0.9rem; color:#cbd5e1">Your VIP access runs through Aug 19, 2025. Join the live session at 10:00 AM Eastern (17:00 Bucharest) for pro tips and bonuses.</div>
+                <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
+                    <a href="${magicLink}" class="primary-cta" style="background:linear-gradient(90deg,#ffee68,#f870d0); color:#0b0a16; padding:0.7rem 1rem; border-radius:10px; text-decoration:none; font-weight:800;">Activate My VIP Trial</a>
+                    <a href="webinar-registration.html?${new URLSearchParams({ fullname: firstName, email }).toString()}" target="_blank" class="secondary-cta" style="background:#0b0a16; border:1px solid #94a3b8; color:#e2e8f0; padding:0.7rem 1rem; border-radius:10px; text-decoration:none; font-weight:700; position:relative;">Save My VIP Webinar Seat</a>
+                </div>
+            `;
+            consoleEl.appendChild(successBlock);
+            showSuccessWithConfetti(`🎉 Congrats, ${firstName}! You just unlocked your VIP Early FREE Access to MagicPods AI`);
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> Activated';
+            }
+        } else if (result.isValid && !result.isRedeemable) {
+            // Already claimed
+            addConsoleMessage('🔒 This key has been claimed already.','warning');
+            await new Promise(r => setTimeout(r, 500));
+            showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, 'This key has already been claimed.');
+        } else {
+            // Invalid
+            addConsoleMessage('❌ Invalid or expired key.','warning');
+            await new Promise(r => setTimeout(r, 400));
+            showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, 'This key appears invalid or expired.');
+        }
+    } catch (error) {
+        console.error('Validation error:', error);
+        addConsoleMessage('❌ Network error occurred.');
+        addConsoleMessage('🔄 Please check your connection and try again.');
+        showError('Network error. Please check your connection and try again.');
+        const submitBtn = document.querySelector('#activationForm .btn-activate');
+        if (submitBtn) {
+            submitBtn.innerHTML = 'Unlock My Free Access';
+            submitBtn.disabled = false;
+        }
+    } finally {
+        isKeyValidating = false;
+    }
+}
+
+function showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, headlineText) {
+    const consoleEl = document.getElementById('keyConsole');
+    const block = document.createElement('div');
+    block.style.cssText = 'margin-top: 1rem; background: linear-gradient(180deg, rgba(239,68,68,.08), rgba(239,68,68,.04)); border: 1px solid rgba(239,68,68,.35); color: #fecaca; padding: 1rem; border-radius: 12px;';
+    const qs = new URLSearchParams({ fullname: firstName, email }).toString();
+    block.innerHTML = `
+        <div style="font-weight:800; font-size:1.05rem; margin-bottom:0.25rem; color:#fecaca;">${headlineText}</div>
+        <div style="margin-bottom:0.9rem; color:#e2e8f0">But there’s still hope—register for our VIP Launch Webinar on Aug 19 @ 10:00 AM Eastern and you could win 1 of 10 Golden Keys live.</div>
+        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin-bottom:.5rem;">
+            <a href="webinar-registration.html?${qs}#webinar-optin" target="_blank" class="primary-cta" style="background:linear-gradient(90deg,#ffee68,#f870d0); color:#0b0a16; padding:0.7rem 1rem; border-radius:10px; text-decoration:none; font-weight:800;">Register for the VIP Webinar</a>
+        </div>
+        <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap; color:#cbd5e1">
+            <label style="display:flex; align-items:center; gap:.5rem;">
+                <input type="checkbox" id="smsReminderChk"> Text me reminders
+            </label>
+            <label style="display:flex; align-items:center; gap:.5rem;">
+                <input type="checkbox" id="telegramJoinChk"> Join our Telegram for instant alerts
+            </label>
+        </div>
+        <div id="phoneReveal" style="margin-top:.6rem; display:none;">
+            <input type="tel" id="smsPhone" placeholder="Your phone number" style="width:100%; height:44px; border-radius:10px; border:1px solid rgba(226,232,240,.3); background:#0b0a16; color:#e2e8f0; padding:0 12px;">
+        </div>
+    `;
+    consoleEl.appendChild(block);
+    const smsChk = block.querySelector('#smsReminderChk');
+    const telChk = block.querySelector('#telegramJoinChk');
+    const phoneReveal = block.querySelector('#phoneReveal');
+    if (smsChk) {
+        smsChk.addEventListener('change', () => {
+            phoneReveal.style.display = smsChk.checked ? 'block' : 'none';
+        });
+    }
+    // Send lead with context
+    sendLeadToN8N({
+        event: headlineText.includes('claimed') ? 'index_key_redeemed_already' : 'index_key_invalid',
+        firstName,
+        email,
+        goldenKey,
+        tags: tags,
+        page: window.location.href,
+        referrer: document.referrer || undefined,
+        ...utm,
+        timestamp: new Date().toISOString()
+    });
+    const submitBtn = document.querySelector('#activationForm .btn-activate');
+    if (submitBtn) {
+        submitBtn.innerHTML = 'Try Another Key';
+        submitBtn.disabled = false;
+    }
 }
 
 function addConsoleMessage(text, type = 'info') {
