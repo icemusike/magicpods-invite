@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initHeaderScroll();
     initVideoPlayer();
     initUrgencyCounters();
+    initWebinarRegistrationPage();
     
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -45,6 +46,38 @@ function clearSimulationTimeouts() {
         simulationTimeouts.forEach(id => clearTimeout(id));
         simulationTimeouts = [];
     }
+}
+
+// Webinar Registration: prefill and submit handler
+function initWebinarRegistrationPage() {
+    const form = document.querySelector('form.webinar-optin');
+    if (!form) return; // not on webinar-registration.html
+
+    // Prefill from query params
+    const params = new URLSearchParams(window.location.search);
+    const fullname = params.get('fullname');
+    const email = params.get('email');
+    if (fullname) {
+        const nameInput = form.querySelector('input[name="fullname"]');
+        if (nameInput) nameInput.value = fullname;
+    }
+    if (email) {
+        const emailInput = form.querySelector('input[name="email"]');
+        if (emailInput) emailInput.value = decodeURIComponent(email);
+    }
+
+    // Submit -> redirect to confirmation with data
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const nameVal = (form.querySelector('input[name="fullname"]').value || '').trim();
+        const emailVal = (form.querySelector('input[name="email"]').value || '').trim();
+        if (!nameVal || !isValidEmail(emailVal)) {
+            alert('Please enter a valid name and email.');
+            return;
+        }
+        const qs = new URLSearchParams({ fullname: nameVal, email: emailVal }).toString();
+        window.location.href = `webinar-confirmation.html?${qs}`;
+    });
 }
 
 function rehydrateConsoleFromBuffer() {
