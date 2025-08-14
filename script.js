@@ -821,7 +821,13 @@ function openPremiumModal({ variant = 'success', title = '', body = '', actions 
 
     card.classList.remove('success', 'warning');
     card.classList.add(variant);
-    titleEl.innerHTML = title;
+    
+    // Add icon before title
+    const iconHtml = variant === 'success' 
+        ? '<div class="mp-modal-icon"><i class="fas fa-check"></i></div>' 
+        : '<div class="mp-modal-icon"><i class="fas fa-exclamation-triangle"></i></div>';
+    
+    titleEl.innerHTML = iconHtml + title;
     bodyEl.innerHTML = body;
     actionsEl.innerHTML = '';
 
@@ -836,18 +842,18 @@ function openPremiumModal({ variant = 'success', title = '', body = '', actions 
 
     if (boosters) {
         const boostersWrap = document.createElement('div');
-        boostersWrap.style.cssText = 'width:100%; margin-top:.5rem; color:#cbd5e1;';
+        boostersWrap.className = 'mp-boosters';
         boostersWrap.innerHTML = `
-            <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
-                <label style="display:flex; align-items:center; gap:.5rem;">
+            <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap; margin-bottom:12px;">
+                <label>
                     <input type="checkbox" id="smsReminderChk"> Text me reminders
                 </label>
-                <label style="display:flex; align-items:center; gap:.5rem;">
+                <label>
                     <input type="checkbox" id="telegramJoinChk"> Join our Telegram for instant alerts
                 </label>
             </div>
-            <div id="phoneReveal" style="margin-top:.6rem; display:none;">
-                <input type="tel" id="smsPhone" placeholder="Your phone number" style="width:100%; height:44px; border-radius:10px; border:1px solid rgba(226,232,240,.3); background:#0b0a16; color:#e2e8f0; padding:0 12px;">
+            <div id="phoneReveal" style="display:none;">
+                <input type="tel" id="smsPhone" placeholder="Your phone number">
             </div>
         `;
         actionsEl.appendChild(boostersWrap);
