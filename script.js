@@ -625,21 +625,22 @@ function simulateKeyValidation(key) {
     
     const messages = [
         { text: 'Initializing Golden Key validation system...', type: 'info', delay: 0 },
-        { text: 'Establishing secure connection to MagicPods AI...', type: 'info', delay: 600 },
-        { text: 'Key format validation: PASSED ✓', type: 'success', delay: 1200 },
-        { text: 'Performing cryptographic authenticity check...', type: 'info', delay: 1800 }
+        { text: 'Connecting to MagicPods AI validation node...', type: 'info', delay: 500 },
+        { text: 'Negotiating secure channel (TLS 1.3)...', type: 'info', delay: 1000 },
+        { text: 'Key format validation: PASSED ✓', type: 'success', delay: 1500 },
+        { text: 'Performing authenticity checks (HMAC/SHA-256)...', type: 'info', delay: 2000 }
     ];
     
     // Add more specific validation based on key length
     if (key.length >= 8) {
         messages.push(
-            { text: 'Scanning distributed validation database...', type: 'info', delay: 2400 },
+            { text: 'Scanning distributed validation database...', type: 'info', delay: 2500 },
             { text: 'Cross-referencing with invitation registry...', type: 'info', delay: 3000 },
             { text: 'Awaiting server validation response...', type: 'warning', delay: 3600 }
         );
     } else if (key.length >= 6) {
         messages.push(
-            { text: 'Processing key with basic validation...', type: 'warning', delay: 2400 }
+            { text: 'Processing key with basic validation...', type: 'warning', delay: 2500 }
         );
     }
     
@@ -934,7 +935,10 @@ function addConsoleMessage(text, type = 'info') {
         second: '2-digit' 
     });
     
+    // Pick icon based on type
+    const icon = type === 'success' ? 'fa-check-circle' : type === 'warning' ? 'fa-exclamation-triangle' : type === 'error' ? 'fa-times-circle' : 'fa-terminal';
     line.innerHTML = `
+        <i class="console-icon fas ${icon}"></i>
         <div class="console-line-content">${text}</div>
         <div class="console-line-timestamp">${timestamp}</div>
     `;
@@ -946,7 +950,7 @@ function addConsoleMessage(text, type = 'info') {
     // Auto-expand based on line count with immediate effect
     const lineCount = consoleContent.querySelectorAll('.console-line').length;
     consoleContainer.setAttribute('data-lines', Math.min(lineCount + 1, 6).toString());
-    if (lineCount >= 3) {
+    if (lineCount >= 2) {
         consoleContainer.classList.add('expanded');
     }
     

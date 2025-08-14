@@ -162,10 +162,15 @@
             flex-shrink: 0;
             margin-top: 2px;
         }
+        .console-icon { width: 18px; height: 18px; margin: 2px 4px 0 4px; flex-shrink: 0; }
         .console-line.info::before { background: linear-gradient(180deg, #60a5fa, #3b82f6); }
         .console-line.warning::before { background: linear-gradient(180deg, #fbbf24, #f59e0b); }
         .console-line.success::before { background: linear-gradient(180deg, #34d399, #10b981); }
         .console-line.error::before { background: linear-gradient(180deg, #f87171, #ef4444); }
+        .console-line.info .console-icon { color: #60a5fa; }
+        .console-line.warning .console-icon { color: #f59e0b; }
+        .console-line.success .console-icon { color: #10b981; }
+        .console-line.error .console-icon { color: #ef4444; }
         
         .console-line-content {
             flex: 1;
