@@ -940,20 +940,20 @@ function addConsoleMessage(text, type = 'info') {
     `;
     
     consoleContent.appendChild(line);
+    // Ensure the line remains visible and not overwritten
+    line.style.willChange = 'transform, opacity';
     
     // Auto-expand based on line count with immediate effect
-    const lineCount = consoleContent.children.length;
+    const lineCount = consoleContent.querySelectorAll('.console-line').length;
+    consoleContainer.setAttribute('data-lines', Math.min(lineCount + 1, 6).toString());
     if (lineCount >= 3) {
-        consoleContainer.setAttribute('data-lines', Math.min(lineCount, 7).toString());
-        if (lineCount >= 4) {
-            consoleContainer.classList.add('expanded');
-        }
+        consoleContainer.classList.add('expanded');
     }
     
     // Auto scroll to bottom with smooth behavior
-    setTimeout(() => {
-        consoleContent.scrollTop = consoleContent.scrollHeight;
-    }, 50);
+    requestAnimationFrame(() => {
+        consoleContent.scrollTop = consoleContent.scrollHeight + 200;
+    });
     
     // Update cursor status
     const cursor = consoleContainer.querySelector('.console-cursor');
