@@ -3,51 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MagicPods AI Webinar Registration - Live Podcast Creation in 60 Minutes</title>
-    <meta name="description" content="Watch us create a viral video podcast live in 60 minutes. Free webinar registration - only 200 seats available.">
-    <link rel="stylesheet" href="styles.css">
+    <title>MagicPods AI - AI-Powered Podcast Creation</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="shortcut icon" type="images/png" href="images/favicon.webp"/>
+ 
+<script src="js/jquery.min.js"></script>    
 </head>
 <body>
-    <!-- Site Header -->
-    <header class="site-header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <img src="images/Magicpods_logo_dark.png" alt="MagicPods AI" class="logo">
-            </div>
-            <div class="header-meta">
-                <span class="early-bird-text">Early Bird Seats Left</span>
-                <a href="#" class="login-link">Login / My Seat</a>
-            </div>
-        </nav>
-    </header>
-
+  
     <!-- Hero Section -->
     <section class="hero webinar-hero">
-        <div class="container">
+         <!-- Spacer to prevent jump -->
+        <div id="nav-spacer" style="height: 0;"></div> 
+			<nav id="nav-bar" class="menu navbar navbar-expand-lg navbar-light nav-bar-top">
+				<a class="navbar-brand" href="index.html"><img src="images/logo.webp" class="img-fluid center-block logo-img" alt="images"></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse SMN_effect-21" id="navbarSupportedContent">
+					<ul class="xl18 lg17 md14 sm16 xs18 w400 navbar-nav ml-auto text-center">
+					    
+					  <li class="nav-item">
+						<a class="nav-link nav-link-inn" ><span>Early Bird Seats Left</span></a>
+					  </li>
+					   
+					  <li class="nav-item">
+						<a class="nav-link getlink hvr-grow" href="#webinar-optin">
+							<!-- Noise Overlay -->
+							<span class="noise-overlay"></span>
+
+							<span class="text">Login / My Seat</span> 
+							<svg class="btn-arrow1" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+								
+								<defs>
+									<linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+										<stop offset="28%" stop-color="#ffee68" />
+										<stop offset="78%" stop-color="#f870d0" />
+									</linearGradient>
+								</defs> 
+								<g>
+									<g>
+										<path d="M506.134,241.843c-0.006-0.006-0.011-0.013-0.018-0.019l-104.504-104
+											c-7.829-7.791-20.492-7.762-28.285,0.068c-7.792,7.829-7.762,20.492,0.067,28.284L443.558,236H20
+											c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h423.557l-70.162,69.824c-7.829,7.792-7.859,20.455-0.067,28.284
+											c7.793,7.831,20.457,7.858,28.285,0.068l104.504-104c0.006-0.006,0.011-0.013,0.018-0.019
+											C513.968,262.339,513.943,249.635,506.134,241.843z"/>
+									</g>
+								</g>
+							</svg>
+
+						</a>  
+
+
+					  </li>  
+					</ul> 
+				</div>
+			</nav>
+ 
+        <div class="container-fluid">
             <div class="hero-content">
-                <h1 class="hero-title">Transform Any Content Into a <span class="gradient-text">Professional Video Podcast</span><br>in Just 60 Minutes—Live Demo</h1>
-                <p class="hero-lead">Join industry experts as they demonstrate our revolutionary AI technology that converts text, articles, or URLs into engaging video podcasts—no technical expertise required.</p>
-                
-                <div class="hero-grid">
-                    <!-- Vimeo Video -->
-                    <div class="video-container">
-                        <div class="video-wrapper">
-                            <div class="video-player-container">
-                                <iframe
-                                    src="https://player.vimeo.com/video/1107697441?color=6366f1&title=0&byline=0&portrait=0&badge=0&controls=1&background=0&responsive=1&dnt=1&quality=720p"
-                                    frameborder="0"
-                                    allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
-                                    allowfullscreen
-                                    title="MagicPods AI Webinar Preview">
-                                </iframe>
-                            </div>
-                        </div>
-                        <script src="https://player.vimeo.com/api/player.js"></script>
-                    </div>
-                    
-                    <!-- Opt-in Card -->
+               <h1 class="banner-headline xl64 lg64 md52 sm46 xs30 text-white" style="position: relative;z-index: 1;">
+                Your Podcast Ships in 60 <br class="d-none d-lg-block"/> Minutes <span class="banner-headline-span1">Watch Us Do It LIVE</span><br class="d-none d-lg-block"/>on August 19</h1>
+                <p class="hero-lead xl22 lg22 md20 sm18 xs16 w400"><span class="hero-lead-span">See how complete beginners turn any <span class="w700">text or URL into viral video podcasts <br class="d-none d-lg-block"/></span> using a single AI prompt—no camera, no mic.</span></p> 
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="webinar-video-div">
+                    <div class="align-self-center video-box-main">	 
+					<div class="video-box">  
+						<div class="video-box-inner">											
+							<div class="autoplayer-area">
+							<div class="autoplayer-subarea autoplayer-subarea-16-by-9">
+							<div id="autoplayer"></div>
+							</div>
+							<div class="autoplayer-overlay">
+							<div class="autoplayer-overlay-background"></div>
+							<div class="autoplayer-overlay-content">
+							<span class="animated infinite pulse inline-block">
+							Click Here To Unmute Video
+							</span>
+							</div>
+							</div>
+							</div>		
+						</div>
+					</div>
+				    </div>
+                </div>
+
+                <div class="optin-div">
                     <aside class="optin-card">
                         <div class="registered-count">
                             Already Registered <strong>195 / 200</strong>
@@ -89,34 +141,49 @@
                                 </div>
                             </div>
                         </div>
+
                         
+                    </aside>    
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+                <div class="webinar-form-div" id="webinar-optin">
+                    <div class="webinar-form-div-inn">
+
+                        <img src="images/connection4.png" alt="connection" class="connection4-image">
                         <form class="webinar-optin" id="webinar-optin" action="#" method="POST">
-                            <div class="form-group">
+                            <div class="row m-0" style="width: 100%;">
+                           <div class="form-group">
+                                <label for="fullname">Your Name</label>
                                 <input type="text" name="fullname" placeholder="Your Name *" required>
                             </div>
                             <div class="form-group">
+                                <label for="email">Email Address</label>
                                 <input type="email" name="email" placeholder="Email Address *" required>
+                            </div>
                             </div>
                             <input type="hidden" name="webinar_date" value="Tue, Aug 19 2025 10 AM EST">
                             <button type="submit" class="btn-register">
                                 <i class="fas fa-lock"></i>
-                                Reserve My Seat — FREE
+                                Reserve My Seat FREE
+                            <i class="fas fa-arrow-right"></i>
                             </button>
                             <small class="secure-note">
                                 <i class="fas fa-shield-alt"></i>
                                 Secure registration • 100% free
                             </small>
                         </form>
-                    </aside>
-                </div>
-            </div>
+                    </div>
+                </div>     
         </div>
     </section>
 
     <!-- Why Different Section -->
     <section class="why-different">
         <div class="container">
-            <h2 class="section-title">Why This Webinar Is Different</h2>
+             <h1 class="xl64 lg56 md60 sm51 xs26 w710 lh100 ls25-64f text-center ">Why This Webinar <br class="d-none d-md-block"/> Is Different</h1>
             <ul class="bullets">
                 <li class="bullet-item">
                     <div class="bullet-icon"><i class="fas fa-video"></i></div>
@@ -160,24 +227,33 @@
 
     <!-- Webinar Meta Section -->
     <section class="webinar-meta">
-        <div class="container">
-            <dl class="meta-details">
-                <dt>Date</dt>
-                <dd>Tuesday, August 19, 2025</dd>
-                <dt>Time</dt>
-                <dd>10 AM EST / 7 AM PST / 3 PM BST</dd>
+        <div class="container-fluid">
+         <div class="row justify-content-center">   
+            <div class="webinar-date-div">
+            <dl class="meta-details"> 
+                <dd>
+                    <img src="images/date.png" alt="date" class="date-image">
+                    Tuesday, August 19, 2025</dd>
+            </dl>               
+              
+            <dl class="meta-details"> 
+                <dd>
+                    <img src="images/time.png" alt="time" class="time-image">
+                    10 AM EST / 7 AM PST / 3 PM BST</dd>
             </dl>
             <a href="#webinar-optin" class="primary-cta">
                 <i class="fas fa-calendar-plus"></i>
-                Reserve My Seat — FREE
+                Reserve My Seat FREE
             </a>
+        </div>
+        </div>
         </div>
     </section>
 
     <!-- Why Reserve Section -->
     <section class="why-reserve">
         <div class="container">
-            <h2 class="section-title">Why You Should Reserve Your Seat</h2>
+           <h1 class="xl64 lg56 md60 sm51 xs26 w710 lh100 ls25-64f text-center ">Why You Should Reserve <br class="d-none d-md-block"/> Your Seat</h1>
             <div class="grid-3col">
                 <div class="benefit-card">
                     <div class="benefit-icon">
@@ -207,19 +283,23 @@
     <!-- Hosts Section -->
     <section class="hosts">
         <div class="container">
-            <h2 class="section-title">Meet Your Hosts</h2>
-            <div class="host-grid">
-                <div class="host-card">
-                    <img src="images/adrian.webp" alt="Adrian Isfan" class="host-image">
+            <h1 class="xl64 lg56 md60 sm51 xs26 w710 lh100 ls25-64f text-center text-white">Meet Your Hosts</h2>
+            <div class="row host-grid mt5">
+                <div class="host-card-out col-md-6">
+                <div class="host-card col-12">
+                    <img src="images/adrian2.png" alt="Adrian Isfan" class="">
                     <h3 class="host-name">Adrian Isfan</h3>
                     <span class="host-role">Co-Founder & Product Lead</span>
                     <p class="host-bio">Creator of multiple 7-figure AI launches (LeadsGorilla, CallFluent AI). Adrian will walk you through the live build and monetization blueprint.</p>
                 </div>
-                <div class="host-card">
-                    <img src="images/pankaj.webp" alt="Pankaj Malav" class="host-image">
+                </div>
+                <div class="host-card-out col-md-6">
+                <div class="host-card col-12">
+                    <img src="images/pankaj2.png" alt="Pankaj Malav" class=" ">
                     <h3 class="host-name">Pankaj Malav</h3>
                     <span class="host-role">Co-Founder & Chief Engineer</span>
                     <p class="host-bio">The technical brain behind MagicPods AI. Pankaj reveals the engine that converts any content into engagement-boosting podcast shows.</p>
+                </div>
                 </div>
             </div>
         </div>
@@ -227,66 +307,43 @@
 
     <!-- In 60 Minutes Section -->
     <section class="in-60-min">
-        <div class="container">
-            <h2 class="section-title">In 60 Minutes You'll…</h2>
-            <ol class="steps">
-                <li class="step-item">
-                    <span class="step-number">1</span>
-                    <div class="step-content">
-                        <h3>Erase the Content Bottleneck</h3>
-                        <p>turn blogs & PDFs into episodes.</p>
-                    </div>
-                </li>
-                <li class="step-item">
-                    <span class="step-number">2</span>
-                    <div class="step-content">
-                        <h3>Monetize Before You Record</h3>
-                        <p>apply the Prompt→Proof→Pre-Sale method we demo.</p>
-                    </div>
-                </li>
-                <li class="step-item">
-                    <span class="step-number">3</span>
-                    <div class="step-content">
-                        <h3>Clone Our Exact Playbook</h3>
-                        <p>download the Rapid-Launch Checklist.</p>
-                    </div>
-                </li>
-                <li class="step-item">
-                    <span class="step-number">4</span>
-                    <div class="step-content">
-                        <h3>Grab the Ultimate Bundle</h3>
-                        <p>lifetime access at a launch-only price.</p>
-                    </div>
-                </li>
-            </ol>
-        </div>
-    </section>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="webinar-meta-div">
 
-    <!-- Countdown Strip -->
-    <section class="countdown-strip" aria-label="Webinar Starts In">
-        <div class="container">
-            <div class="countdown-content">
-                <div class="timer" id="bottom-timer">
-                    <div class="timer-grid">
-                        <div class="timer-item">
-                            <span class="timer-number" id="days-bottom">12</span>
-                            <span class="timer-label">Days</span>
+                <h1 class="xl64 lg56 md60 sm51 xs26 w710 lh100 ls25-64f text-center">In 60 Minutes You'll…</h1>
+                <ol class="steps">
+                    <li class="step-item">
+                        <span class="step-number">1</span>
+                        <div class="step-content">
+                            <h3>Erase the Content Bottleneck</h3>
+                            <p>turn blogs & PDFs into episodes.</p>
                         </div>
-                        <div class="timer-item">
-                            <span class="timer-number" id="hours-bottom">08</span>
-                            <span class="timer-label">Hours</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">2</span>
+                        <div class="step-content">
+                            <h3>Monetize Before You Record</h3>
+                            <p>apply the Prompt→Proof→Pre-Sale method we demo.</p>
                         </div>
-                        <div class="timer-item">
-                            <span class="timer-number" id="minutes-bottom">45</span>
-                            <span class="timer-label">Minutes</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">3</span>
+                        <div class="step-content">
+                            <h3>Clone Our Exact Playbook</h3>
+                            <p>download the Rapid-Launch Checklist.</p>
                         </div>
-                        <div class="timer-item">
-                            <span class="timer-number" id="seconds-bottom">23</span>
-                            <span class="timer-label">Seconds</span>
+                    </li>
+                    <li class="step-item">
+                        <span class="step-number">4</span>
+                        <div class="step-content">
+                            <h3>Grab the Ultimate Bundle</h3>
+                            <p>lifetime access at a launch-only price.</p>
                         </div>
-                    </div>
+                    </li>
+                </ol>
                 </div>
-                <p class="limited-seats">Limited Seats Available</p>
+
             </div>
         </div>
     </section>
@@ -294,7 +351,7 @@
     <!-- FAQ Section -->
     <section class="faq">
         <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
+            <h1 class="xl64 lg56 md60 sm51 xs26 w710 lh100 ls25-64f text-center">Frequently Asked Questions</h1>
             <div class="faq-list">
                 <details class="faq-item">
                     <summary class="faq-question">Do I need tech skills?</summary>
@@ -324,17 +381,46 @@
         </div>
     </section>
 
+    
+
     <!-- Final CTA Section -->
     <section class="final-cta">
         <div class="container">
-            <div class="final-cta-content">
-                <h2 class="final-cta-title">Ready to Ship Your Podcast Idea?</h2>
-                <p class="small-date">Tuesday • Aug 19 • 10 AM EST</p>
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                <h1 class="xl64 lg56 md60 sm51 xs26 w710 lh100 ls25-64f text-center text-white">Ready to Ship Your <br class="d-none d-lg-block"/> Podcast Idea?</h1>
+                <p class="small-date text-white"><u>Tuesday • Aug 19 • 10 AM EST</u></p>
                 <a href="#webinar-optin" class="primary-cta">
                     <i class="fas fa-rocket"></i>
-                    Reserve My Seat — FREE
+                    Reserve My Seat FREE
                 </a>
                 <small class="hurry-text">Hurry! Seats are limited.</small>
+
+                <div class="countdown-content mt3">
+                    <div class="timer" id="bottom-timer">
+                        <div class="timer-grid">
+                            <div class="timer-item">
+                                <span class="timer-number" id="days-bottom">12</span>
+                                <span class="timer-label">Days</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-number" id="hours-bottom">08</span>
+                                <span class="timer-label">Hours</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-number" id="minutes-bottom">45</span>
+                                <span class="timer-label">Minutes</span>
+                            </div>
+                            <div class="timer-item">
+                                <span class="timer-number" id="seconds-bottom">23</span>
+                                <span class="timer-label">Seconds</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="limited-seats">Limited Seats Available</p>
+                </div>
+
+                 </div>
             </div>
         </div>
     </section>
@@ -345,8 +431,8 @@
             <div class="footer-content">
                 <div class="footer-main">
                     <div class="footer-brand">
-                        <div class="footer-logo-container">
-                            <img src="images/magicpods-logo.png" alt="MagicPods AI" class="logo footer-logo">
+                         <div class="footer-logo-container">
+                            <img src="images/magicpodslogo.png" alt="MagicPods AI" class="logo footer-logo">
                         </div>
                         <p class="footer-description">Transforming podcast creation with artificial intelligence. Turn your ideas into viral podcasts in just 3 simple steps.</p>
                     </div>
@@ -376,7 +462,7 @@
             
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    <p>&copy; 2024 MagicPods AI. All rights reserved.</p>
+                    <p>&copy; 2025 MagicPods AI. All rights reserved.</p>
                 </div>
             </div>
             
@@ -387,6 +473,38 @@
         </div>
     </footer>
 
-    <script src="webinar-script.js"></script>
+<script src="js/bootstrap.min.js"></script>    
+<!-- Auto Play Video CSS -->
+<link href="css/autoplay.css" type="text/css" rel="stylesheet"/>
+<!-- Auto Play Video JS -->
+<script src="js/autoplay2.js" type="application/javascript"></script>
+<script async src="js/player.js"></script>
+<script async src="https://www.youtube.com/iframe_api"></script> 
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<script src="script.js"></script>
+
+<script>
+    ////nav-bar////   
+$(function () {
+    var $nav = $('#nav-bar');
+
+    // Scroll function
+    function updateNavbar() {
+      var scrollY = $(window).scrollTop();
+      if (scrollY > 50) {
+        $nav.addClass('scrolled');
+      } else {
+        $nav.removeClass('scrolled');
+      }
+    }
+
+    // Run immediately on load and bind scroll
+    updateNavbar();
+    $(window).on('scroll', updateNavbar);
+  });
+  </script>
+
 </body>
 </html>

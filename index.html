@@ -4,75 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MagicPods AI - AI-Powered Podcast Creation</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <link rel="shortcut icon" type="images/png" href="images/favicon.webp"/>
+
+
+<script src="js/jquery.min.js"></script>    
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <img src="images/Magicpods_logo_dark.png" alt="MagicPods AI" class="logo">
-            </div>
-            <div class="nav-links">
-                <a href="#statistics">Podcasts Stats</a>
-                <a href="webinar-registration.html">Register For Webinar</a>
-            </div>
-            <a href="#activation" class="nav-cta-btn">Claim Your Access Key</a>
-        </nav>
-    </header>
+  
+   
 
-    <!-- Sticky Scarcity Bar -->
-    <div class="sticky-scarcity-bar">
-        <div class="scarcity-bar-content">
-            <i class="fas fa-key"></i>
-            <span>Golden Keys Remaining: <span class="remaining-count">200</span></span>
-            <div class="progress-bar-scarcity">
-                <div class="progress-fill-scarcity" style="width: 80%;"></div>
-            </div>
-        </div>
-    </div>
+<!-- Hero Section -->
+<section class="hero">
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Spacer to prevent jump -->
+    <div id="nav-spacer" style="height: 0;"></div> 
+			<nav id="nav-bar" class="menu navbar navbar-expand-lg navbar-light nav-bar-top">
+				<a class="navbar-brand" href="index.html"><img src="images/logo.webp" class="img-fluid center-block logo-img" alt="images"></a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+
+				<div class="collapse navbar-collapse SMN_effect-21" id="navbarSupportedContent">
+					<ul class="xl18 lg17 md14 sm16 xs18 w400 navbar-nav ml-auto text-center">
+					    
+					  <li class="nav-item">
+						<a class="nav-link nav-link-inn" href="#statistics"><span>Podcasts Stats</span></a>
+					  </li>
+					  <li class="nav-item">
+						<a class="nav-link nav-link-inn" href="webinar-registration.html"><span>Register For Webinar</span></a>
+					  </li> 
+					  <li class="nav-item">
+						<a class="nav-link getlink hvr-grow" href="#activation">
+							<!-- Noise Overlay -->
+							<span class="noise-overlay"></span>
+
+							<span class="text">Claim Your Access Key</span> 
+							<svg class="btn-arrow1" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+								viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+								
+								<defs>
+									<linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+										<stop offset="28%" stop-color="#ffee68" />
+										<stop offset="78%" stop-color="#f870d0" />
+									</linearGradient>
+								</defs> 
+								<g>
+									<g>
+										<path d="M506.134,241.843c-0.006-0.006-0.011-0.013-0.018-0.019l-104.504-104
+											c-7.829-7.791-20.492-7.762-28.285,0.068c-7.792,7.829-7.762,20.492,0.067,28.284L443.558,236H20
+											c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h423.557l-70.162,69.824c-7.829,7.792-7.859,20.455-0.067,28.284
+											c7.793,7.831,20.457,7.858,28.285,0.068l104.504-104c0.006-0.006,0.011-0.013,0.018-0.019
+											C513.968,262.339,513.943,249.635,506.134,241.843z"/>
+									</g>
+								</g>
+							</svg>
+
+						</a>  
+
+
+					  </li>  
+					</ul> 
+				</div>
+			</nav>
+
+
         <div class="hero-content">
-            <div class="invitation-badge">
-                <i class="fas fa-crown"></i>
-                <span>Congratulations, You've been invited!</span>
-            </div>
-            <h1 class="hero-title">
-                Turn your Ideas, Blog, scripts into 
-                <span class="gradient-text">viral podcasts</span> 
-                in just 3 simple steps
-            </h1>
-            <p class="hero-subtitle">
-                Completely free if you got a golden key access invitation.
-            </p>
-            
-            <!-- Video Player -->
-            <div class="video-container">
-                <div class="video-wrapper">
-                    <div class="video-player-container">
-                        <iframe 
-                            src="https://player.vimeo.com/video/1107663505?color=6366f1&title=0&byline=0&portrait=0&badge=0&controls=1&background=0&responsive=1&dnt=1&quality=720p" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture; encrypted-media" 
-                            allowfullscreen
-                            title="MagicPods AI Demo">
-                        </iframe>
+
+            <div class="col-12">
+				<h3 class="lg24 md22 sm20 xs20 w700 lh110 text-white">Golden Keys Remaining: <span class="remaining-count">200</span></h3> 
+				
+                <div class="progress-bar-scarcity">
+                    <div class="progress-fill-scarcity">
+                        <span>80% Remaining</span>
                     </div>
                 </div>
-                <script src="https://player.vimeo.com/api/player.js"></script>
-            </div>
-        </div>
+            </div>    
+
+   
+            <div class="col-12 text-center"> 
+				<p class="lg25 md22 sm20 xs18 w700 lh150 banner-subtitle ls25-20f" style="color: #736f9a;"><span class="banner-subtitle-heighlight">
+                    <img src="images/crown.png" class="crown img-fluid center-block" alt="crown" /> 
+                    Congratulations, You've been invited!</span></p> 
+
+                <h1 class="banner-headline xl64 lg64 md52 sm46 xs30 text-white" style="position: relative;z-index: 1;"> 
+                    Turn your Ideas, Blog, scripts <br class="d-none d-lg-block"/> 
+                    into <span class="banner-headline-span1">viral podcasts</span> in <u>just</u> <br class="d-none d-lg-block"/> 
+                    3 simple steps
+                </h1>
+
+                <p class="banner-subheadline xl28 lg28 md22 sm20 xs16 w400 lh130 text-white">    
+					<u class="w700">Completely free</u> if you got a golden key access invitation.
+
+				</p>
+			</div>
+ 
+        
+       
+
+     <div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-11" style="position: relative;z-index: 1;"> 
+				<div class="align-self-center video-box-main">	 
+					<div class="video-box">
+<!-- 
+						<div class="video-container" data-vimeo-id="38772314">
+							<div class="video-thumbnail">
+								<img src="images/vidthumbnail.webp" class="demothumb img-fluid center-block" alt="videoThumbnail" /> 
+							</div>
+						</div>-->
+
+					 
+						<div class="video-box-inner">											
+							<div class="autoplayer-area">
+							<div class="autoplayer-subarea autoplayer-subarea-16-by-9">
+							<div id="autoplayer"></div>
+							</div>
+							<div class="autoplayer-overlay">
+							<div class="autoplayer-overlay-background"></div>
+							<div class="autoplayer-overlay-content">
+							<span class="animated infinite pulse inline-block">
+							Click Here To Unmute Video
+							</span>
+							</div>
+							</div>
+							</div>		
+						</div>
+					</div>
+				</div>  
+			</div>   
+		</div>  
+	</div> 
     </section>
 
     <!-- Scarcity Section -->
     <section class="scarcity-section">
-        <div class="container">
+        <div class="container-fluid" style="position: relative;">
+
+            <div class="row justify-content-center">	
+			<div class="scarcity-box">
+
             <div class="scarcity-content">
-                <h2 class="scarcity-title">Exclusive Limited Availability</h2>
+                <div class="col-12 text-center">    
+                    <h1 class="lg60 md56 sm45 xs26 w710 lh120" style="letter-spacing: -1.5px">Exclusive Limited <br class="d-none d-lg-block"/>  Availability</h1>
+                </div> 
                 <div class="scarcity-stats">
                     <div class="scarcity-main">
                         <div class="stat-group">
@@ -89,10 +170,12 @@
                         
                         <div class="progress-container">
                             <div class="progress-bar">
-                                <div class="progress-fill" data-progress="80"></div>
+                                <div class="progress-fill" data-progress="80">
+                            <span class="progress-text">80% remaining</span></div>
                             </div>
-                            <span class="progress-text">80% remaining</span>
                         </div>
+
+                        
                     </div>
                     
                     <div class="scarcity-urgency">
@@ -105,21 +188,24 @@
                 </div>
                 
                 <p class="scarcity-description">
-                    Complete our simple 2-step activation process below to secure your free xBesh account. 
+                    Complete our simple 2-step activation process below to secure your free xBesh account.  <br/>
                     Enter your email, then submit your Golden Key code to get immediate access.
                 </p>
                 
                 <p class="scarcity-cta">
-                    <strong>Claim your exclusive spot before they're all gone!</strong>
+                    <u>Claim your exclusive spot before they're all gone!</u>
                 </p>
+            </div>
+            </div>
             </div>
         </div>
     </section>
 
     <!-- Golden Key Activation Widget -->
-    <section class="activation-section">
-        <div class="container">
-            <div class="activation-widget">
+    <section class="activation-section" id="activation">
+        <div class="container"> 
+            <div class="row m-0">            
+                <div class="col-12 activation-widget">
                 <h2 class="activation-title">Activate Your Golden Key Access</h2>
                 
                 <div class="activation-steps">
@@ -132,6 +218,7 @@
                 
                 <form class="activation-form" id="activationForm">
                     <div class="form-step active" data-step="1">
+                    <div class="row m-0" style="width: 100%;">
                         <div class="form-group">
                             <label for="firstName">First Name</label>
                             <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
@@ -140,6 +227,7 @@
                             <label for="email">Email Address</label>
                             <input type="email" id="email" name="email" placeholder="Enter your email address" required>
                         </div>
+                    </div>
                         <button type="button" class="btn-next" onclick="nextStep()">
                             Continue
                             <i class="fas fa-arrow-right"></i>
@@ -172,184 +260,191 @@
                         </button>
                     </div>
                 </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Podcast Industry Statistics Section -->
     <section class="statistics-section">
-        <div class="container">
-            <div class="statistics-header">
-                <h2>Key Podcast Industry Statistics</h2>
-                <div class="stats-badge">
-                    <span>2020-2025 & BEYOND</span>
-                </div>
-            </div>
-            
-            <div class="statistics-grid">
-                <!-- Global Podcast Listeners -->
-                <div class="stat-card global-listeners">
-                    <div class="stat-icon">
-                        <div class="listener-icons">
-                            <div class="listener-avatar"></div>
-                            <div class="listener-avatar"></div>
-                            <div class="listener-avatar"></div>
-                            <div class="listener-avatar"></div>
-                        </div>
-                    </div>
-                    <h3>Global Podcast Listeners</h3>
-                    <div class="stat-data">
-                        <div class="stat-item">
-                            <span class="year">2020:</span>
-                            <span class="value highlighted">383 million</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="year">2023:</span>
-                            <span class="value">506.9 million</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="year">2024:</span>
-                            <span class="value">546.7 million</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="year">2025:</span>
-                            <span class="value">584.1 million</span>
-                        </div>
-                    </div>
-                    <div class="stat-projection">
-                        <span class="projection-text">2027 (Projected)</span>
-                        <span class="projection-value">651.7 million</span>
-                    </div>
-                </div>
+         <div class="container-fluid" style="position: relative;"> 
+            <div class="row justify-content-center">	
+                <div class="col-12 section6-1-box-out"> 
+                    <div class="section6-1-box">
+                        <h1 class="xl64 lg56 md60 sm51 xs26 w710 lh100 ls25-64f text-center text-white">Key Podcast <br class="d-none d-md-block"/> Industry Statistics </h1>   
 
-                <!-- US Podcast Listeners -->
-                <div class="stat-card us-listeners">
-                    <div class="stat-icon">
-                        <div class="growth-chart">
-                            <div class="chart-bar" style="height: 30%"></div>
-                            <div class="chart-bar" style="height: 60%"></div>
-                            <div class="chart-bar" style="height: 100%"></div>
-                        </div>
-                    </div>
-                    <h3>US Podcast Listeners</h3>
-                    <div class="stat-data">
-                        <div class="stat-item">
-                            <span class="icon">📈</span>
-                            <span class="text">2020: 37% of US population</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="icon">📊</span>
-                            <span class="text">2025: 55% of US population</span>
-                        </div>
-                    </div>
-                    <div class="stat-projection">
-                        <span class="projection-text">2025: 158 million</span>
-                        <span class="projection-sub">monthly listeners</span>
-                    </div>
-                </div>
+                        <h4 class="lg33 md32 sm28 xs22 w600 lh130 text-white text-center upper section6-1-title" style="letter-spacing: -0.825px">    
+                            <span>2020–2025 & Beyond</span>
+                        </h4> 
+    
+                        <div class="row justify-content-center m-0">
+                            <div class="key-podcast-box-out">
+                                <div class="col-12 key-podcast-box key-podcast-box-1">
+                                    <img src="images/podcast1.webp" class="podcast1-img img-fluid center-block" alt="podcast1"/>
 
-                <!-- Podcast Market Size -->
-                <div class="stat-card market-size">
-                    <div class="stat-icon">
-                        <div class="dollar-chart">
-                            <span class="dollar-sign">$</span>
-                            <div class="growth-arrow">↗</div>
-                        </div>
-                    </div>
-                    <h3>Podcast Market Size</h3>
-                    <div class="stat-data">
-                        <div class="stat-item">
-                            <span class="icon">📈</span>
-                            <span class="text">2024: $30.8 - $36.3 billion</span>
-                        </div>
-                        <div class="stat-item highlighted">
-                            <span class="icon">🎯</span>
-                            <span class="text">2025: $32.5 - $38.4 billion</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="icon">🚀</span>
-                            <span class="text">2030: $131 - $134 billion</span>
-                        </div>
-                    </div>
-                    <div class="stat-projection">
-                        <span class="projection-text">2032: $173.5 billion</span>
-                        <span class="projection-sub">(CAGR: 27%)</span>
-                    </div>
-                </div>
+                                    <div class="col-12 key-podcast-box-detail">
+                                        <h3 class="key-podcast-box-title w800 lh110 plusjakarta">Global Podcast Listeners</h3>
+    
+                                        <div class="key-podcast-list key-podcast-list-1">
+                                            <h5><img src="images/podcastpoint.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                <span class="h5-1">2020: 383 million</span></h5>
 
-                <!-- Ad Revenue -->
-                <div class="stat-card ad-revenue">
-                    <div class="stat-icon">
-                        <div class="ad-icon">
-                            <div class="ad-frame">Ad</div>
-                            <div class="revenue-line"></div>
+                                            <h5><img src="images/podcastpoint.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                2023: 506.9 million</h5>
+
+                                            <h5><img src="images/podcastpoint.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                2024: 546.7 million</h5>
+
+                                            <h5><img src="images/podcastpoint.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                <span class="h5-2">2025: 584.1 million</span></h5>
+                                        </div>
+
+                                        <img src="images/connection1.webp" class="connection1-img img-fluid center-block" alt="connection1"/>	
+
+                                        <h4><span>2027 (Projected) <br/> 651.7 million</span></h4>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div class="key-podcast-box-out">
+                                <div class="col-12 key-podcast-box key-podcast-box-2">
+                                    <img src="images/podcast2.webp" class="podcast1-img img-fluid center-block" alt="podcast1"/>
+
+                                    <div class="col-12 key-podcast-box-detail">
+                                        <h3 class="key-podcast-box-title w800 lh110 plusjakarta">US Podcast Listeners</h3>
+
+                                        <div class="key-podcast-list key-podcast-list-2">
+                                            <h5><img src="images/podcastpoint2.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                2020: 37% of US population</h5>
+
+                                            <h5><img src="images/podcastpoint2.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                <span class="h5-2">2025: 55% of US population </span></h5>
+    
+                                        </div>
+
+                                        <img src="images/connection2.webp" class="connection2-img img-fluid ml-auto d-block" alt="connection"/>	
+
+                                        <h4><span>2025: 158 million <br/> monthly listeners</span></h4>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div class="key-podcast-box-out">
+                                <div class="col-12 key-podcast-box key-podcast-box-3">
+                                    <img src="images/podcast3.webp" class="podcast1-img img-fluid center-block" alt="podcast1"/>
+
+                                    <div class="col-12 key-podcast-box-detail">
+                                        <h3 class="key-podcast-box-title w800 lh110 plusjakarta">Podcast Market Size</h3>
+
+                                        <div class="key-podcast-list key-podcast-list-3">
+                                            <h5><img src="images/podcastpoint3.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                2024: $30.8–$36.3 billion</h5>
+
+                                            <h5><img src="images/podcastpoint3.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                <span class="h5-2">2025: $32.5–$38.4 billion</span></h5>
+
+                                            <h5><img src="images/podcastpoint3.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                2030: $131–$134 billion</h5>
+    
+                                        </div>
+
+                                        <h4><span>2032: $173.5 billion <br/> (CAGR: 27%)</span></h4>
+                                    </div> 
+                                </div>
+                            </div>
+
+                            <div class="key-podcast-box-out">
+                                <div class="col-12 key-podcast-box key-podcast-box-4">
+                                    <img src="images/podcast4.webp" class="podcast1-img img-fluid center-block" alt="podcast1"/>
+
+                                    <div class="col-12 key-podcast-box-detail">
+                                        <h3 class="key-podcast-box-title w800 lh110 plusjakarta">Ad Revenue (US)</h3>
+
+                                        <div class="key-podcast-list key-podcast-list-4">
+                                            <h5><img src="images/podcastpoint4.webp" class="podcastpoint-img img-fluid center-block" alt="podcastpoint"/>
+                                                2024: Over $4 billion</h5> 
+                                        </div>
+    
+
+                                        <img src="images/connection3.webp" class="connection3-img img-fluid mx-auto d-block" alt="connection"/>	
+
+                                        <h4><span>2030 (Projected): <br/> $12 billion</span></h4>
+                                    </div>  
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <h3>Ad Revenue (US)</h3>
-                    <div class="stat-data">
-                        <div class="stat-item">
-                            <span class="icon">💰</span>
-                            <span class="text">2024: Over $4 billion</span>
-                        </div>
-                    </div>
-                    <div class="stat-projection">
-                        <span class="projection-text">2030 (Projected):</span>
-                        <span class="projection-value">$12 billion</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </div>  
+                </div> 
+            </div> 
+        </div> 
     </section>
 
     <!-- Features Section -->
     <section class="features" id="features">
-        <div class="container">
-            <div class="section-header">
-                <h2>Everything you need to create amazing podcasts</h2>
-                <p>From concept to distribution, our AI handles the heavy lifting</p>
+        <div class="container-fluid">
+            <div class="section-header">  
+               <h1 class="xl64 lg56 md60 sm51 xs26 w710 lh100 ls25-64f text-center ">Everything you need to <br class="d-none d-md-block"/> create amazing podcasts</h2>
+                <p><span>From concept to distribution, our AI handles the heavy lifting</span></p>
             </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-microphone-alt"></i>
+            <div class="row justify-content-center features-grid">
+                
+                <div class="col-md-4 feature-card-out">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-microphone-alt"></i>
+                        </div>
+                        <h3>AI Voice Generation</h3>
+                        <p>Choose from dozens of realistic AI voices or clone your own. Multiple speakers, different accents, perfect pronunciation every time.</p>
                     </div>
-                    <h3>AI Voice Generation</h3>
-                    <p>Choose from dozens of realistic AI voices or clone your own. Multiple speakers, different accents, perfect pronunciation every time.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-pen-fancy"></i>
+                <div class="col-md-4 feature-card-out">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-pen-fancy"></i>
+                        </div>
+                        <h3>Smart Script Writing</h3>
+                        <p>Just provide your topic or outline. Our AI creates engaging, well-structured scripts with natural conversation flow and compelling storytelling.</p>
                     </div>
-                    <h3>Smart Script Writing</h3>
-                    <p>Just provide your topic or outline. Our AI creates engaging, well-structured scripts with natural conversation flow and compelling storytelling.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-wand-magic-sparkles"></i>
+                <div class="col-md-4 feature-card-out">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h3>Automatic Editing</h3>
+                        <p>Professional-grade editing with background music, sound effects, smooth transitions, and perfect audio levels - all done automatically.</p>
                     </div>
-                    <h3>Automatic Editing</h3>
-                    <p>Professional-grade editing with background music, sound effects, smooth transitions, and perfect audio levels - all done automatically.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-rocket"></i>
+
+                
+                <div class="col-md-4 feature-card-out">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>One-Click Distribution</h3>
+                        <p>Publish to Spotify, Apple Podcasts, Google Podcasts, and 20+ other platforms simultaneously with optimized metadata and artwork.</p>
                     </div>
-                    <h3>One-Click Distribution</h3>
-                    <p>Publish to Spotify, Apple Podcasts, Google Podcasts, and 20+ other platforms simultaneously with optimized metadata and artwork.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
+
+                <div class="col-md-4 feature-card-out">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Analytics & Insights</h3>
+                        <p>Track performance across all platforms. Understand your audience with detailed analytics and AI-powered content recommendations.</p>
                     </div>
-                    <h3>Analytics & Insights</h3>
-                    <p>Track performance across all platforms. Understand your audience with detailed analytics and AI-powered content recommendations.</p>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
+
+                <div class="col-md-4 feature-card-out">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Lightning Fast</h3>
+                        <p>From idea to published podcast in under 10 minutes. What used to take hours or days now happens in minutes with AI acceleration.</p>
                     </div>
-                    <h3>Lightning Fast</h3>
-                    <p>From idea to published podcast in under 10 minutes. What used to take hours or days now happens in minutes with AI acceleration.</p>
                 </div>
             </div>
         </div>
@@ -383,7 +478,7 @@
     <section class="testimonials">
         <div class="container">
             <div class="section-header">
-                <h2>Real Results from Real Users</h2>
+                <h1 class="xl64 lg56 md60 sm51 xs26 w710 lh100 ls25-64f text-center ">Real Results from Real Users</h2>
                 <p>See how creators are transforming their content and income with MagicPods AI</p>
             </div>
             <div class="testimonials-grid">
@@ -498,11 +593,11 @@
                     </div>
                 </div>
                 
-                <button class="webinar-cta-btn">
+                <a href="#activation" class="primary-cta">
                     <i class="fas fa-play-circle"></i>
                     Reserve my free spot now
                     <i class="fas fa-arrow-right"></i>
-                </button>
+                </a>
             </div>
         </div>
     </section>
@@ -514,7 +609,7 @@
                 <div class="footer-main">
                     <div class="footer-brand">
                         <div class="footer-logo-container">
-                            <img src="images/magicpods-logo.png" alt="MagicPods AI" class="logo footer-logo">
+                            <img src="images/magicpodslogo.png" alt="MagicPods AI" class="logo footer-logo">
                         </div>
                         <p class="footer-description">Transforming podcast creation with artificial intelligence. Turn your ideas into viral podcasts in just 3 simple steps.</p>
                     </div>
@@ -544,7 +639,7 @@
             
             <div class="footer-bottom">
                 <div class="footer-copyright">
-                    <p>&copy; 2024 MagicPods AI. All rights reserved.</p>
+                    <p>&copy; 2025 MagicPods AI. All rights reserved.</p>
                 </div>
             </div>
             
@@ -555,6 +650,38 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+<script src="js/bootstrap.min.js"></script>    
+<!-- Auto Play Video CSS -->
+<link href="css/autoplay.css" type="text/css" rel="stylesheet"/>
+<!-- Auto Play Video JS -->
+<script src="js/autoplay.js" type="application/javascript"></script>
+<script async src="js/player.js"></script>
+<script async src="https://www.youtube.com/iframe_api"></script> 
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<script src="script.js"></script>
+
+<script>
+    ////nav-bar////   
+$(function () {
+    var $nav = $('#nav-bar');
+
+    // Scroll function
+    function updateNavbar() {
+      var scrollY = $(window).scrollTop();
+      if (scrollY > 50) {
+        $nav.addClass('scrolled');
+      } else {
+        $nav.removeClass('scrolled');
+      }
+    }
+
+    // Run immediately on load and bind scroll
+    updateNavbar();
+    $(window).on('scroll', updateNavbar);
+  });
+  </script>
+
 </body>
 </html>
