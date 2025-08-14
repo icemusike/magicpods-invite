@@ -695,18 +695,16 @@ async function performKeyValidation(goldenKey) {
                 timestamp: new Date().toISOString()
             });
 
-            // Success UI block
-            const successBlock = document.createElement('div');
-            successBlock.style.cssText = 'margin-top: 1rem; background: linear-gradient(180deg, rgba(16,185,129,.1), rgba(16,185,129,.05)); border: 1px solid rgba(16,185,129,.35); color: #d1fae5; padding: 1rem; border-radius: 12px;';
-            successBlock.innerHTML = `
-                <div style="font-weight:800; font-size:1.05rem; margin-bottom:0.5rem;">🎉 Congrats, ${firstName}! You just unlocked your VIP Early FREE Access to MagicPods.</div>
-                <div style="margin-bottom:0.9rem; color:#cbd5e1">Your VIP access runs through Aug 19, 2025. Join the live session at 10:00 AM Eastern (17:00 Bucharest) for pro tips and bonuses.</div>
-                <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
-                    <a href="${magicLink}" class="primary-cta" style="background:linear-gradient(90deg,#ffee68,#f870d0); color:#0b0a16; padding:0.7rem 1rem; border-radius:10px; text-decoration:none; font-weight:800;">Activate My VIP Trial</a>
-                    <a href="webinar-registration.html?${new URLSearchParams({ fullname: firstName, email }).toString()}" target="_blank" class="secondary-cta" style="background:#0b0a16; border:1px solid #94a3b8; color:#e2e8f0; padding:0.7rem 1rem; border-radius:10px; text-decoration:none; font-weight:700; position:relative;">Save My VIP Webinar Seat</a>
-                </div>
-            `;
-            consoleEl.appendChild(successBlock);
+            // Premium modal overlay for success
+            openPremiumModal({
+                variant: 'success',
+                title: `🎉 Congrats, ${firstName}!`,
+                body: `You just unlocked your VIP Early FREE Access to MagicPods.<br/><br/>Your VIP access runs through Aug 19, 2025. Join the live session at 10:00 AM Eastern (17:00 Bucharest) for pro tips and bonuses.`,
+                actions: [
+                    { label: 'Activate My VIP Trial', href: magicLink, primary: true },
+                    { label: 'Save My VIP Webinar Seat', href: `webinar-registration.html?${new URLSearchParams({ fullname: firstName, email }).toString()}`, target: '_blank' }
+                ]
+            });
             showSuccessWithConfetti(`🎉 Congrats, ${firstName}! You just unlocked your VIP Early FREE Access to MagicPods AI`);
             if (submitBtn) {
                 submitBtn.innerHTML = '<i class="fas fa-check"></i> Activated';
@@ -738,37 +736,16 @@ async function performKeyValidation(goldenKey) {
 }
 
 function showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, headlineText) {
-    const consoleEl = document.getElementById('keyConsole');
-    const block = document.createElement('div');
-    block.style.cssText = 'margin-top: 1rem; background: linear-gradient(180deg, rgba(239,68,68,.08), rgba(239,68,68,.04)); border: 1px solid rgba(239,68,68,.35); color: #fecaca; padding: 1rem; border-radius: 12px;';
     const qs = new URLSearchParams({ fullname: firstName, email }).toString();
-    block.innerHTML = `
-        <div style="font-weight:800; font-size:1.05rem; margin-bottom:0.25rem; color:#fecaca;">${headlineText}</div>
-        <div style="margin-bottom:0.9rem; color:#e2e8f0">But there’s still hope—register for our VIP Launch Webinar on Aug 19 @ 10:00 AM Eastern and you could win 1 of 10 Golden Keys live.</div>
-        <div style="display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center; margin-bottom:.5rem;">
-            <a href="webinar-registration.html?${qs}#webinar-optin" target="_blank" class="primary-cta" style="background:linear-gradient(90deg,#ffee68,#f870d0); color:#0b0a16; padding:0.7rem 1rem; border-radius:10px; text-decoration:none; font-weight:800;">Register for the VIP Webinar</a>
-        </div>
-        <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap; color:#cbd5e1">
-            <label style="display:flex; align-items:center; gap:.5rem;">
-                <input type="checkbox" id="smsReminderChk"> Text me reminders
-            </label>
-            <label style="display:flex; align-items:center; gap:.5rem;">
-                <input type="checkbox" id="telegramJoinChk"> Join our Telegram for instant alerts
-            </label>
-        </div>
-        <div id="phoneReveal" style="margin-top:.6rem; display:none;">
-            <input type="tel" id="smsPhone" placeholder="Your phone number" style="width:100%; height:44px; border-radius:10px; border:1px solid rgba(226,232,240,.3); background:#0b0a16; color:#e2e8f0; padding:0 12px;">
-        </div>
-    `;
-    consoleEl.appendChild(block);
-    const smsChk = block.querySelector('#smsReminderChk');
-    const telChk = block.querySelector('#telegramJoinChk');
-    const phoneReveal = block.querySelector('#phoneReveal');
-    if (smsChk) {
-        smsChk.addEventListener('change', () => {
-            phoneReveal.style.display = smsChk.checked ? 'block' : 'none';
-        });
-    }
+    openPremiumModal({
+        variant: 'warning',
+        title: headlineText,
+        body: `But there’s still hope—register for our VIP Launch Webinar on Aug 19 @ 10:00 AM Eastern and you could win 1 of 10 Golden Keys live.`,
+        actions: [
+            { label: 'Register for the VIP Webinar', href: `webinar-registration.html?${qs}#webinar-optin`, target: '_blank', primary: true }
+        ],
+        boosters: true
+    });
     // Send lead with context
     sendLeadToN8N({
         event: headlineText.includes('claimed') ? 'index_key_redeemed_already' : 'index_key_invalid',
@@ -786,6 +763,70 @@ function showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, headline
         submitBtn.innerHTML = 'Try Another Key';
         submitBtn.disabled = false;
     }
+}
+
+function openPremiumModal({ variant = 'success', title = '', body = '', actions = [], boosters = false }) {
+    const overlay = document.getElementById('mpModal');
+    const card = document.getElementById('mpModalCard');
+    const titleEl = document.getElementById('mpModalTitle');
+    const bodyEl = document.getElementById('mpModalBody');
+    const actionsEl = document.getElementById('mpModalActions');
+    const closeBtn = document.getElementById('mpModalClose');
+
+    card.classList.remove('success', 'warning');
+    card.classList.add(variant);
+    titleEl.innerHTML = title;
+    bodyEl.innerHTML = body;
+    actionsEl.innerHTML = '';
+
+    actions.forEach(a => {
+        const link = document.createElement('a');
+        link.href = a.href || '#';
+        if (a.target) link.target = a.target;
+        link.textContent = a.label;
+        link.className = a.primary ? 'mp-primary' : 'mp-secondary';
+        actionsEl.appendChild(link);
+    });
+
+    if (boosters) {
+        const boostersWrap = document.createElement('div');
+        boostersWrap.style.cssText = 'width:100%; margin-top:.5rem; color:#cbd5e1;';
+        boostersWrap.innerHTML = `
+            <div style="display:flex; gap:1rem; align-items:center; flex-wrap:wrap;">
+                <label style="display:flex; align-items:center; gap:.5rem;">
+                    <input type="checkbox" id="smsReminderChk"> Text me reminders
+                </label>
+                <label style="display:flex; align-items:center; gap:.5rem;">
+                    <input type="checkbox" id="telegramJoinChk"> Join our Telegram for instant alerts
+                </label>
+            </div>
+            <div id="phoneReveal" style="margin-top:.6rem; display:none;">
+                <input type="tel" id="smsPhone" placeholder="Your phone number" style="width:100%; height:44px; border-radius:10px; border:1px solid rgba(226,232,240,.3); background:#0b0a16; color:#e2e8f0; padding:0 12px;">
+            </div>
+        `;
+        actionsEl.appendChild(boostersWrap);
+
+        const smsChk = boostersWrap.querySelector('#smsReminderChk');
+        const phoneReveal = boostersWrap.querySelector('#phoneReveal');
+        if (smsChk) {
+            smsChk.addEventListener('change', () => {
+                phoneReveal.style.display = smsChk.checked ? 'block' : 'none';
+            });
+        }
+    }
+
+    function close() {
+        overlay.classList.remove('show');
+    }
+    overlay.classList.add('show');
+    closeBtn.onclick = close;
+    overlay.onclick = (e) => { if (e.target === overlay) close(); };
+    document.addEventListener('keydown', function escListener(ev) {
+        if (ev.key === 'Escape') {
+            close();
+            document.removeEventListener('keydown', escListener);
+        }
+    });
 }
 
 function addConsoleMessage(text, type = 'info') {
