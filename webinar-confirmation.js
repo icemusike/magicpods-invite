@@ -16,8 +16,8 @@ function initConfirmationCountdown() {
     const countdownEl = document.getElementById('confirm-timer');
     if (!countdownEl) return;
 
-    // Set the webinar date - August 19, 2025 10:00 AM ET (daylight time safe)
-    const webinarDate = new Date('Aug 19, 2025 10:00:00 ET').getTime();
+    // Set the webinar date - August 19, 2025 10:00 AM ET
+    const webinarDate = new Date('2025-08-19T10:00:00-04:00').getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
@@ -340,9 +340,9 @@ function personalizeConfirmationHeader(){
     
     if(titleEl){
         if(firstName){
-            titleEl.innerHTML=`Congratulations ${firstName} You're In & All Set For MagicPods AI Webinar!`;
+            titleEl.innerHTML=`Congratulations ${firstName} <br class="d-none d-lg-block"/> You're In & All Set For <span class="banner-headline-span1">MagicPods AI Webinar!</span>`;
         } else {
-            titleEl.innerHTML=`Congratulations You're In & All Set For MagicPods AI Webinar!`;
+            titleEl.innerHTML=`Congratulations <br class="d-none d-lg-block"/> You're In & All Set For <span class="banner-headline-span1">MagicPods AI Webinar!</span>`;
         }
         
         if(keyValid && vipBadge){
@@ -351,7 +351,7 @@ function personalizeConfirmationHeader(){
     }
     
     if(statusEl){
-        statusEl.innerHTML='Watch this short video and get ready to see AI turn any text into binge-worthy podcasts—plus learn how you could win FREE VIP access!';
+        statusEl.innerHTML='<span class="hero-lead-span">Watch this short video and get ready to see AI turn any text into <span class="w700">binge-worthy podcasts</span>—plus learn how you could win FREE VIP access!</span>';
     }
 }
 

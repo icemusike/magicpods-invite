@@ -5,26 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webinar Registration Confirmed - MagicPods AI</title>
     <meta name="description" content="Your seat is confirmed for the MagicPods AI launch webinar. Get ready to see AI turn text into podcasts live!">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="webinar-confirmation.css">
 </head>
 <body>
 
-    <!-- 1. Header Section -->
-    <header class="confirm-header">
-        <div class="container">
-            <div id="vipBadge" class="vip-badge" style="display:none;"><i class="fas fa-crown"></i> VIP Keyholder</div>
-            <h1 id="confirmTitle" class="banner-headline">Congratulations [Name] You're In & All Set For MagicPods AI Webinar!</h1>
-            <p class="hero-lead" id="confirmStatus">Watch this short video and get ready to see AI turn any text into binge-worthy podcasts—plus learn how you could win FREE VIP access!</p>
-            
-            <!-- Video Above the Fold -->
-            <div class="video-wrapper mt-4">
-                <div style="padding:56.25% 0 0 0;position:relative;border-radius:15px;overflow:hidden;"><iframe src="https://player.vimeo.com/video/1107697441?color=6366f1&title=0&byline=0&portrait=0&badge=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+    <!-- Hero Section -->
+    <section class="hero webinar-hero confirm-hero">
+        <!-- Navigation -->
+        <nav id="nav-bar" class="menu navbar navbar-expand-lg navbar-light nav-bar-top">
+            <a class="navbar-brand" href="index.html"><img src="images/logo.webp" class="img-fluid center-block logo-img" alt="images"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse SMN_effect-21" id="navbarSupportedContent">
+                <ul class="xl18 lg17 md14 sm16 xs18 w400 navbar-nav ml-auto text-center">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn"><span>Confirmation</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link getlink hvr-grow" href="webinar-registration.html">
+                            <span class="noise-overlay"></span>
+                            <span class="text">Back to Registration</span> 
+                        </a>
+                    </li>  
+                </ul> 
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="hero-content">
+                <div id="vipBadge" class="vip-badge" style="display:none;"><i class="fas fa-crown"></i> VIP Keyholder</div>
+                <h1 id="confirmTitle" class="banner-headline xl64 lg64 md52 sm46 xs30 text-white" style="position: relative;z-index: 1;">
+                    Congratulations [Name] <br class="d-none d-lg-block"/> You're In & All Set For <span class="banner-headline-span1">MagicPods AI Webinar!</span>
+                </h1>
+                <p class="hero-lead xl22 lg22 md20 sm18 xs16 w400" id="confirmStatus">
+                    <span class="hero-lead-span">Watch this short video and get ready to see AI turn any text into <span class="w700">binge-worthy podcasts</span>—plus learn how you could win FREE VIP access!</span>
+                </p> 
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="webinar-video-div">
+                    <div class="align-self-center video-box-main">	 
+                        <div class="video-box">  
+                            <div class="video-box-inner">											
+                                <div class="autoplayer-area">
+                                    <div class="autoplayer-subarea autoplayer-subarea-16-by-9">
+                                        <div style="padding:56.25% 0 0 0;position:relative;">
+                                            <iframe src="https://player.vimeo.com/video/1107697441?color=6366f1&title=0&byline=0&portrait=0&badge=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                                        </div>
+                                        <script src="https://player.vimeo.com/api/player.js"></script>
+                                    </div>
+                                </div>		
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <!-- 2. Countdown Timer Section -->
     <section class="countdown" aria-label="Webinar Starts In">
@@ -196,6 +241,8 @@
         </div>
     </footer>
 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>    
     <script src="webinar-confirmation.js"></script>
 </body>
 </html>
