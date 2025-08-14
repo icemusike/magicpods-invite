@@ -62,43 +62,7 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
         
-        /* Console Header */
-        .console-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            background: rgba(255,255,255,.05);
-            border-bottom: 1px solid rgba(255,255,255,.1);
-            backdrop-filter: blur(10px);
-        }
-        .console-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #a78bfa;
-            letter-spacing: 0.5px;
-        }
-        .console-status {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            color: #64748b;
-        }
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #10b981;
-            animation: pulse-dot 2s ease-in-out infinite;
-        }
-        @keyframes pulse-dot {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+        /* Console Header removed */
         
         /* Console Content Area */
         #consoleContent {
@@ -707,16 +671,7 @@
                             <!-- Console Simulation -->
                             <div class="console-progress" id="keyProgress"><div class="console-progress-fill" id="keyProgressFill"></div></div>
                             <div class="console-container" id="keyConsole">
-                                <div class="console-header">
-                                    <div class="console-title">
-                                        <i class="fas fa-terminal"></i>
-                                        MagicPods AI Validator
-                                    </div>
-                                    <div class="console-status">
-                                        <div class="status-dot"></div>
-                                        Connected
-                                    </div>
-                                </div>
+                                <!-- Optional header removed to maximize space and avoid overlaying content during animation -->
                                 <div id="consoleContent"></div>
                                 <div class="console-cursor">
                                     Awaiting input...

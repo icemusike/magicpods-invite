@@ -623,7 +623,7 @@ function simulateKeyValidation(key) {
         console.removeAttribute('data-lines');
         console.classList.remove('expanded');
     }
-    
+    // Never wipe existing content (removed: consoleContent.innerHTML = '')
     const messages = [
         { text: 'Initializing Golden Key validation system...', type: 'info', delay: 0 },
         { text: 'Connecting to MagicPods AI validation node...', type: 'info', delay: 500 },
