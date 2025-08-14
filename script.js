@@ -30,6 +30,34 @@ document.addEventListener('DOMContentLoaded', function() {
     initIntersectionStyles();
 });
 
+// N8N webhook endpoint for lead capture
+const N8N_WEBHOOK_URL = 'https://callflujent.app.n8n.cloud/webhook-test/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0';
+
+function collectUtmParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        utm_source: params.get('utm_source') || undefined,
+        utm_medium: params.get('utm_medium') || undefined,
+        utm_campaign: params.get('utm_campaign') || undefined,
+        utm_term: params.get('utm_term') || undefined,
+        utm_content: params.get('utm_content') || undefined
+    };
+}
+
+async function sendLeadToN8N(payload) {
+    try {
+        await fetch(N8N_WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            keepalive: true
+        });
+    } catch (err) {
+        // Non-blocking failure; continue UX regardless
+        console.warn('N8N webhook failed', err);
+    }
+}
+
 // Golden Key Activation System
 function initGoldenKeyActivation() {
     const activationForm = document.getElementById('activationForm');
@@ -40,7 +68,7 @@ function initGoldenKeyActivation() {
 
 function nextStep() {
     const currentStep = document.querySelector('.form-step.active');
-    const nextStep = document.querySelector('.form-step[data-step="2"]');
+    const nextStepEl = document.querySelector('.form-step[data-step="2"]');
     const stepIndicators = document.querySelectorAll('.step');
     
     // Validate current step
@@ -56,17 +84,33 @@ function nextStep() {
         return;
     }
     
-    // Update UI
-    currentStep.classList.remove('active');
-    nextStep.classList.add('active');
-    
-    stepIndicators[0].classList.remove('active');
-    stepIndicators[1].classList.add('active');
-    
-    // Auto-focus on golden key input
-    setTimeout(() => {
-        document.getElementById('goldenKey').focus();
-    }, 100);
+    // Send lead to N8N (non-blocking)
+    const utm = collectUtmParams();
+    sendLeadToN8N({
+        event: 'index_lead_submit_step1',
+        firstName,
+        email,
+        page: window.location.href,
+        referrer: document.referrer || undefined,
+        ...utm,
+        timestamp: new Date().toISOString()
+    });
+
+    // Redirect to webinar registration with query params to prefill
+    const qs = new URLSearchParams({ fullname: firstName, email }).toString();
+    window.location.href = `webinar-registration.html?${qs}#webinar-optin`;
+
+    // If redirect is blocked, preserve original step behavior as fallback
+    try {
+        currentStep.classList.remove('active');
+        nextStepEl.classList.add('active');
+        stepIndicators[0].classList.remove('active');
+        stepIndicators[1].classList.add('active');
+        setTimeout(() => {
+            const keyEl = document.getElementById('goldenKey');
+            if (keyEl) keyEl.focus();
+        }, 100);
+    } catch (_) {}
 }
 
 function prevStep() {

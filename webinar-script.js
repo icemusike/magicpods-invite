@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
     initRecentRegistrations();
     initScrollEffects();
     initFAQAccordion();
+
+    // Prefill form fields from query params if present
+    tryPrefillFromQuery();
 });
 
 // Countdown Timer Functionality
@@ -74,6 +77,22 @@ function initWebinarForm() {
         input.addEventListener('blur', validateField);
         input.addEventListener('input', clearFieldError);
     });
+}
+
+function tryPrefillFromQuery() {
+    const form = document.getElementById('webinar-optin');
+    if (!form) return;
+    const params = new URLSearchParams(window.location.search);
+    const fullname = params.get('fullname');
+    const email = params.get('email');
+    if (fullname) {
+        const nameInput = form.querySelector('input[name="fullname"]');
+        if (nameInput) nameInput.value = fullname;
+    }
+    if (email) {
+        const emailInput = form.querySelector('input[name="email"]');
+        if (emailInput) emailInput.value = email;
+    }
 }
 
 async function handleWebinarSubmit(e) {
