@@ -201,6 +201,8 @@
             animation: scan-line 3s ease-in-out infinite;
             z-index: 1; /* ensure below content */
         }
+        /* remove any after pseudo element that could overlay content */
+        .console-container::after { display:none !important; }
         @keyframes scan-line {
             0%, 100% { opacity: 0; transform: translateX(-100%); }
             50% { opacity: 1; transform: translateX(100%); }
