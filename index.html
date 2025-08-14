@@ -473,6 +473,13 @@
             .inline-countdown .countdown-item{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);box-shadow:0 6px 18px -8px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.2);border-radius:14px;padding:12px 18px;min-width:92px}
             .inline-countdown .countdown-number{color:#fff;font-weight:900;font-size:34px;letter-spacing:1px;text-shadow:0 2px 0 rgba(0,0,0,.35)}
             .inline-countdown .countdown-label{text-transform:uppercase;letter-spacing:.08em;color:#e5e7eb;font-size:12px;opacity:.9}
+            
+            /* Scoped dark theme for countdown under activation card only */
+            .activate-countdown .webinar-date{display:inline-flex;align-items:center;gap:10px;background:#0f172a;color:#fff;padding:10px 16px;border-radius:12px;margin-bottom:12px;border:1px solid rgba(255,255,255,.06);box-shadow:0 6px 16px -10px rgba(2,6,23,.6)}
+            .activate-countdown .countdown-timer{display:inline-flex;gap:14px;margin-top:4px}
+            .activate-countdown .countdown-item{background:#0b1220;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:12px 18px;min-width:92px;box-shadow:0 6px 18px -8px rgba(2,6,23,.6), inset 0 1px 0 rgba(255,255,255,.06)}
+            .activate-countdown .countdown-number{color:#e5e7eb;font-weight:900;font-size:34px;letter-spacing:1px;text-shadow:0 1px 0 rgba(0,0,0,.5)}
+            .activate-countdown .countdown-label{text-transform:uppercase;letter-spacing:.08em;color:#9ca3af;font-size:12px}
         </style>
     
     <link rel="shortcut icon" type="images/png" href="images/favicon.webp"/>
@@ -699,7 +706,7 @@
     </section>
 
     <!-- Countdown under Activation Card -->
-    <div class="container mt-4">
+    <div class="container mt-4 activate-countdown">
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 text-center">
                 <div class="webinar-details">
