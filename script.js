@@ -145,19 +145,20 @@ async function handleActivationSubmit(e) {
     
     try {
         // Add console messages for validation process
-        await new Promise(resolve => setTimeout(resolve, 800));
+        await new Promise(resolve => setTimeout(resolve, 400));
         addConsoleMessage('📡 Sending Golden Key for verification...');
         
-        await new Promise(resolve => setTimeout(resolve, 600));
+        await new Promise(resolve => setTimeout(resolve, 400));
         addConsoleMessage(`🔐 Validating key: ${goldenKey}`);
         
-        // Make API call to validate the golden key
-        const encodedKey = encodeURIComponent(goldenKey);
-        const response = await fetch(`https://api.magicpodsai.com/app/voucher-validate?code=${encodedKey}`, {
-            method: 'GET',
+        // Make API call to validate the golden key (POST per spec)
+        const response = await fetch('https://api.magicpodsai.com/app/voucher-validate', {
+            method: 'POST',
             headers: {
-                'Accept': 'application/json'
-            }
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ code: goldenKey })
         });
         
         if (!response.ok) {
@@ -179,9 +180,19 @@ async function handleActivationSubmit(e) {
             // Track successful signup
             trackSignup(email, firstName);
             
-            // Show success with confetti
-            showSuccessWithConfetti(`🎉 Congratulations ${firstName}! Your Golden Key has been activated successfully!`);
-            
+            // Show designed success block below console
+            showSuccessWithConfetti(`🎉 Congrats, ${firstName}! You just unlocked your VIP Early FREE Access to MagicPods AI`);
+            const successBlock = document.createElement('div');
+            successBlock.style.cssText = 'margin-top: 1rem; background: #f0f9ff; border: 1px solid #bae6fd; color: #0c4a6e; padding: 1rem; border-radius: 12px;';
+            successBlock.innerHTML = `
+                <div style="font-weight:800; font-size:1.1rem; margin-bottom:0.5rem;">VIP Trial Activated</div>
+                <div style="margin-bottom:0.75rem;">Your VIP trial runs through Aug 19, 2025. Join the live session at 10:00 AM Eastern (17:00 Bucharest) for pro tips and bonuses.</div>
+                <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                    <a href="#" id="vip-activate-link" class="primary-cta" style="background:#0ea5e9; color:#fff; padding:0.6rem 1rem; border-radius:10px; text-decoration:none; font-weight:700;">Activate My VIP Trial</a>
+                    <a href="webinar-registration.html?${encodeURIComponent('fullname')}=${encodeURIComponent(firstName)}&email=${encodeURIComponent(email)}" target="_blank" class="secondary-cta" style="background:#fff; border:1px solid #94a3b8; color:#0f172a; padding:0.6rem 1rem; border-radius:10px; text-decoration:none; font-weight:700;">Save My VIP Webinar Seat</a>
+                </div>
+            `;
+            console.appendChild(successBlock);
             submitBtn.innerHTML = '<i class="fas fa-check"></i> Activated';
             
         } else if (result.isValid && !result.isRedeemable) {
@@ -191,7 +202,7 @@ async function handleActivationSubmit(e) {
             
             await new Promise(resolve => setTimeout(resolve, 800));
             
-            showErrorWithWebinarCTA('Golden Key has been claimed already — continue to register for our webinar to claim one of 10 extra keys.');
+            showErrorWithWebinarCTA('This key has already been claimed. Register for our VIP Launch Webinar to win 1 of 10 Golden Keys live.');
             // Notify N8N and redirect to webinar registration with prefill
             sendLeadToN8N({
                 event: 'index_key_redeemed_already',
@@ -215,7 +226,7 @@ async function handleActivationSubmit(e) {
             
             await new Promise(resolve => setTimeout(resolve, 500));
             
-            showError('Invalid Golden Key. Continue to register for our webinar to claim one of 10 extra keys.');
+            showError('Invalid Golden Key. Register for our VIP Launch Webinar to win 1 of 10 Golden Keys live.');
             // Notify N8N and redirect to webinar registration with prefill
             sendLeadToN8N({
                 event: 'index_key_invalid',

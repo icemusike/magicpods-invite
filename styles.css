@@ -825,6 +825,17 @@ span.gradientbg{background:url(images/textbg1.webp) no-repeat center center;back
     display: block;
 }
 
+/* Step 2 input and spacing refinements */
+.form-step[data-step="2"] input#goldenKey {
+    width: 100%;
+}
+.form-step[data-step="2"] .btn-activate {
+    margin-bottom: 0.75rem;
+}
+.form-step[data-step="2"] .btn-back {
+    margin-top: 0.25rem;
+}
+
 .form-step .form-group {
     margin-bottom: 10px;
     display: flex;
