@@ -79,7 +79,8 @@ function initWebinarRegistrationPage() {
         } else {
             headlineEl.innerHTML = `
                 <span class="banner-headline-span1">${firstName}</span>, Your podcast ships in 60 <br class="d-none d-lg-block"/>
-                minutes. Watch us do it live on Aug 19 — save your seat to win a Golden Key.`;
+                minutes <span class=\"banner-headline-span1\">Watch Us Do It LIVE</span><br class=\"d-none d-lg-block\"/>
+                <span>Save your seat to win a Golden Key on Aug 19.</span>`;
         }
     }
 
