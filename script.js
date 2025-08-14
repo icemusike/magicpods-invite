@@ -722,11 +722,11 @@ async function performKeyValidation(goldenKey) {
             openPremiumModal({
                 variant: 'success',
                 title: `🎉 Congrats, ${firstName}!`,
-                body: `You just unlocked your VIP Early FREE Access to MagicPods.<br/><br/>Your VIP access runs through Aug 19, 2025. Join the live session at 10:00 AM Eastern (17:00 Bucharest) for pro tips and bonuses.`,
+                body: `You just unlocked your VIP Early FREE Access to MagicPods.<br/><br/>Your VIP access runs through Aug 19, 2025. Join the live session at 10:00 AM Eastern • 7:00 AM Pacific • 3:00 PM GMT for pro tips and bonuses.`,
                 actions: [
-                    { label: 'Activate My VIP Trial', href: magicLink, primary: true },
-                    { label: 'Save My VIP Webinar Seat', href: `webinar-registration.html?${new URLSearchParams({ fullname: firstName, email }).toString()}`, target: '_blank' }
-                ]
+                    { label: 'Secure My Seat & Activate Account Now →', href: `webinar-registration.html?${new URLSearchParams({ fullname: firstName, email }).toString()}`, primary: true }
+                ],
+                headline: 'Important Next Step...'
             });
             showSuccessWithConfetti(`🎉 Congrats, ${firstName}! You just unlocked your VIP Early FREE Access to MagicPods AI`);
             if (submitBtn) {
@@ -815,7 +815,7 @@ function showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, headline
     }
 }
 
-function openPremiumModal({ variant = 'success', title = '', body = '', actions = [], boosters = false }) {
+function openPremiumModal({ variant = 'success', title = '', body = '', actions = [], boosters = false, headline = '' }) {
     const overlay = document.getElementById('mpModal');
     const card = document.getElementById('mpModalCard');
     const titleEl = document.getElementById('mpModalTitle');
@@ -834,6 +834,15 @@ function openPremiumModal({ variant = 'success', title = '', body = '', actions 
     titleEl.innerHTML = iconHtml + title;
     bodyEl.innerHTML = body;
     actionsEl.innerHTML = '';
+
+    // Add headline if provided
+    if (headline) {
+        const headlineEl = document.createElement('div');
+        headlineEl.className = 'mp-modal-headline';
+        headlineEl.textContent = headline;
+        headlineEl.style.cssText = 'font-size: 1rem; font-weight: 700; color: #6b7280; text-align: center; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 0.5px;';
+        actionsEl.appendChild(headlineEl);
+    }
 
     actions.forEach(a => {
         const link = document.createElement('a');
