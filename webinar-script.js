@@ -142,7 +142,7 @@ async function handleWebinarSubmit(e) {
         updateRegistrationCount();
         // Build redirect URL passing user data and any key info from query
         const qp = new URLSearchParams(window.location.search);
-        const hadKeyValid = qp.get('key_valid') || qp.get('keyValid') || '';
+        const hadKeyValid = qp.get('key_valid') || qp.get('keyValid') || 'false';
         const params = new URLSearchParams({ fullname: fullName, email, key_valid: hadKeyValid });
         setTimeout(() => {
             window.location.href = `webinar-confirmation.html?${params.toString()}`;

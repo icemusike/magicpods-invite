@@ -345,7 +345,10 @@ function addEnhancedStyling() {
 function personalizeConfirmationHeader(){
     const params=new URLSearchParams(location.search);
     const fullname=params.get('fullname')||'';
-    const keyValid=(params.get('key_valid')||'').toLowerCase()==='true';
+    const keyValidParam = params.get('key_valid')||'';
+    const keyValid = keyValidParam.toLowerCase() === 'true';
+    
+    console.log('Debug: key_valid parameter:', keyValidParam, 'evaluated as:', keyValid);
     const titleEl=document.getElementById('confirmTitle');
     const statusEl=document.getElementById('confirmStatus');
     const vipBadge=document.getElementById('vipBadge');
@@ -368,19 +371,28 @@ function personalizeConfirmationHeader(){
     }
 
     // Handle VIP Access Section for Valid Key Holders
+    console.log('Debug: Checking VIP access - keyValid:', keyValid, 'firstName:', firstName);
     if(keyValid){
+        console.log('Debug: Initializing VIP section');
         initVIPAccessSection(firstName);
+    } else {
+        console.log('Debug: Key not valid, VIP section will not show');
     }
 }
 
 function initVIPAccessSection(firstName) {
+    console.log('Debug: initVIPAccessSection called with firstName:', firstName);
     const vipSection = document.getElementById('vipAccessSection');
     const vipTitle = document.getElementById('vipTitle');
     const claimBtn = document.getElementById('claimAccountBtn');
     
-    if(!vipSection) return;
+    if(!vipSection) {
+        console.log('Debug: VIP section element not found');
+        return;
+    }
     
     // Show the VIP section
+    console.log('Debug: Showing VIP section');
     vipSection.style.display = 'block';
     
     // Personalize the title

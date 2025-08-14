@@ -93,7 +93,15 @@ function initWebinarRegistrationPage() {
             alert('Please enter a valid name and email.');
             return;
         }
-        const qs = new URLSearchParams({ fullname: nameVal, email: emailVal }).toString();
+        
+        // Check for key_valid parameter from current URL and pass it along
+        const currentParams = new URLSearchParams(window.location.search);
+        const keyValid = currentParams.get('key_valid') || 'false';
+        const qs = new URLSearchParams({ 
+            fullname: nameVal, 
+            email: emailVal,
+            key_valid: keyValid
+        }).toString();
         window.location.href = `webinar-confirmation.html?${qs}`;
     });
 }
