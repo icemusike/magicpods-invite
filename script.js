@@ -37,6 +37,14 @@ const N8N_WEBHOOK_URL = 'https://callflujent.app.n8n.cloud/webhook-test/b189d0e4
 let lastValidatedKey = '';
 let isKeyValidating = false;
 let validateKeyTimer = null;
+let simulationTimeouts = [];
+
+function clearSimulationTimeouts() {
+    if (simulationTimeouts.length) {
+        simulationTimeouts.forEach(id => clearTimeout(id));
+        simulationTimeouts = [];
+    }
+}
 
 function collectUtmParams() {
     const params = new URLSearchParams(window.location.search);
@@ -599,14 +607,21 @@ function simulateKeyValidation(key) {
     }
     
     console.classList.add('show');
-    if (progress && progressFill) {
+    if (progress && progressFill && progress.classList.contains('show') === false) {
         progress.classList.add('show');
         progressFill.style.width = '18%';
-        setTimeout(()=>progressFill.style.width='30%', 150);
+        const id = setTimeout(()=>progressFill.style.width='30%', 150); simulationTimeouts.push(id);
     }
-    consoleContent.innerHTML = '';
-    console.removeAttribute('data-lines');
-    console.classList.remove('expanded');
+    // Prevent re-starting simulation while it's already running
+    if (console.dataset.simulating === '1') {
+        return;
+    }
+    console.dataset.simulating = '1';
+    
+    if (consoleContent.childElementCount === 0) {
+        console.removeAttribute('data-lines');
+        console.classList.remove('expanded');
+    }
     
     const messages = [
         { text: 'Initializing Golden Key validation system...', type: 'info', delay: 0 },
@@ -629,10 +644,11 @@ function simulateKeyValidation(key) {
     }
     
     // Display messages with delays
-    messages.forEach((message, index) => {
-        setTimeout(() => {
+    messages.forEach((message) => {
+        const id = setTimeout(() => {
             addConsoleMessage(message.text, message.type);
         }, message.delay);
+        simulationTimeouts.push(id);
     });
 }
 
@@ -672,6 +688,11 @@ async function performKeyValidation(goldenKey) {
         }
         return;
     }
+    
+    // Stop any running simulation
+    clearSimulationTimeouts();
+    const consoleBox = document.getElementById('keyConsole');
+    if (consoleBox) delete consoleBox.dataset.simulating;
     
     isKeyValidating = true;
     consoleEl.classList.add('show');
