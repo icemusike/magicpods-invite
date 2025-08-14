@@ -16,20 +16,17 @@
     <header class="confirm-header">
         <div class="container">
             <div id="vipBadge" class="vip-badge" style="display:none;"><i class="fas fa-crown"></i> VIP Keyholder</div>
-            <h1 id="confirmTitle">Registration Confirmed</h1>
-            <p class="status" id="confirmStatus">Your spot is reserved</p>
+            <h1 id="confirmTitle" class="banner-headline">Congratulations [Name] You're In & All Set For MagicPods AI Webinar!</h1>
+            <p class="hero-lead" id="confirmStatus">Watch this short video and get ready to see AI turn any text into binge-worthy podcasts—plus learn how you could win FREE VIP access!</p>
+            
+            <!-- Video Above the Fold -->
+            <div class="video-wrapper mt-4">
+                <div style="padding:56.25% 0 0 0;position:relative;border-radius:15px;overflow:hidden;"><iframe src="https://player.vimeo.com/video/1107697441?color=6366f1&title=0&byline=0&portrait=0&badge=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+            </div>
         </div>
     </header>
 
-    <!-- 2. Check Email Section -->
-    <section class="check-email">
-        <div class="container">
-            <h2>Check Your Email</h2>
-            <p>for your unique join link and access details</p>
-        </div>
-    </section>
-
-    <!-- 3. Countdown Timer Section -->
+    <!-- 2. Countdown Timer Section -->
     <section class="countdown" aria-label="Webinar Starts In">
         <div class="container">
             <h2>Webinar Starts In</h2>
@@ -39,87 +36,122 @@
         </div>
     </section>
 
-    <!-- 4. Video Intro Section -->
-    <section class="video-intro">
+    <!-- 3. Check Email Section -->
+    <section class="check-email">
         <div class="container">
-            <h2>You’re All Set for the MagicPods AI Launch Webinar!</h2>
-            <p>Watch this short video and get ready to see AI turn any text into binge-worthy podcasts—plus learn how you could win FREE lifetime access!</p>
-            <div class="video-wrapper">
-                <!-- Placeholder for Vimeo/YouTube Iframe -->
-                <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/1107697441?color=6366f1&title=0&byline=0&portrait=0&badge=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+            <h2>Check Your Email</h2>
+            <p>for your unique join link and access details</p>
+        </div>
+    </section>
+
+    <!-- 4. Webinar Details Section -->
+    <section class="webinar-details">
+        <div class="container">
+            <div class="details-card">
+                <div class="details-header">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Webinar Details</h3>
+                </div>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-calendar"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h4>Date & Time</h4>
+                            <p>Tuesday, August 19 2025<br>10:00 AM ET / 7:00 AM PT / 3:00 PM BST</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h4>Session Length</h4>
+                            <p>60-minute live demo + Q&A</p>
+                        </div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <div class="detail-content">
+                            <h4>Your Join Link</h4>
+                            <p>Emailed to your address with 1-hour reminder</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- 5. Webinar Details Section -->
-    <section class="webinar-details">
-        <div class="container">
-            <h3>Webinar Details</h3>
-            <dl>
-                <dt>Date & Time</dt>
-                <dd>Tuesday, August 19 2025 · 10:00 AM ET / 7:00 AM PT / 3:00 PM BST</dd>
-                <dt>Session Length</dt>
-                <dd>60-minute live demo + Q&A</dd>
-            </dl>
-            <h3>Your Join Link</h3>
-            <p>We’ve emailed your unique access link to the address you provided. Reminder email will arrive 1 hour before we go live.</p>
-        </div>
-    </section>
-
-    <!-- 6. Next Steps Section -->
+    <!-- 5. Next Steps Section -->
     <section class="next-steps">
         <div class="container">
-            <h2>Next Steps</h2>
-            <!-- STEP 1: Add to Calendar -->
-            <article class="step add-calendar">
-                <span class="step-num">1</span>
-                <div class="step-content">
-                    <h3>Add to Calendar</h3>
-                    <p>Lock in your seat and set a reminder so you don't miss:</p>
-                    <ul>
-                        <li>Live AI podcast production demo</li>
-                        <li>Chance to win 10 FREE lifetime licences</li>
-                        <li>Exclusive early-bird bonuses revealed live</li>
-                    </ul>
-                    <div class="calendar-buttons">
-                        <a href="#" class="btn" data-cal="google">Google Calendar</a>
-                        <a href="#" class="btn" data-cal="outlook">Outlook Calendar</a>
-                        <a href="#" class="btn" data-cal="ics">iCal (.ics)</a>
+            <h2 class="section-title">What Happens Next?</h2>
+            <div class="steps-grid">
+                <!-- STEP 1: Add to Calendar -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-num">1</span>
+                        <h3>Add to Calendar</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>Lock in your seat and set a reminder so you don't miss:</p>
+                        <ul class="step-benefits">
+                            <li><i class="fas fa-check"></i> Live AI podcast production demo</li>
+                            <li><i class="fas fa-check"></i> Chance to win 10 FREE Golden Keys</li>
+                            <li><i class="fas fa-check"></i> Exclusive early-bird bonuses revealed live</li>
+                        </ul>
+                        <div class="calendar-buttons">
+                            <a href="#" class="btn-calendar" data-cal="google"><i class="fab fa-google"></i> Google Calendar</a>
+                            <a href="#" class="btn-calendar" data-cal="outlook"><i class="fab fa-microsoft"></i> Outlook</a>
+                            <a href="#" class="btn-calendar" data-cal="ics"><i class="fas fa-calendar-plus"></i> iCal (.ics)</a>
+                        </div>
                     </div>
                 </div>
-            </article>
-            <!-- STEP 2: Influence the Demo -->
-            <article class="step influence-demo">
-                <span class="step-num">2</span>
-                <div class="step-content">
-                    <h3>Influence the Live Demo</h3>
-                    <p>Your idea could be featured! Adrian will pick one attendee's concept and build it in front of everyone.</p>
-                    <form id="idea-submit">
-                        <label for="pod_name">Podcast Name:</label>
-                        <input type="text" id="pod_name" name="pod_name">
-                        <label for="pod_desc">Short Description:</label>
-                        <textarea id="pod_desc" name="pod_desc" rows="3"></textarea>
-                        <button type="submit" class="submit">Submit Your Idea</button>
-                    </form>
-                    <small class="tip">Keep it simple & focused for the best chance!</small>
-                </div>
-            </article>
-            <!-- STEP 3: Share with Others -->
-            <article class="step share">
-                <span class="step-num">3</span>
-                <div class="step-content">
-                    <h3>Share with Others</h3>
-                    <p>Know someone who dreams of launching a podcast without mics or editing? Invite them and boost their chance to snag FREE access.</p>
-                    <div class="share-buttons">
-                        <a href="#" class="btn share" data-net="facebook">Facebook</a>
-                        <a href="#" class="btn share" data-net="twitter">Twitter</a>
-                        <a href="#" class="btn share" data-net="linkedin">LinkedIn</a>
-                        <a href="#" class="btn share" data-net="email">Email</a>
-                        <a href="#" class="btn share" data-net="copy">Copy Link</a>
-                        <a href="#" class="btn share" data-net="sms">SMS</a>
+                
+                <!-- STEP 2: Influence the Demo -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-num">2</span>
+                        <h3>Influence the Live Demo</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>Your idea could be featured! Adrian will pick one attendee's concept and build it live.</p>
+                        <form id="idea-submit" class="idea-form">
+                            <div class="form-group">
+                                <label for="pod_name">Podcast Name:</label>
+                                <input type="text" id="pod_name" name="pod_name" placeholder="Enter your podcast idea">
+                            </div>
+                            <div class="form-group">
+                                <label for="pod_desc">Short Description:</label>
+                                <textarea id="pod_desc" name="pod_desc" rows="3" placeholder="Describe your concept briefly"></textarea>
+                            </div>
+                            <button type="submit" class="btn-submit"><i class="fas fa-paper-plane"></i> Submit Your Idea</button>
+                        </form>
+                        <small class="tip"><i class="fas fa-lightbulb"></i> Keep it simple & focused for the best chance!</small>
                     </div>
                 </div>
-            </article>
+                
+                <!-- STEP 3: Share with Others -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <span class="step-num">3</span>
+                        <h3>Share & Invite Friends</h3>
+                    </div>
+                    <div class="step-content">
+                        <p>Know someone who dreams of launching a podcast? Invite them and boost their chance to win FREE access.</p>
+                        <div class="share-buttons">
+                            <a href="#" class="btn-share facebook" data-net="facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            <a href="#" class="btn-share twitter" data-net="twitter"><i class="fab fa-twitter"></i> Twitter</a>
+                            <a href="#" class="btn-share linkedin" data-net="linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                            <a href="#" class="btn-share email" data-net="email"><i class="fas fa-envelope"></i> Email</a>
+                            <a href="#" class="btn-share copy" data-net="copy"><i class="fas fa-copy"></i> Copy Link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

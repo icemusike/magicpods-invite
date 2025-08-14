@@ -114,7 +114,7 @@ function initShareButtons() {
 
     shareButtons.addEventListener('click', function(e) {
         e.preventDefault();
-        const target = e.target.closest('.btn.share');
+        const target = e.target.closest('.btn-share');
         if (!target) return;
 
         // Add click animation
@@ -184,7 +184,7 @@ function initIdeaForm() {
 
     ideaForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const submitBtn = ideaForm.querySelector('button.submit');
+        const submitBtn = ideaForm.querySelector('.btn-submit');
         
         // Enhanced validation
         const podName = podNameInput.value.trim();
@@ -240,7 +240,7 @@ function initAnimations() {
     }, observerOptions);
     
     // Observe elements for scroll animations
-    document.querySelectorAll('.step, .host-card, .timer-item').forEach(el => {
+    document.querySelectorAll('.step-card, .host-card, .timer-item, .detail-item').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
         el.style.transition = 'all 0.6s ease-out';
@@ -250,7 +250,7 @@ function initAnimations() {
 
 function initInteractiveEffects() {
     // Enhanced hover effects
-    document.querySelectorAll('.step, .host-card').forEach(card => {
+    document.querySelectorAll('.step-card, .host-card, .detail-item').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-8px) scale(1.02)';
             this.style.boxShadow = '0 30px 60px rgba(0, 0, 0, 0.15)';
@@ -337,14 +337,21 @@ function personalizeConfirmationHeader(){
     const statusEl=document.getElementById('confirmStatus');
     const vipBadge=document.getElementById('vipBadge');
     const firstName=fullname?fullname.split(' ')[0]:'';
+    
     if(titleEl){
-        if(keyValid){
-            if(vipBadge) vipBadge.style.display='inline-flex';
-            titleEl.innerHTML=`<span style="background: linear-gradient(135deg,#ffee68,#f870d0); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Welcome${firstName?`, ${firstName}`:''}</span> — You’re In!`;
-            if(statusEl) statusEl.textContent='Front-row VIP seat reserved';
-        }else if(firstName){
-            titleEl.innerHTML=`${firstName}, you’re in!`;
+        if(firstName){
+            titleEl.innerHTML=`Congratulations ${firstName} You're In & All Set For MagicPods AI Webinar!`;
+        } else {
+            titleEl.innerHTML=`Congratulations You're In & All Set For MagicPods AI Webinar!`;
         }
+        
+        if(keyValid && vipBadge){
+            vipBadge.style.display='inline-flex';
+        }
+    }
+    
+    if(statusEl){
+        statusEl.innerHTML='Watch this short video and get ready to see AI turn any text into binge-worthy podcasts—plus learn how you could win FREE VIP access!';
     }
 }
 

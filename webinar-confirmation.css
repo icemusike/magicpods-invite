@@ -150,6 +150,35 @@ body {
     animation: fadeInUp 1s ease-out;
 }
 
+.banner-headline {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 50%, #ffffff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.hero-lead {
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.video-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+}
+
 .confirm-header h1 {
     font-size: 4rem;
     font-weight: 900;
@@ -159,7 +188,6 @@ body {
     -webkit-text-fill-color: transparent;
     background-clip: text;
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    animation: pulse 3s ease-in-out infinite;
 }
 
 .confirm-header .status {
@@ -357,79 +385,119 @@ body {
     background: #000;
 }
 
-/* 5. Enhanced Webinar Details */
+/* 4. Enhanced Webinar Details */
 .webinar-details {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     position: relative;
 }
 
-.webinar-details .container {
-    max-width: 800px;
-}
-
-.webinar-details h3 {
-    font-size: 2rem;
-    font-weight: 800;
-    margin-bottom: 2rem;
-    color: var(--text-primary);
+.details-card {
+    background: white;
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     position: relative;
-    padding-left: 1rem;
+    overflow: hidden;
 }
 
-.webinar-details h3::before {
+.details-card::before {
     content: '';
     position: absolute;
+    top: 0;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 4px;
-    height: 100%;
+    right: 0;
+    height: 6px;
     background: var(--gradient-primary);
-    border-radius: 2px;
 }
 
-.webinar-details dl {
-    background: white;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    display: grid;
-    grid-template-columns: max-content 1fr;
-    gap: 1.5rem 3rem;
-    margin-bottom: 3rem;
+.details-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border-light);
 }
 
-.webinar-details dt {
-    font-weight: 700;
+.details-header i {
+    font-size: 2rem;
     color: var(--primary-color);
-    font-size: 1.1rem;
+    background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(99,102,241,0.05));
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.webinar-details dd {
-    font-weight: 500;
+.details-header h3 {
+    font-size: 2rem;
+    font-weight: 800;
     color: var(--text-primary);
-    font-size: 1.1rem;
-    margin-left: 0;
+    margin: 0;
 }
 
-.webinar-details p {
-    background: white;
-    padding: 2rem;
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8fafc, #f1f5f9);
     border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--text-secondary);
+    border: 1px solid rgba(99,102,241,0.1);
+    transition: all 0.3s ease;
 }
 
-/* 6. Enhanced Next Steps */
+.detail-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.detail-icon {
+    width: 50px;
+    height: 50px;
+    background: var(--gradient-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.detail-icon i {
+    font-size: 1.25rem;
+    color: white;
+}
+
+.detail-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem 0;
+}
+
+.detail-content p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* 5. Enhanced Next Steps */
 .next-steps {
     background: white;
     padding: 6rem 2rem;
 }
 
-.next-steps h2 {
+.section-title {
     text-align: center;
     font-size: 3rem;
     font-weight: 800;
@@ -440,12 +508,19 @@ body {
     background-clip: text;
 }
 
-.next-steps .step {
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.step-card {
     background: linear-gradient(135deg, #ffffff, #f8fafc);
     border: 2px solid transparent;
     background-clip: padding-box;
-    margin-bottom: 3rem;
-    padding: 3rem;
+    padding: 2.5rem;
     border-radius: 24px;
     box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.08),
@@ -454,12 +529,9 @@ body {
     overflow: hidden;
     transition: all 0.4s ease;
     animation: slideInLeft 0.6s ease-out;
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
 }
 
-.next-steps .step::before {
+.step-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -470,21 +542,29 @@ body {
     transition: width 0.3s ease;
 }
 
-.next-steps .step:hover {
+.step-card:hover {
     transform: translateY(-8px);
     box-shadow: 
         0 30px 60px rgba(0, 0, 0, 0.12),
         0 0 0 1px rgba(99, 102, 241, 0.1);
 }
 
-.next-steps .step:hover::before {
+.step-card:hover::before {
     width: 12px;
 }
 
-.next-steps .step-num {
-    position: static;
-    width: 70px;
-    height: 70px;
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-light);
+}
+
+.step-num {
+    width: 50px;
+    height: 50px;
     background: var(--gradient-primary);
     color: white;
     border-radius: 50%;
@@ -492,94 +572,211 @@ body {
     align-items: center;
     justify-content: center;
     font-weight: 900;
-    font-size: 2rem;
+    font-size: 1.5rem;
     flex-shrink: 0;
     box-shadow: 0 10px 30px rgba(251, 191, 36, 0.3);
 }
 
-.step-content {
-    flex: 1;
-}
-
-.next-steps .step h3 {
-    font-size: 1.5rem;
+.step-header h3 {
+    font-size: 1.4rem;
     font-weight: 800;
-    margin-bottom: 1rem;
     color: var(--text-primary);
+    margin: 0;
 }
 
-.next-steps .step p {
-    font-size: 1.1rem;
+.step-content p {
+    font-size: 1rem;
     color: var(--text-secondary);
     line-height: 1.6;
     margin-bottom: 1.5rem;
 }
 
-.next-steps .step ul {
+.step-benefits {
     margin: 1.5rem 0;
     padding-left: 0;
     list-style: none;
 }
 
-.next-steps .step li {
-    position: relative;
-    padding-left: 2rem;
+.step-benefits li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     margin-bottom: 0.75rem;
     font-size: 1rem;
     color: var(--text-secondary);
 }
 
-.next-steps .step li::before {
-    content: '✨';
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-size: 1.2rem;
+.step-benefits li i {
+    color: var(--success-color);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.idea-form {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-top: 1.5rem;
+    border: 2px solid rgba(99, 102, 241, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+    font-family: inherit;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+    transform: translateY(-2px);
+}
+
+.tip {
+    color: var(--text-light);
+    font-style: italic;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tip i {
+    color: var(--secondary-color);
 }
 
 /* Button Styles */
-.calendar-buttons, .share-buttons {
+.calendar-buttons {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
     margin-top: 2rem;
 }
 
-.next-steps .btn {
+.btn-calendar {
     background: var(--gradient-primary);
     color: white;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.5rem;
     border-radius: 12px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
     position: relative;
     overflow: hidden;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.next-steps .btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
+.btn-calendar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+    text-decoration: none;
+    color: white;
 }
 
-.next-steps .btn:hover {
+.btn-submit {
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.btn-submit:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
 }
 
-.next-steps .btn:hover::before {
-    left: 100%;
+.share-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.btn-share {
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 2px solid;
+}
+
+.btn-share.facebook {
+    background: #1877f2;
+    color: white;
+    border-color: #1877f2;
+}
+
+.btn-share.twitter {
+    background: #1da1f2;
+    color: white;
+    border-color: #1da1f2;
+}
+
+.btn-share.linkedin {
+    background: #0077b5;
+    color: white;
+    border-color: #0077b5;
+}
+
+.btn-share.email {
+    background: #ea4335;
+    color: white;
+    border-color: #ea4335;
+}
+
+.btn-share.copy {
+    background: #6b7280;
+    color: white;
+    border-color: #6b7280;
+}
+
+.btn-share:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    color: white;
 }
 
 /* Form Styles */
@@ -802,13 +999,13 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .confirm-header h1 {
-        font-size: 2.5rem;
+    .banner-headline {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
     }
     
     .confirm-header {
-        padding: 4rem 1rem;
-        min-height: 50vh;
+        padding: 3rem 1rem;
+        min-height: 60vh;
     }
     
     #confirm-timer {
@@ -824,18 +1021,22 @@ body {
         font-size: 2rem;
     }
     
-    .next-steps .step {
-        flex-direction: column;
-        text-align: center;
+    .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .step-card {
         padding: 2rem;
     }
     
-    .next-steps .step-num {
-        margin: 0 auto 1.5rem;
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
-    .video-intro h2 {
-        font-size: 2rem;
+    .details-card {
+        padding: 2rem;
     }
     
     .host-grid {
@@ -845,15 +1046,16 @@ body {
     
     .calendar-buttons, .share-buttons {
         justify-content: center;
+        flex-direction: column;
+        align-items: center;
     }
     
     .container {
         padding: 0 1rem;
     }
     
-    .webinar-details dl {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+    .section-title {
+        font-size: 2.5rem;
     }
 }
 
