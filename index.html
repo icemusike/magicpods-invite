@@ -217,6 +217,26 @@
         .console-progress.show { display:block; }
         .console-progress-fill { height:100%; width:0%; background: linear-gradient(90deg,#ffee68,#f870d0,#6a8dff); transition: width .5s ease; }
 
+        /* Fix CTA/link overlap in Step 1 */
+        .activation-form .btn-next {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .activation-form .btn-next::before,
+        .activation-form .btn-next::after { pointer-events: none; }
+        .activation-form .privacy-note,
+        .activation-form .no-key-note { position: relative; z-index: 2; }
+        .activation-form .no-key-note { font-size: 1rem; }
+        .activation-form .no-key-note a {
+            color: #2563eb;
+            font-weight: 700;
+            text-decoration: underline;
+            pointer-events: auto;
+        }
+
         /* Professional-grade Premium Modal System */
         .mp-modal-overlay {
             position: fixed;
