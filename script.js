@@ -889,6 +889,25 @@ async function performKeyValidation(goldenKey) {
             // Build magic link if provided, otherwise fallback
             const magicLink = result.magicLink || `https://app.magicpodsai.com/onboarding?ml=${encodeURIComponent(goldenKey)}&n=${encodeURIComponent(firstName)}&e=${encodeURIComponent(email)}`;
             
+            // Store validation data for later use on confirmation page
+            const validationData = {
+                isValid: true,
+                isRedeemable: true,
+                registerUrl: result.registerUrl || magicLink,
+                goldenKey,
+                firstName,
+                email,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Store in both sessionStorage (temporary) and localStorage (persistent)
+            try {
+                sessionStorage.setItem('magicpods_validation_data', JSON.stringify(validationData));
+                localStorage.setItem('magicpods_validation_data', JSON.stringify(validationData));
+            } catch(e) {
+                console.warn('Failed to store validation data:', e);
+            }
+            
             // Send tags + event to N8N
             sendLeadToN8N({
                 event: 'index_key_valid_auto',
@@ -909,7 +928,7 @@ async function performKeyValidation(goldenKey) {
                 title: `🎉 Congrats, ${firstName}!`,
                 body: `You just unlocked your VIP Early FREE Access to MagicPods.<br/><br/>Your VIP access runs through Aug 19, 2025. Join the live session at 10:00 AM Eastern • 7:00 AM Pacific • 3:00 PM GMT for pro tips and bonuses.`,
                 actions: [
-                    { label: 'Secure My Seat & Activate Account Now →', href: `webinar-registration.html?${new URLSearchParams({ fullname: firstName, email }).toString()}`, primary: true }
+                    { label: 'Secure My Seat & Activate Account Now →', href: `webinar-registration.html?${new URLSearchParams({ fullname: firstName, email, key_valid: 'true' }).toString()}`, primary: true }
                 ],
                 headline: 'Important Next Step...'
             });

@@ -366,6 +366,86 @@ function personalizeConfirmationHeader(){
     if(statusEl){
         statusEl.innerHTML='<span class="hero-lead-span">Watch this short video and get ready to see AI turn any text into <span class="w700">binge-worthy podcasts</span>—plus learn how you could win FREE VIP access!</span>';
     }
+
+    // Handle VIP Access Section for Valid Key Holders
+    if(keyValid){
+        initVIPAccessSection(firstName);
+    }
+}
+
+function initVIPAccessSection(firstName) {
+    const vipSection = document.getElementById('vipAccessSection');
+    const vipTitle = document.getElementById('vipTitle');
+    const claimBtn = document.getElementById('claimAccountBtn');
+    
+    if(!vipSection) return;
+    
+    // Show the VIP section
+    vipSection.style.display = 'block';
+    
+    // Personalize the title
+    if(vipTitle && firstName){
+        vipTitle.innerHTML = `Congratulations ${firstName} You've managed to Snatch a VIP Early Access Valid Golden Key!`;
+    }
+    
+    // Get saved registerUrl from localStorage or sessionStorage
+    const savedValidationData = getSavedValidationData();
+    
+    if(savedValidationData && savedValidationData.registerUrl){
+        claimBtn.href = savedValidationData.registerUrl;
+        claimBtn.target = '_blank';
+        
+        // Add click tracking
+        claimBtn.addEventListener('click', function() {
+            // Track the claim event
+            console.log('VIP Account Claim clicked:', savedValidationData.registerUrl);
+            showToast('🎉 Redirecting to your VIP account setup...', 'success');
+        });
+    } else {
+        // Fallback if no saved data found
+        claimBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showToast('⚠️ Registration data not found. Please try activating your key again.', 'error');
+        });
+    }
+    
+    // Add entrance animation
+    setTimeout(() => {
+        vipSection.style.opacity = '0';
+        vipSection.style.transform = 'translateY(30px)';
+        vipSection.style.transition = 'all 0.8s ease-out';
+        
+        requestAnimationFrame(() => {
+            vipSection.style.opacity = '1';
+            vipSection.style.transform = 'translateY(0)';
+        });
+    }, 500);
+}
+
+function getSavedValidationData() {
+    // Try to get from sessionStorage first (temporary), then localStorage (persistent)
+    try {
+        const sessionData = sessionStorage.getItem('magicpods_validation_data');
+        if(sessionData) {
+            return JSON.parse(sessionData);
+        }
+        
+        const localData = localStorage.getItem('magicpods_validation_data');
+        if(localData) {
+            return JSON.parse(localData);
+        }
+        
+        // Also try to get from URL parameters as fallback
+        const params = new URLSearchParams(window.location.search);
+        const registerUrl = params.get('register_url');
+        if(registerUrl) {
+            return { registerUrl: decodeURIComponent(registerUrl) };
+        }
+    } catch(e) {
+        console.warn('Failed to parse saved validation data:', e);
+    }
+    
+    return null;
 }
 
 // Helper Functions
