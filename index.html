@@ -464,7 +464,7 @@
             }
         }
         /* Constrain hero headline width to align with header menu */
-        .hero .banner-headline { max-width: 1140px; margin-left: auto; margin-right: auto; }
+        .hero .banner-headline { max-width: 1280px; margin-left: auto; margin-right: auto; }
     </style>
         <style>
             /* Scoped enhancements for the inline countdown below video only */
@@ -1239,9 +1239,10 @@
 
   const [affKey, affVal] = getFirst(affKeys);
   const [subKey, subVal] = getFirst(subIdKeys);
+  const aidVal = qs.get('aid');
 
-  if (affVal) {
-    const payload = { source:"jvzoo", affKey, affVal, subKey, subVal, ts: Date.now() };
+  if (affVal || aidVal) {
+    const payload = { source:"jvzoo", affKey, affVal, subKey, subVal, aid: aidVal || (affKey==='aid'? affVal : null), ts: Date.now() };
     // Persist 90 days
     document.cookie = `mp_aff=${encodeURIComponent(JSON.stringify(payload))}; path=/; max-age=${60*60*24*90}; SameSite=Lax`;
     try { localStorage.setItem("mp_aff", JSON.stringify(payload)); } catch(e){}
@@ -1276,6 +1277,7 @@
       addHidden("affiliate_id", data.affVal || "");
       addHidden("sub_key", data.subKey || "");
       addHidden("sub_id", data.subVal || "");
+      addHidden("aid", data.aid || (data.affKey==='aid'? data.affVal : ""));
     }
   });
 })();

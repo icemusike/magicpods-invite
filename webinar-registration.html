@@ -10,6 +10,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <!-- Affiliate attribution (JVZoo + generic) -->
+    <script>
+    (function () {
+      const qs = new URLSearchParams(location.search);
+      const affKeys = ["aid","aff","affiliate","affiliate_id","aff_id","jvz_aff","jvzoo_aff","ref"];
+      const subIdKeys = ["tid","subid","sub_id","sid"]; // JVZoo tracking id if present
+
+      function getFirst(keys){ for (const k of keys) { const v = qs.get(k); if (v) return [k, v]; } return [null,null]; }
+
+      const [affKey, affVal] = getFirst(affKeys);
+      const [subKey, subVal] = getFirst(subIdKeys);
+      const aidVal = qs.get('aid');
+
+      if (affVal || aidVal) {
+        const payload = { source:"jvzoo", affKey, affVal, subKey, subVal, aid: aidVal || (affKey==='aid'? affVal : null), ts: Date.now() };
+        document.cookie = `mp_aff=${encodeURIComponent(JSON.stringify(payload))}; path=/; max-age=${60*60*24*90}; SameSite=Lax`;
+        try { localStorage.setItem("mp_aff", JSON.stringify(payload)); } catch(e){}
+      }
+
+      window.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form.webinar-optin');
+        if (!form) return;
+
+        const data = (() => {
+          try {
+            const c = document.cookie.split('; ').find(x => x.startsWith('mp_aff='));
+            if (c) return JSON.parse(decodeURIComponent(c.split('=')[1]));
+            const ls = localStorage.getItem('mp_aff'); 
+            if (ls) return JSON.parse(ls);
+          } catch(e){}
+          return null;
+        })();
+
+        const addHidden = (name, value) => {
+          if (!value) return;
+          const i = document.createElement("input");
+          i.type = "hidden"; i.name = name; i.value = value;
+          form.appendChild(i);
+        };
+
+        if (data) {
+          addHidden("aff_source", data.source || "jvzoo");
+          addHidden("aff_key", data.affKey || "");
+          addHidden("affiliate_id", data.affVal || "");
+          addHidden("sub_key", data.subKey || "");
+          addHidden("sub_id", data.subVal || "");
+          addHidden("aid", data.aid || (data.affKey==='aid'? data.affVal : ""));
+        }
+      });
+    })();
+    </script>
     <style>
         /* Constrain hero headline width to prevent full-width stretching */
         .webinar-hero .banner-headline { max-width: 1280px; margin-left: auto; margin-right: auto; }
