@@ -2059,11 +2059,11 @@
     
     <!-- Auto Play Video CSS -->
     <link href="css/autoplay.css" type="text/css" rel="stylesheet"/>
-    <!-- Auto Play Video JS -->
-    <script src="js/autoplay.js" type="application/javascript"></script>
+    <!-- Page-Specific Video JS -->
     <script async src="js/player.js"></script>
     <script async src="https://www.youtube.com/iframe_api"></script>
     <script src="https://player.vimeo.com/api/player.js"></script>
+    <script src="js/page-video-config.js" type="application/javascript"></script>
     <script>
         // Placeholder URLs - replace with actual links
         const HOPLINK_URL = 'https://your-jvzoo-hoplink.com';
@@ -2210,13 +2210,17 @@
 
         // Video Integration (similar to index.html)
         function initStrategyVideo() {
-            // This will be populated with the actual video player logic
-            // For now, it's a placeholder that matches the index.html structure
-            const videoContainer = document.getElementById('strategyAutoplayer');
+            // Initialize with the specific Vimeo video ID for strategy page
+            const videoContainer = document.getElementById('autoplayer');
             if (videoContainer) {
-                // Placeholder for video integration
-                // You can integrate Vimeo/YouTube player here similar to index.html
+                // The autoplay.js will handle the video, but we can add page-specific config
                 console.log('Strategy video container ready for integration');
+                
+                // Override autoplay.js config for this page if needed
+                if (window.autoplayConfig) {
+                    window.autoplayConfig.video.id = '1110250673';
+                    window.autoplayConfig.placeholder.id = '1110250673';
+                }
             }
         }
 
