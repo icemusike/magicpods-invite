@@ -41,8 +41,9 @@
             text-align: center;
             background: url(images/banner.png) no-repeat center top;
             background-size: cover;
-            background-color: #010101;
-            padding: 175px 0 13% 0;
+            background-attachment: fixed;
+            background-color: #000000;
+            padding: 175px 0 60px 0;
             position: relative;
             overflow: hidden;
         }
@@ -259,36 +260,18 @@
         /* Content Sections */
         .content-section {
             padding: 60px 0;
-            background: #0f0f23;
+            background: #000000;
         }
 
         .content-section:nth-child(even) {
-            background: #1a1a2e;
+            background: #000000;
         }
 
-        /* Overview Section - Blend with Hero */
+        /* Overview Section - Continue black background */
         .overview-section {
-            background: url(images/banner.png) no-repeat center top;
-            background-size: cover;
-            background-color: #010101;
+            background: #000000;
             padding: 40px 0 80px;
             position: relative;
-        }
-
-        .overview-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1;
-        }
-
-        .overview-section .container {
-            position: relative;
-            z-index: 2;
         }
 
         .section-title {
@@ -721,6 +704,7 @@
             .strategy-hero {
                 padding: 145px 0 60px 0;
                 min-height: auto;
+                background-attachment: scroll; /* Fix for mobile devices */
             }
             
             .strategy-pill {
@@ -918,7 +902,7 @@
 
         /* Footer */
         .strategy-footer {
-            background: #0f0f23;
+            background: #000000;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding: 40px 0;
             text-align: center;
