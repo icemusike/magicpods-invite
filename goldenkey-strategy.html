@@ -31,169 +31,50 @@
     <style>
         /* Strategy Page Specific Styles */
         .strategy-hero {
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-            position: relative;
-            overflow: hidden;
-            padding: 80px 0 60px;
-        }
-
-        .strategy-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('images/textbg1.webp') center/cover;
-            opacity: 0.1;
-            z-index: 1;
-        }
-
-        /* Strategy Video Section */
-        .strategy-video-section {
-            position: relative;
-            z-index: 2;
-        }
-
-        .video-title {
-            color: #e2e8f0;
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .strategy-video-container {
-            margin-bottom: 25px;
-        }
-
-        /* Import video styles from index.html */
-        .video-box {
-            position: relative;
-            width: 100%;
-            max-width: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 
-                0 20px 40px -12px rgba(0,0,0,.4),
-                0 8px 16px -4px rgba(0,0,0,.2),
-                inset 0 1px 0 rgba(255,255,255,.1);
-            background: linear-gradient(145deg, #1a1b26 0%, #16161e 100%);
-            border: 1px solid rgba(167,139,250,.25);
-        }
-
-        .video-box-inner {
-            position: relative;
-            width: 100%;
-        }
-
-        .autoplayer-area {
-            position: relative;
-            width: 100%;
-        }
-
-        .autoplayer-subarea {
-            position: relative;
-            width: 100%;
-        }
-
-        .autoplayer-subarea-16-by-9 {
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-        }
-
-        #strategyAutoplayer {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 16px;
-        }
-
-        .autoplayer-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            background: rgba(0,0,0,0.3);
-            border-radius: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 2rem 4rem;
+            margin: 0 auto;
+            text-align: center;
+            background: url(images/banner.png) no-repeat center top;
+            background-size: cover;
+            background-color: #010101;
+            padding: 175px 0 13% 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .autoplayer-overlay:hover {
-            background: rgba(0,0,0,0.5);
-        }
-
-        .autoplayer-overlay-background {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* Strategy Hero Content */
+        .strategy-hero .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
-            border-radius: 16px;
-        }
-
-        .autoplayer-overlay-content {
-            position: relative;
-            z-index: 2;
-            background: rgba(255,255,255,0.9);
-            color: #1f2937;
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .autoplayer-overlay-content:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
-        }
-
-        .strategy-hero .container {
+            align-items: center;
             position: relative;
             z-index: 2;
         }
 
-        .eyebrow-text {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        .strategy-pill {
+            background: linear-gradient(45deg, #16a34a, #059669);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             margin-bottom: 20px;
+            box-shadow: 0 8px 25px rgba(22, 163, 74, 0.4);
             animation: pulse 2s infinite;
         }
 
-        .strategy-headline {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #6366f1, #8b5cf6, #06b6d4);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 3s ease-in-out infinite;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        .strategy-subhead {
-            font-size: 1.4rem;
-            color: #e2e8f0;
-            font-weight: 500;
-            margin-bottom: 30px;
+        .strategy-pill i {
+            font-size: 18px;
         }
 
         .countdown-widget {
@@ -762,20 +643,13 @@
             }
             
             .strategy-hero {
-                padding: 60px 0 40px;
+                padding: 145px 0 60px 0;
+                min-height: auto;
             }
             
-            .strategy-hero .row {
-                flex-direction: column-reverse;
-            }
-            
-            .strategy-video-section {
-                margin-bottom: 40px;
-            }
-            
-            .video-title {
-                font-size: 1.2rem;
-                margin-bottom: 15px;
+            .strategy-pill {
+                font-size: 14px;
+                padding: 10px 20px;
             }
             
             .countdown-widget {
@@ -964,7 +838,7 @@
 </head>
 
 <body>
-    <!-- Sticky Navigation -->
+    <!-- Section Navigation -->
     <nav class="strategy-nav">
         <div class="container">
             <div class="row">
@@ -986,18 +860,101 @@
 
     <!-- Hero Section -->
     <section class="strategy-hero">
+        <!-- Spacer to prevent jump -->
+        <div id="nav-spacer" style="height: 0;"></div> 
+        <nav id="nav-bar" class="menu navbar navbar-expand-lg navbar-light nav-bar-top">
+            <a class="navbar-brand" href="index.html"><img src="images/logo.webp" class="img-fluid center-block logo-img" alt="images"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse SMN_effect-21" id="navbarSupportedContent">
+                <ul class="xl18 lg17 md14 sm16 xs18 w400 navbar-nav ml-auto text-center">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn" href="index.html#statistics"><span>Podcasts Stats</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn" href="webinar-registration.html"><span>Register For Webinar</span></a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link getlink hvr-grow" href="index.html#activation">
+                            <!-- Noise Overlay -->
+                            <span class="noise-overlay"></span>
+                            <span class="text">Claim Your Access Key</span> 
+                            <svg class="btn-arrow1" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                <defs>
+                                    <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="28%" stop-color="#ffee68" />
+                                        <stop offset="78%" stop-color="#f870d0" />
+                                    </linearGradient>
+                                </defs> 
+                                <g>
+                                    <g>
+                                        <path d="M506.134,241.843c-0.006-0.006-0.011-0.013-0.018-0.019l-104.504-104
+                                            c-7.829-7.791-20.492-7.762-28.285,0.068c-7.792,7.829-7.762,20.492,0.067,28.284L443.558,236H20
+                                            c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h423.557l-70.162,69.824c-7.829,7.792-7.859,20.455-0.067,28.284
+                                            c7.793,7.831,20.457,7.858,28.285,0.068l104.504-104c0.006-0.006,0.011-0.013,0.018-0.019
+                                            C513.968,262.339,513.943,249.635,506.134,241.843z"/>
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>  
+                    </li>  
+                </ul> 
+            </div>
+        </nav>
+
+        <div class="hero-content">
+            <div class="col-12">
+                <div class="strategy-pill">
+                    <i class="fas fa-chart-line"></i>
+                    Your 6 Figure Pre-Launch Strategy Guide
+                </div> 
+                
+                <h1 class="banner-headline xl64 lg64 md52 sm46 xs30 text-white" style="position: relative;z-index: 1; max-width: 1280px; margin-left: auto; margin-right: auto;"> 
+                    MagicPods AI <br class="d-none d-lg-block"/> 
+                    <span class="banner-headline-span1">Golden Keys VIP Strategy</span> <br class="d-none d-lg-block"/> 
+                    Blueprint
+                </h1>
+
+                <p class="banner-subheadline xl28 lg28 md22 sm20 xs16 w400 lh130 text-white">    
+                    Your <u class="w700">5–6 figure JV roadmap</u> for the next 7–10 days.
+                </p>
+            </div>
+        </div>
+       
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <div class="eyebrow-text">
-                        Prelaunch is WIDE OPEN (Today: Fri, Aug 15, 2025)
-                    </div>
-                    <h1 class="strategy-headline">
-                        MagicPods AI – Golden Keys VIP Strategy Blueprint
-                    </h1>
-                    <p class="strategy-subhead">
-                        Your 5–6 figure JV roadmap for the next 7–10 days
-                    </p>
+            <div class="row justify-content-center">
+                <div class="col-lg-11" style="position: relative;z-index: 1;"> 
+                    <div class="align-self-center video-box-main">	 
+                        <div class="video-box">
+                            <div class="video-box-inner">											
+                                <div class="autoplayer-area">
+                                    <div class="autoplayer-subarea autoplayer-subarea-16-by-9">
+                                        <div id="autoplayer"></div>
+                                    </div>
+                                    <div class="autoplayer-overlay">
+                                        <div class="autoplayer-overlay-background"></div>
+                                        <div class="autoplayer-overlay-content">
+                                            <span class="animated infinite pulse inline-block">
+                                                🔊 Sound on (Strategy Overview)
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>		
+                            </div>
+                        </div>
+                    </div>  
+                </div>   
+            </div>  
+        </div> 
+        
+        <!-- Strategy CTA Buttons -->
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-12 text-center">
                     <div class="cta-buttons">
                         <a href="#" class="btn-primary-gradient" id="hoplinkBtn">
                             <i class="fas fa-link"></i> Grab Your Hoplink
@@ -1007,55 +964,38 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-5">
-                    <div class="strategy-video-section">
-                        <h3 class="video-title">How the Golden Keys Strategy Works</h3>
-                        <div class="strategy-video-container">
-                            <div class="video-box">
-                                <div class="video-box-inner">
-                                    <div class="autoplayer-area">
-                                        <div class="autoplayer-subarea autoplayer-subarea-16-by-9">
-                                            <div id="strategyAutoplayer"></div>
-                                        </div>
-                                        <div class="autoplayer-overlay">
-                                            <div class="autoplayer-overlay-background"></div>
-                                            <div class="autoplayer-overlay-content">
-                                                <span class="animated infinite pulse inline-block">
-                                                    🔊 Sound on (Strategy Overview)
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+            </div>
+        </div>
+
+        <!-- Webinar Countdown -->
+        <div class="container mt-4">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 text-center">
+                    <div class="countdown-widget">
+                        <div class="countdown-label text-center">
+                            <i class="fas fa-calendar-alt"></i> Webinar Countdown
+                        </div>
+                        <div class="countdown-timer" id="strategyCountdown">
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="days-timer">0</span>
+                                <span class="countdown-unit">Days</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="hours-timer">0</span>
+                                <span class="countdown-unit">Hours</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="minutes-timer">0</span>
+                                <span class="countdown-unit">Min</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="seconds-timer">0</span>
+                                <span class="countdown-unit">Sec</span>
                             </div>
                         </div>
-                        
-                        <div class="countdown-widget">
-                            <div class="countdown-label text-center">
-                                <i class="fas fa-calendar-alt"></i> Webinar Countdown
-                            </div>
-                            <div class="countdown-timer" id="strategyCountdown">
-                                <div class="countdown-item">
-                                    <span class="countdown-number" id="days-timer">0</span>
-                                    <span class="countdown-unit">Days</span>
-                                </div>
-                                <div class="countdown-item">
-                                    <span class="countdown-number" id="hours-timer">0</span>
-                                    <span class="countdown-unit">Hours</span>
-                                </div>
-                                <div class="countdown-item">
-                                    <span class="countdown-number" id="minutes-timer">0</span>
-                                    <span class="countdown-unit">Min</span>
-                                </div>
-                                <div class="countdown-item">
-                                    <span class="countdown-number" id="seconds-timer">0</span>
-                                    <span class="countdown-unit">Sec</span>
-                                </div>
-                            </div>
-                            <div class="cart-note text-center">
-                                Tue, Aug 19 @ 10:00 AM EDT<br>
-                                <small>Cart opens 11:05 AM EDT</small>
-                            </div>
+                        <div class="cart-note text-center">
+                            Tue, Aug 19 @ 10:00 AM EDT<br>
+                            <small>Cart opens 11:05 AM EDT</small>
                         </div>
                     </div>
                 </div>
@@ -1876,6 +1816,25 @@
             initStrategyVideo();
             initUIAnimations();
             initActiveNavigation();
+        });
+
+        // Navigation bar scroll behavior (from index.html)
+        $(function () {
+            var $nav = $('#nav-bar');
+
+            // Scroll function
+            function updateNavbar() {
+                var scrollY = $(window).scrollTop();
+                if (scrollY > 50) {
+                    $nav.addClass('scrolled');
+                } else {
+                    $nav.removeClass('scrolled');
+                }
+            }
+
+            // Run immediately on load and bind scroll
+            updateNavbar();
+            $(window).on('scroll', updateNavbar);
         });
     </script>
 </body>
