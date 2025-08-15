@@ -60,7 +60,7 @@
         }
 
         .strategy-pill {
-            background: linear-gradient(45deg, #16a34a, #059669);
+            background: transparent;
             color: white;
             padding: 12px 24px;
             border-radius: 50px;
@@ -70,8 +70,28 @@
             align-items: center;
             gap: 8px;
             margin-bottom: 20px;
-            box-shadow: 0 8px 25px rgba(22, 163, 74, 0.4);
-            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .strategy-pill::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd, #98d8c8);
+            background-size: 300% 300%;
+            border-radius: 50px;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            animation: gradient-border 3s ease infinite;
+        }
+
+        @keyframes gradient-border {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .strategy-pill i {
@@ -712,6 +732,10 @@
                 padding: 10px 20px;
             }
 
+            .strategy-pill::before {
+                padding: 1.5px;
+            }
+
             .hero-why-works-card {
                 padding: 25px;
                 margin-bottom: 30px;
@@ -993,9 +1017,9 @@
                 </div> 
                 
                 <h1 class="banner-headline xl64 lg64 md52 sm46 xs30 text-white" style="position: relative;z-index: 1; max-width: 1280px; margin-left: auto; margin-right: auto;"> 
-                    MagicPods AI <br class="d-none d-lg-block"/> 
-                    <span class="banner-headline-span1">Golden Keys VIP Strategy</span> <br class="d-none d-lg-block"/> 
-                    Blueprint
+                    Why My Secret <br class="d-none d-lg-block"/> 
+                    <span class="banner-headline-span1">Golden Key VIP Strategy</span> <br class="d-none d-lg-block"/> 
+                    Affiliate Blueprint Works
                 </h1>
 
                 <p class="banner-subheadline xl28 lg28 md22 sm20 xs16 w400 lh130 text-white">    
