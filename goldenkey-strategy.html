@@ -125,55 +125,35 @@
             margin-top: 8px;
         }
 
-        /* Main Navigation */
+        /* Section Navigation */
         .strategy-nav {
             background: rgba(15, 15, 35, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(99, 102, 241, 0.2);
             position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 20px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            top: 73px; /* Position below the main nav */
+            z-index: 999;
+            padding: 15px 0;
         }
 
         .strategy-nav .nav-link {
             color: #e2e8f0;
             font-weight: 500;
-            padding: 10px 16px;
-            border-radius: 25px;
+            padding: 8px 16px;
+            border-radius: 20px;
             transition: all 0.3s ease;
             text-decoration: none;
-            font-size: 15px;
-            white-space: nowrap;
         }
 
         .strategy-nav .nav-link:hover,
         .strategy-nav .nav-link.active {
             background: rgba(99, 102, 241, 0.2);
             color: #6366f1;
-            transform: translateY(-2px);
         }
 
         .strategy-nav .nav-link.active {
             background: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        }
-
-        .strategy-nav .navbar-brand {
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .strategy-nav .navbar-brand:hover {
-            transform: scale(1.05);
-        }
-
-        .nav-divider {
-            color: rgba(99, 102, 241, 0.5);
-            font-weight: 300;
-            font-size: 18px;
-            margin: 0 8px;
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
         }
 
         /* CTA Buttons */
@@ -751,39 +731,16 @@
         }
 
         @media (max-width: 768px) {
-            .strategy-nav {
-                padding: 15px 0;
-            }
-            
-            .strategy-nav .d-flex {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .strategy-nav .navbar-brand {
-                order: -1;
-                margin-bottom: 10px;
-            }
-            
-            .nav-divider {
-                display: none;
-            }
-            
             .strategy-nav .nav-link {
-                padding: 8px 14px;
-                font-size: 14px;
-                margin: 2px;
+                padding: 6px 12px;
+                font-size: 0.9rem;
             }
         }
 
         @media (max-width: 480px) {
             .strategy-nav .nav-link {
                 padding: 6px 12px;
-                font-size: 13px;
-            }
-            
-            .strategy-nav .d-flex {
-                gap: 8px;
+                font-size: 0.9rem;
             }
         }
             
@@ -891,6 +848,54 @@
 <body>
     <!-- Hero Section -->
     <section class="strategy-hero">
+        <!-- Spacer to prevent jump -->
+        <div id="nav-spacer" style="height: 0;"></div> 
+        <nav id="nav-bar" class="menu navbar navbar-expand-lg navbar-light nav-bar-top">
+            <a class="navbar-brand" href="index.html"><img src="images/logo.webp" class="img-fluid center-block logo-img" alt="images"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse SMN_effect-21" id="navbarSupportedContent">
+                <ul class="xl18 lg17 md14 sm16 xs18 w400 navbar-nav ml-auto text-center">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn" href="index.html"><span>Home</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn" href="index.html#statistics"><span>Podcasts Stats</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn" href="webinar-registration.html"><span>Register For Webinar</span></a>
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link getlink hvr-grow" href="index.html#activation">
+                            <!-- Noise Overlay -->
+                            <span class="noise-overlay"></span>
+                            <span class="text">Claim Your Access Key</span> 
+                            <svg class="btn-arrow1" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                <defs>
+                                    <linearGradient id="arrowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="28%" stop-color="#ffee68" />
+                                        <stop offset="78%" stop-color="#f870d0" />
+                                    </linearGradient>
+                                </defs> 
+                                <g>
+                                    <g>
+                                        <path d="M506.134,241.843c-0.006-0.006-0.011-0.013-0.018-0.019l-104.504-104
+                                            c-7.829-7.791-20.492-7.762-28.285,0.068c-7.792,7.829-7.762,20.492,0.067,28.284L443.558,236H20
+                                            c-11.046,0-20,8.954-20,20c0,11.046,8.954,20,20,20h423.557l-70.162,69.824c-7.829,7.792-7.859,20.455-0.067,28.284
+                                            c7.793,7.831,20.457,7.858,28.285,0.068l104.504-104c0.006-0.006,0.011-0.013,0.018-0.019
+                                            C513.968,262.339,513.943,249.635,506.134,241.843z"/>
+                                    </g>
+                                </g>
+                            </svg>
+                        </a>  
+                    </li>  
+                </ul> 
+            </div>
+        </nav>
 
         <div class="hero-content">
             <div class="col-12">
@@ -989,25 +994,12 @@
         </div>
     </section>
 
-    <!-- Main Navigation -->
+    <!-- Section Navigation -->
     <nav class="strategy-nav">
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="d-flex flex-wrap justify-content-center align-items-center gap-3">
-                        <!-- Logo -->
-                        <a href="index.html" class="navbar-brand me-4">
-                            <img src="images/logo.webp" class="img-fluid logo-img" alt="MagicPods AI" style="height: 40px;">
-                        </a>
-                        
-                        <!-- Page Links -->
-                        <a href="index.html" class="nav-link">Home</a>
-                        <a href="index.html#statistics" class="nav-link">Podcast Stats</a>
-                        <a href="webinar-registration.html" class="nav-link">Register For Webinar</a>
-                        <a href="index.html#activation" class="nav-link">Claim Access Key</a>
-                        
-                        <!-- Section Links -->
-                        <span class="nav-divider">|</span>
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
                         <a href="#overview" class="nav-link">Overview</a>
                         <a href="#timeline" class="nav-link">Timeline</a>
                         <a href="#golden-keys" class="nav-link">Golden Keys</a>
@@ -1837,7 +1829,24 @@
             initActiveNavigation();
         });
 
+        // Navigation bar scroll behavior (from index.html)
+        $(function () {
+            var $nav = $('#nav-bar');
 
+            // Scroll function
+            function updateNavbar() {
+                var scrollY = $(window).scrollTop();
+                if (scrollY > 50) {
+                    $nav.addClass('scrolled');
+                } else {
+                    $nav.removeClass('scrolled');
+                }
+            }
+
+            // Run immediately on load and bind scroll
+            updateNavbar();
+            $(window).on('scroll', updateNavbar);
+        });
     </script>
 </body>
 </html>
