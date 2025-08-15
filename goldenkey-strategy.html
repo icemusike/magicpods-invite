@@ -49,6 +49,116 @@
             z-index: 1;
         }
 
+        /* Strategy Video Section */
+        .strategy-video-section {
+            position: relative;
+            z-index: 2;
+        }
+
+        .video-title {
+            color: #e2e8f0;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .strategy-video-container {
+            margin-bottom: 25px;
+        }
+
+        /* Import video styles from index.html */
+        .video-box {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 40px -12px rgba(0,0,0,.4),
+                0 8px 16px -4px rgba(0,0,0,.2),
+                inset 0 1px 0 rgba(255,255,255,.1);
+            background: linear-gradient(145deg, #1a1b26 0%, #16161e 100%);
+            border: 1px solid rgba(167,139,250,.25);
+        }
+
+        .video-box-inner {
+            position: relative;
+            width: 100%;
+        }
+
+        .autoplayer-area {
+            position: relative;
+            width: 100%;
+        }
+
+        .autoplayer-subarea {
+            position: relative;
+            width: 100%;
+        }
+
+        .autoplayer-subarea-16-by-9 {
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        }
+
+        #strategyAutoplayer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 16px;
+        }
+
+        .autoplayer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .autoplayer-overlay:hover {
+            background: rgba(0,0,0,0.5);
+        }
+
+        .autoplayer-overlay-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
+            border-radius: 16px;
+        }
+
+        .autoplayer-overlay-content {
+            position: relative;
+            z-index: 2;
+            background: rgba(255,255,255,0.9);
+            color: #1f2937;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .autoplayer-overlay-content:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+        }
+
         .strategy-hero .container {
             position: relative;
             z-index: 2;
@@ -154,9 +264,15 @@
             text-decoration: none;
         }
 
-        .strategy-nav .nav-link:hover {
+        .strategy-nav .nav-link:hover,
+        .strategy-nav .nav-link.active {
             background: rgba(99, 102, 241, 0.2);
             color: #6366f1;
+        }
+
+        .strategy-nav .nav-link.active {
+            background: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
         }
 
         /* CTA Buttons */
@@ -572,6 +688,44 @@
                 font-size: 2.5rem;
             }
             
+            .strategy-hero {
+                padding: 60px 0 40px;
+            }
+            
+            .strategy-hero .row {
+                flex-direction: column-reverse;
+            }
+            
+            .strategy-video-section {
+                margin-bottom: 40px;
+            }
+            
+            .video-title {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+            
+            .countdown-widget {
+                margin-top: 20px;
+            }
+            
+            .countdown-timer {
+                gap: 8px;
+            }
+            
+            .countdown-item {
+                min-width: 45px;
+                padding: 8px;
+            }
+            
+            .countdown-number {
+                font-size: 1.4rem;
+            }
+            
+            .countdown-unit {
+                font-size: 0.7rem;
+            }
+            
             .timeline::before {
                 left: 30px;
             }
@@ -586,6 +740,39 @@
             .timeline-date {
                 left: -75px !important;
                 right: auto !important;
+                width: 130px;
+                font-size: 0.8rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .btn-primary-gradient,
+            .btn-secondary-gradient {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .strategy-nav .nav-link {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .strategy-headline {
+                font-size: 2rem;
+            }
+            
+            .strategy-subhead {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
             }
         }
 
@@ -646,7 +833,7 @@
     <section class="strategy-hero">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-8">
+                <div class="col-lg-7">
                     <div class="eyebrow-text">
                         Prelaunch is WIDE OPEN (Today: Fri, Aug 15, 2025)
                     </div>
@@ -665,32 +852,55 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="countdown-widget">
-                        <div class="countdown-label text-center">
-                            <i class="fas fa-calendar-alt"></i> Webinar Countdown
+                <div class="col-lg-5">
+                    <div class="strategy-video-section">
+                        <h3 class="video-title">How the Golden Keys Strategy Works</h3>
+                        <div class="strategy-video-container">
+                            <div class="video-box">
+                                <div class="video-box-inner">
+                                    <div class="autoplayer-area">
+                                        <div class="autoplayer-subarea autoplayer-subarea-16-by-9">
+                                            <div id="strategyAutoplayer"></div>
+                                        </div>
+                                        <div class="autoplayer-overlay">
+                                            <div class="autoplayer-overlay-background"></div>
+                                            <div class="autoplayer-overlay-content">
+                                                <span class="animated infinite pulse inline-block">
+                                                    🔊 Sound on (Strategy Overview)
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="countdown-timer" id="strategyCountdown">
-                            <div class="countdown-item">
-                                <span class="countdown-number" id="days-timer">0</span>
-                                <span class="countdown-unit">Days</span>
+                        
+                        <div class="countdown-widget">
+                            <div class="countdown-label text-center">
+                                <i class="fas fa-calendar-alt"></i> Webinar Countdown
                             </div>
-                            <div class="countdown-item">
-                                <span class="countdown-number" id="hours-timer">0</span>
-                                <span class="countdown-unit">Hours</span>
+                            <div class="countdown-timer" id="strategyCountdown">
+                                <div class="countdown-item">
+                                    <span class="countdown-number" id="days-timer">0</span>
+                                    <span class="countdown-unit">Days</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="countdown-number" id="hours-timer">0</span>
+                                    <span class="countdown-unit">Hours</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="countdown-number" id="minutes-timer">0</span>
+                                    <span class="countdown-unit">Min</span>
+                                </div>
+                                <div class="countdown-item">
+                                    <span class="countdown-number" id="seconds-timer">0</span>
+                                    <span class="countdown-unit">Sec</span>
+                                </div>
                             </div>
-                            <div class="countdown-item">
-                                <span class="countdown-number" id="minutes-timer">0</span>
-                                <span class="countdown-unit">Min</span>
+                            <div class="cart-note text-center">
+                                Tue, Aug 19 @ 10:00 AM EDT<br>
+                                <small>Cart opens 11:05 AM EDT</small>
                             </div>
-                            <div class="countdown-item">
-                                <span class="countdown-number" id="seconds-timer">0</span>
-                                <span class="countdown-unit">Sec</span>
-                            </div>
-                        </div>
-                        <div class="cart-note text-center">
-                            Tue, Aug 19 @ 10:00 AM EDT<br>
-                            <small>Cart opens 11:00 AM EDT</small>
                         </div>
                     </div>
                 </div>
@@ -774,34 +984,36 @@
                     <p class="section-subtitle">Follow this day-by-day blueprint for maximum results</p>
                     
                     <div class="timeline">
-                        <!-- Day 0 -->
+                        <!-- Day 0 - Pre-Sell -->
                         <div class="timeline-item">
                             <div class="timeline-date">Day 0 - Aug 15</div>
                             <div class="timeline-content">
-                                <div class="timeline-title">Friday (Today)</div>
-                                <div class="timeline-goal">Goal: Flood opt-ins & trigger Golden Key FOMO</div>
+                                <div class="timeline-title">Friday - Pre-Sell Heads-Up</div>
+                                <div class="timeline-goal">Goal: Prime your list & build anticipation</div>
                                 <div class="timeline-actions">
                                     <ul>
-                                        <li><strong>Email #1: KEY DROP (10:00 AM EDT)</strong> — "5 VIP Keys live now."</li>
-                                        <li><strong>Social:</strong> 3-frame story + post; later share a live counter screenshot.</li>
-                                        <li><strong>Resend non-openers (7:00 PM EDT)</strong> with a new subject.</li>
-                                        <li><strong>DM warm buyers</strong> with hoplink.</li>
+                                        <li><strong>Email #1: PRE-SELL HEADS-UP</strong> — "Golden Keys drop tomorrow at 11 AM."</li>
+                                        <li><strong>Engagement hook:</strong> "Reply 'Golden Key Access' to be tagged fast-lane for tomorrow's drop."</li>
+                                        <li><strong>Social tease:</strong> Story countdown + "Something big drops tomorrow."</li>
+                                        <li><strong>List segmentation:</strong> Tag all responders for priority access notification.</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Day 1 -->
+                        <!-- Day 1 - Key Drop -->
                         <div class="timeline-item">
                             <div class="timeline-date">Day 1 - Aug 16</div>
                             <div class="timeline-content">
-                                <div class="timeline-title">Saturday</div>
-                                <div class="timeline-goal">Goal: Scarcity + webinar seed</div>
+                                <div class="timeline-title">Saturday - KEY DROP DAY</div>
+                                <div class="timeline-goal">Goal: Flood opt-ins & trigger Golden Key FOMO</div>
                                 <div class="timeline-actions">
                                     <ul>
-                                        <li><strong>Email #2: ALMOST GONE;</strong> if Keys remain, push. Else pivot to webinar "second chance."</li>
-                                        <li><strong>Story:</strong> Poll "Got a Key? Yes/Waiting."</li>
-                                        <li><strong>Comment bait:</strong> ask for topic ideas to bring to the webinar.</li>
+                                        <li><strong>Email #2: KEY DROP (11:00 AM EDT)</strong> — "5 VIP Keys live now."</li>
+                                        <li><strong>Fast-lane first:</strong> Send to tagged responders 10 mins early.</li>
+                                        <li><strong>Social:</strong> 3-frame story + post; later share a live counter screenshot.</li>
+                                        <li><strong>Resend non-openers (7:00 PM EDT)</strong> with a new subject.</li>
+                                        <li><strong>DM warm buyers</strong> with hoplink.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -812,12 +1024,12 @@
                             <div class="timeline-date">Day 2 - Aug 17</div>
                             <div class="timeline-content">
                                 <div class="timeline-title">Sunday</div>
-                                <div class="timeline-goal">Goal: Social proof flywheel</div>
+                                <div class="timeline-goal">Goal: Scarcity + webinar seed</div>
                                 <div class="timeline-actions">
                                     <ul>
-                                        <li><strong>VIP access to winners;</strong> share UGC (screenshots/first impressions).</li>
-                                        <li><strong>Email #3: WHAT VIPs ARE BUILDING</strong> — examples; CTA = webinar reg.</li>
-                                        <li><strong>Short reel (45–60s)</strong> — "Look what VIPs did in a day."</li>
+                                        <li><strong>Email #3: ALMOST GONE;</strong> if Keys remain, push. Else pivot to webinar "second chance."</li>
+                                        <li><strong>Story:</strong> Poll "Got a Key? Yes/Waiting."</li>
+                                        <li><strong>Comment bait:</strong> ask for topic ideas to bring to the webinar.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -828,12 +1040,13 @@
                             <div class="timeline-date">Day 3 - Aug 18</div>
                             <div class="timeline-content">
                                 <div class="timeline-title">Monday</div>
-                                <div class="timeline-goal">Goal: Max registrations + show-up</div>
+                                <div class="timeline-goal">Goal: Social proof flywheel</div>
                                 <div class="timeline-actions">
                                     <ul>
-                                        <li><strong>Email #4: T-24 HOURS</strong> — include .ics + "join 10 mins early."</li>
-                                        <li><strong>Optional SMS:</strong> T-24h, T-60m.</li>
-                                        <li><strong>Stories:</strong> countdown sticker to 10:00 AM EDT Tuesday.</li>
+                                        <li><strong>VIP access to winners;</strong> share UGC (screenshots/first impressions).</li>
+                                        <li><strong>Email #4: WHAT VIPs ARE BUILDING</strong> — examples; CTA = webinar reg.</li>
+                                        <li><strong>Short reel (45–60s)</strong> — "Look what VIPs did in a day."</li>
+                                        <li><strong>T-24h reminder:</strong> Webinar tomorrow at 10:00 AM EDT.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -965,10 +1178,24 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="copy-block">
-                                <h4>Today – KEY DROP</h4>
+                                <h4>Today – PRE-SELL HEADS-UP</h4>
                                 <p><strong>Subjects:</strong></p>
                                 <ul>
-                                    <li>"🔑 5 VIP Keys live now (first come)"</li>
+                                    <li>"🔑 Golden Keys drop tomorrow at 11 AM"</li>
+                                    <li>"Fast-lane access? Reply now"</li>
+                                    <li>"Your VIP head start (24h notice)"</li>
+                                </ul>
+                                <div class="copy-cta">
+                                    Hook: "Reply 'Golden Key Access' to be tagged fast-lane for tomorrow's drop."
+                                </div>
+                                <p><strong>PS:</strong> "Fast-lane subscribers get access 10 minutes early."</p>
+                            </div>
+                            
+                            <div class="copy-block">
+                                <h4>Tomorrow (Sat) – KEY DROP</h4>
+                                <p><strong>Subjects:</strong></p>
+                                <ul>
+                                    <li>"🔑 5 VIP Keys live now (11 AM EDT)"</li>
                                     <li>"Instant early access to MagicPods?"</li>
                                     <li>"My page shows 5 → 0… grab yours"</li>
                                 </ul>
@@ -1255,6 +1482,14 @@
     <!-- JavaScript -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    
+    <!-- Auto Play Video CSS -->
+    <link href="css/autoplay.css" type="text/css" rel="stylesheet"/>
+    <!-- Auto Play Video JS -->
+    <script src="js/autoplay.js" type="application/javascript"></script>
+    <script async src="js/player.js"></script>
+    <script async src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <script>
         // Placeholder URLs - replace with actual links
         const HOPLINK_URL = 'https://your-jvzoo-hoplink.com';
@@ -1399,6 +1634,71 @@
             }, 1000);
         }
 
+        // Video Integration (similar to index.html)
+        function initStrategyVideo() {
+            // This will be populated with the actual video player logic
+            // For now, it's a placeholder that matches the index.html structure
+            const videoContainer = document.getElementById('strategyAutoplayer');
+            if (videoContainer) {
+                // Placeholder for video integration
+                // You can integrate Vimeo/YouTube player here similar to index.html
+                console.log('Strategy video container ready for integration');
+            }
+        }
+
+        // Enhanced UI animations
+        function initUIAnimations() {
+            // Intersection Observer for scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Animate strategy cards
+            document.querySelectorAll('.strategy-card, .timeline-item, .copy-block').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Enhanced navigation highlighting
+        function initActiveNavigation() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            function highlightNavigation() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.pageYOffset >= sectionTop - 200) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', highlightNavigation);
+            highlightNavigation(); // Initial call
+        }
+
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             initStrategyCountdown();
@@ -1406,6 +1706,9 @@
             initCTAButtons();
             loadChecklistState();
             initKeysWidget();
+            initStrategyVideo();
+            initUIAnimations();
+            initActiveNavigation();
         });
     </script>
 </body>
