@@ -491,6 +491,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 60px 0;
+            width: 100%;
         }
 
         .timeline::before {
@@ -520,6 +521,7 @@
             opacity: 0;
             transform: translateY(50px) scale(0.95);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            clear: both;
         }
 
         .timeline-item.visible {
@@ -528,13 +530,15 @@
         }
 
         .timeline-item:nth-child(odd) {
-            left: 0;
+            float: left;
+            text-align: right;
             padding-right: 80px;
             transform-origin: right center;
         }
 
         .timeline-item:nth-child(even) {
-            left: 55%;
+            float: right;
+            text-align: left;
             padding-left: 80px;
             transform-origin: left center;
         }
@@ -579,11 +583,17 @@
         }
 
         .timeline-item:nth-child(odd) .timeline-date {
-            right: -90px;
+            left: calc(100% + 10px);
         }
 
         .timeline-item:nth-child(even) .timeline-date {
-            left: -90px;
+            right: calc(100% + 10px);
+        }
+
+        .timeline::after {
+            content: '';
+            display: table;
+            clear: both;
         }
 
         .timeline-content {
@@ -596,6 +606,7 @@
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
             overflow: hidden;
+            text-align: left;
         }
 
         .timeline-content::before {
@@ -724,11 +735,11 @@
         }
 
         .timeline-item:nth-child(odd)::after {
-            right: -10px;
+            right: -90px;
         }
 
         .timeline-item:nth-child(even)::after {
-            left: -10px;
+            left: -90px;
         }
 
         /* Keys Widget */
@@ -1076,8 +1087,9 @@
             }
             
             .timeline-item {
-                width: 100%;
-                left: 0 !important;
+                width: 100% !important;
+                float: none !important;
+                text-align: left !important;
                 padding-left: 100px !important;
                 padding-right: 20px !important;
                 margin-bottom: 80px;
@@ -1162,6 +1174,9 @@
             }
             
             .timeline-item {
+                width: 100% !important;
+                float: none !important;
+                text-align: left !important;
                 padding-left: 80px !important;
                 padding-right: 15px !important;
                 margin-bottom: 60px;
@@ -1540,7 +1555,9 @@
                     <h2 class="section-title">Timeline (Aug 15 → Aug 21)</h2>
                     <p class="section-subtitle">Follow this day-by-day blueprint for maximum results</p>
                     
-                    <div class="timeline">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="timeline">
                         <!-- Day 0 - Pre-Sell -->
                         <div class="timeline-item">
                             <div class="timeline-date">Day 0 - Aug 15</div>
