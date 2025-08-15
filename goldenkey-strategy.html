@@ -125,36 +125,7 @@
             margin-top: 8px;
         }
 
-        /* Section Navigation */
-        .strategy-nav {
-            background: rgba(15, 15, 35, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(99, 102, 241, 0.2);
-            position: sticky;
-            top: 73px; /* Position below the main nav */
-            z-index: 999;
-            padding: 15px 0;
-        }
 
-        .strategy-nav .nav-link {
-            color: #e2e8f0;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .strategy-nav .nav-link:hover,
-        .strategy-nav .nav-link.active {
-            background: rgba(99, 102, 241, 0.2);
-            color: #6366f1;
-        }
-
-        .strategy-nav .nav-link.active {
-            background: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
-        }
 
         /* CTA Buttons */
         .cta-buttons {
@@ -213,6 +184,31 @@
 
         .content-section:nth-child(even) {
             background: #1a1a2e;
+        }
+
+        /* Overview Section - Blend with Hero */
+        .overview-section {
+            background: url(images/banner.png) no-repeat center top;
+            background-size: cover;
+            background-color: #010101;
+            padding: 40px 0 80px;
+            position: relative;
+        }
+
+        .overview-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .overview-section .container {
+            position: relative;
+            z-index: 2;
         }
 
         .section-title {
@@ -730,19 +726,7 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .strategy-nav .nav-link {
-                padding: 6px 12px;
-                font-size: 0.9rem;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .strategy-nav .nav-link {
-                padding: 6px 12px;
-                font-size: 0.9rem;
-            }
-        }
             
             .strategy-headline {
                 font-size: 2rem;
@@ -866,7 +850,19 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-inn" href="webinar-registration.html"><span>Register For Webinar</span></a>
-                    </li> 
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn" href="#overview"><span>Overview</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn" href="#timeline"><span>Timeline</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn" href="#golden-keys"><span>Golden Keys</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-inn" href="#what-to-send"><span>What To Send</span></a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link getlink hvr-grow" href="index.html#activation">
                             <!-- Noise Overlay -->
@@ -994,28 +990,8 @@
         </div>
     </section>
 
-    <!-- Section Navigation -->
-    <nav class="strategy-nav">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <a href="#overview" class="nav-link">Overview</a>
-                        <a href="#timeline" class="nav-link">Timeline</a>
-                        <a href="#golden-keys" class="nav-link">Golden Keys</a>
-                        <a href="#what-to-send" class="nav-link">What to Send</a>
-                        <a href="#assets" class="nav-link">Assets</a>
-                        <a href="#tracking" class="nav-link">Tracking</a>
-                        <a href="#faq" class="nav-link">FAQ</a>
-                        <a href="#checklist" class="nav-link">Checklist</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
     <!-- Overview Section -->
-    <section class="content-section" id="overview">
+    <section class="content-section overview-section" id="overview">
         <div class="container">
             <div class="row">
                 <div class="col-12">
