@@ -183,7 +183,8 @@ function getAffiliateTracking() {
         affiliate_id: affiliateIdFromUrl || saved.affVal || undefined,
         sub_key: saved.subKey || undefined,
         sub_id: subIdFromUrl || saved.subVal || undefined,
-        aid: aidFromUrl || saved.aid || (saved.affKey === 'aid' ? saved.affVal : undefined)
+        aid: aidFromUrl || saved.aid || (saved.affKey === 'aid' ? saved.affVal : undefined),
+        jvzoo_aff_id: saved.jvzoo_aff_id || undefined
     };
     return payload;
 }

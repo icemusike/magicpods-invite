@@ -1392,8 +1392,32 @@
   const [subKey, subVal] = getFirst(subIdKeys);
   const aidVal = qs.get('aid');
 
-  if (affVal || aidVal) {
-    const payload = { source:"jvzoo", affKey, affVal, subKey, subVal, aid: aidVal || (affKey==='aid'? affVal : null), ts: Date.now() };
+  // Extract affiliate ID from JVZoo referrer if present
+  let jvzooAffiliateId = null;
+  if (document.referrer && document.referrer.includes('jvz')) {
+    const referrerMatch = document.referrer.match(/jvz\d*\.com\/c\/(\d+)/);
+    if (referrerMatch) {
+      jvzooAffiliateId = referrerMatch[1];
+      console.log('JVZoo affiliate ID extracted from referrer:', jvzooAffiliateId);
+    }
+  }
+
+  // Use JVZoo affiliate ID if no other affiliate data is present
+  const finalAffVal = affVal || jvzooAffiliateId;
+  const finalAidVal = aidVal || jvzooAffiliateId;
+
+  if (finalAffVal || finalAidVal || jvzooAffiliateId) {
+    const payload = { 
+      source: jvzooAffiliateId ? "jvzoo" : "jvzoo", 
+      affKey: affKey || (jvzooAffiliateId ? "aid" : null), 
+      affVal: finalAffVal, 
+      subKey, 
+      subVal, 
+      aid: finalAidVal,
+      jvzoo_aff_id: jvzooAffiliateId,
+      ts: Date.now() 
+    };
+    console.log('Affiliate tracking payload:', payload);
     // Persist 90 days
     document.cookie = `mp_aff=${encodeURIComponent(JSON.stringify(payload))}; path=/; max-age=${60*60*24*90}; SameSite=Lax`;
     try { localStorage.setItem("mp_aff", JSON.stringify(payload)); } catch(e){}
@@ -1429,6 +1453,7 @@
       addHidden("sub_key", data.subKey || "");
       addHidden("sub_id", data.subVal || "");
       addHidden("aid", data.aid || (data.affKey==='aid'? data.affVal : ""));
+      addHidden("jvzoo_aff_id", data.jvzoo_aff_id || "");
     }
   });
 })();
