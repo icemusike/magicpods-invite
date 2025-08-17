@@ -1268,6 +1268,15 @@
     if (referrerMatch) {
       jvzooAffiliateId = referrerMatch[1];
       console.log('JVZoo affiliate ID extracted from referrer:', jvzooAffiliateId);
+      
+      // Add aid parameter to URL if not already present and no other affiliate params exist
+      if (!aidVal && !affVal && jvzooAffiliateId) {
+        const currentUrl = new URL(window.location);
+        currentUrl.searchParams.set('aid', jvzooAffiliateId);
+        // Update URL without page reload
+        window.history.replaceState({}, '', currentUrl.toString());
+        console.log('Added aid parameter to URL:', currentUrl.toString());
+      }
     }
   }
 
