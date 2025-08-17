@@ -237,19 +237,7 @@ function nextStep() {
         return;
     }
     
-    // Send lead to N8N (non-blocking)
-    const utm = collectUtmParams();
-    const aff = getAffiliateTracking();
-    sendLeadToN8N({
-        event: 'index_lead_submit_step1',
-        firstName,
-        email,
-        page: window.location.href,
-        referrer: document.referrer || undefined,
-        ...utm,
-        ...aff,
-        timestamp: new Date().toISOString()
-    });
+    // N8N call removed here per request. We only send on webinar form submit.
 
     // Proceed to Step 2 in-place
     currentStep.classList.remove('active');
@@ -917,19 +905,7 @@ async function performKeyValidation(goldenKey) {
                 console.warn('Failed to store validation data:', e);
             }
             
-            // Send tags + event to N8N
-            sendLeadToN8N({
-                event: 'index_key_valid_auto',
-                firstName,
-                email,
-                goldenKey,
-                tags: ['KEY_VALID', 'VIP_TRIAL_ACTIVE', ...tags],
-                page: window.location.href,
-                referrer: document.referrer || undefined,
-                ...utm,
-                ...getAffiliateTracking(),
-                timestamp: new Date().toISOString()
-            });
+            // Removed N8N call on key validation success per request
 
             // Premium modal overlay for success
             // Include aid parameter in the query string for successful validation
@@ -985,18 +961,7 @@ async function performKeyValidation(goldenKey) {
             ],
             boosters: false
         });
-        // Track incident
-        sendLeadToN8N({
-            event: 'index_key_validation_error',
-            firstName,
-            email,
-            goldenKey,
-            page: window.location.href,
-            referrer: document.referrer || undefined,
-            ...utm,
-            ...getAffiliateTracking(),
-            timestamp: new Date().toISOString()
-        });
+        // Removed N8N call on key validation error per request
         const submitBtn = document.querySelector('#activationForm .btn-activate');
         if (submitBtn) {
             submitBtn.innerHTML = 'Try Another Key';
@@ -1034,19 +999,7 @@ function showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, headline
     });
     // Start countdown inside modal
     startModalCountdown('Aug 19, 2025 10:00:00 EST');
-    // Send lead with context
-    sendLeadToN8N({
-        event: headlineText.includes('claimed') ? 'index_key_redeemed_already' : 'index_key_invalid',
-        firstName,
-        email,
-        goldenKey,
-        tags: tags,
-        page: window.location.href,
-        referrer: document.referrer || undefined,
-        ...utm,
-        ...getAffiliateTracking(),
-        timestamp: new Date().toISOString()
-    });
+    // Removed N8N call for invalid/claimed per request
     const submitBtn = document.querySelector('#activationForm .btn-activate');
     if (submitBtn) {
         submitBtn.innerHTML = 'Try Another Key';
