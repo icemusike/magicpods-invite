@@ -1227,6 +1227,27 @@
 <!-- JVZoo Pixel -->
 <img src="https://i.jvzoo.com/114157/421623/2" alt="MagicPods AI Commercial" border="0" style="display:none;"/>
 
+<!-- Conditional Redirect for Specific Affiliate -->
+<script>
+(function () {
+  const qs = new URLSearchParams(location.search);
+  const affKeys = ["aid","aff","affiliate","affiliate_id","aff_id","jvz_aff","jvzoo_aff","ref"];
+  
+  function getFirst(keys){ for (const k of keys) { const v = qs.get(k); if (v) return [k, v]; } return [null,null]; }
+  const [affKey, affVal] = getFirst(affKeys);
+  
+  // Redirect to custom webinar page for specific affiliate
+  if (affVal === '218821') {
+    // Preserve all URL parameters for the redirect
+    const currentUrl = new URL(window.location);
+    const newUrl = new URL('webinar-registration-tim.html', window.location.origin);
+    newUrl.search = currentUrl.search; // Copy all query parameters
+    window.location.href = newUrl.href;
+    return; // Stop execution
+  }
+})();
+</script>
+
 <!-- Affiliate attribution script (JVZoo + query params) -->
 <script>
 (function () {
