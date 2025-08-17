@@ -7,6 +7,8 @@
         
         if (pathname.includes('goldenkey-strategy') || pathname.includes('strategy')) {
             return {"video":{"type":"vimeo","id":"1110250673"},"placeholder":{"type":"vimeo","id":"1110250673"},"target":"all","action":"restart"};
+        } else if (pathname.includes('webinar-registration-tim')) {
+            return {"video":{"type":"youtube","id":"Sn1-ZUcWK3s"},"placeholder":{"type":"youtube","id":"Sn1-ZUcWK3s"},"target":"all","action":"restart"};
         } else if (pathname.includes('webinar-registration')) {
             return {"video":{"type":"vimeo","id":"1107697441"},"placeholder":{"type":"vimeo","id":"1107697441"},"target":"all","action":"restart"};
         } else if (pathname.includes('webinar-confirmation')) {
