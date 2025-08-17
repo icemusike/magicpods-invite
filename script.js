@@ -266,6 +266,25 @@ async function handleActivationSubmit(e) {
     e.preventDefault();
     // On submit, trigger the same automatic flow used for live validation
     const goldenKey = document.getElementById('goldenKey').value.trim();
+    const firstName = (document.getElementById('firstName') || {}).value?.trim?.() || '';
+    const email = (document.getElementById('email') || {}).value?.trim?.() || '';
+
+    // Fire single n8n webhook on activation form submit (requested source of truth)
+    try {
+        const utm = collectUtmParams();
+        const aff = getAffiliateTracking();
+        await sendLeadToN8N({
+            event: 'activation_form_submit',
+            firstName,
+            email,
+            goldenKey,
+            page: window.location.href,
+            referrer: document.referrer || undefined,
+            ...utm,
+            ...aff,
+            timestamp: new Date().toISOString()
+        });
+    } catch(_) { /* non-blocking */ }
     if (goldenKey && goldenKey.length >= 6) {
         scheduleKeyValidation(goldenKey, true);
     }
