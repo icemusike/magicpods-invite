@@ -120,6 +120,9 @@ async function handleWebinarSubmit(e) {
     submitBtn.disabled = true;
     
     try {
+        // Get affiliate tracking data
+        const affiliateData = getAffiliateTracking();
+        
         // Send registration to N8N
         await fetch('https://callflujent.app.n8n.cloud/webhook/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0', {
             method: 'POST',
@@ -131,7 +134,8 @@ async function handleWebinarSubmit(e) {
                 webinar_date: form.querySelector('input[name="webinar_date"]').value,
                 page: window.location.href,
                 referrer: document.referrer || undefined,
-                timestamp: new Date().toISOString()
+                timestamp: new Date().toISOString(),
+                ...affiliateData
             })
         });
         
@@ -450,12 +454,44 @@ style.textContent = `
 `;
 document.head.appendChild(style);
 
+// Get affiliate tracking data from URL or saved cookies/localStorage
+function getAffiliateTracking() {
+    const qs = new URLSearchParams(window.location.search);
+    const getCookieData = () => {
+        try {
+            const c = document.cookie.split('; ').find(x => x.startsWith('mp_aff='));
+            if (c) return JSON.parse(decodeURIComponent(c.split('=')[1]));
+        } catch (_) { /* noop */ }
+        try {
+            const ls = localStorage.getItem('mp_aff');
+            if (ls) return JSON.parse(ls);
+        } catch (_) { /* noop */ }
+        return null;
+    };
+    const saved = getCookieData() || {};
+
+    const aidFromUrl = qs.get('aid');
+    const subIdFromUrl = qs.get('tid') || qs.get('subid') || qs.get('sub_id') || qs.get('sid');
+    const affiliateIdFromUrl = qs.get('aff') || qs.get('affiliate') || qs.get('affiliate_id') || qs.get('aff_id');
+
+    const payload = {
+        aff_source: saved.source || 'jvzoo',
+        aff_key: saved.affKey || undefined,
+        affiliate_id: affiliateIdFromUrl || saved.affVal || undefined,
+        sub_key: saved.subKey || undefined,
+        sub_id: subIdFromUrl || saved.subVal || undefined,
+        aid: aidFromUrl || saved.aid || (saved.affKey === 'aid' ? saved.affVal : undefined)
+    };
+    return payload;
+}
+
 // Export functions for testing
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         initCountdownTimers,
         initWebinarForm,
         isValidEmail,
-        trackWebinarRegistration
+        trackWebinarRegistration,
+        getAffiliateTracking
     };
 }
