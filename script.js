@@ -883,14 +883,11 @@ async function performKeyValidation(goldenKey) {
             if (progressFill) progressFill.style.width = '100%';
             addConsoleMessage('Account activation ready for deployment','success');
 
-            // Build magic link if provided, otherwise fallback
-            const magicLink = result.magicLink || `https://app.magicpodsai.com/onboarding?ml=${encodeURIComponent(goldenKey)}&n=${encodeURIComponent(firstName)}&e=${encodeURIComponent(email)}`;
-            
             // Store validation data for later use on confirmation page
             const validationData = {
                 isValid: true,
                 isRedeemable: true,
-                registerUrl: result.registerUrl || magicLink,
+                registerUrl: result.registerUrl || '',
                 goldenKey,
                 firstName,
                 email,
