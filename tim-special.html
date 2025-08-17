@@ -521,7 +521,7 @@
 						<a class="nav-link nav-link-inn" href="#statistics"><span>Podcasts Stats</span></a>
 					  </li>
 					  <li class="nav-item">
-						<a class="nav-link nav-link-inn" href="webinar-registration.html"><span>Register For Webinar</span></a>
+						<a class="nav-link nav-link-inn" href="#" onclick="goToWebinarRegistration(event)"><span>Register For Webinar</span></a>
 					  </li> 
 					  <li class="nav-item">
 						<a class="nav-link getlink hvr-grow" href="#activation">
@@ -614,7 +614,7 @@
 							<div class="autoplayer-overlay-background"></div>
 							<div class="autoplayer-overlay-content">
 							<span class="animated infinite pulse inline-block">
-							🔊 Sound on (30s preview)
+							🔊 Click to unmute & use controls
 							</span>
 							</div>
 							</div>
@@ -824,7 +824,7 @@
                         </p>
                         <p class="no-key-note" style="text-align:center; margin-top: 0.5rem; font-size: 0.9rem; color: var(--text-secondary);">
                             Don't have a Golden Key Access?
-                            <a href="webinar-registration.html" style="font-weight:700; text-decoration: underline;">Click Here</a>
+                            <a href="#" onclick="goToWebinarRegistration(event)" style="font-weight:700; text-decoration: underline;">Click Here</a>
                         </p>
                     </div>
                     
@@ -1277,25 +1277,29 @@
                 videoId: 'Sn1-ZUcWK3s',
                 playerVars: {
                     autoplay: 1,
-                    controls: 0,
+                    controls: 1,
                     showinfo: 0,
                     modestbranding: 1,
                     rel: 0,
                     loop: 0,
-                    fs: 0,
+                    fs: 1,
                     cc_load_policy: 0,
                     iv_load_policy: 3,
-                    autohide: 1,
+                    autohide: 0,
                     mute: 1
                 },
                 events: {
                     onReady: function(e) {
-                        // Setup overlay click to unmute
+                        // Setup overlay click to unmute and show controls
                         var overlay = document.querySelector('.autoplayer-overlay');
                         if (overlay) {
                             overlay.addEventListener('click', function() {
                                 e.target.unMute();
-                                overlay.remove();
+                                // Remove overlay to reveal YouTube controls
+                                overlay.style.opacity = '0';
+                                setTimeout(function() {
+                                    overlay.remove();
+                                }, 300);
                             });
                             overlay.classList.add('autoplayer-overlay-show');
                         }

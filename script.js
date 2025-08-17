@@ -931,12 +931,22 @@ async function performKeyValidation(goldenKey) {
             });
 
             // Premium modal overlay for success
+            // Include aid parameter in the query string for successful validation
+            const currentParams = new URLSearchParams(window.location.search);
+            const successQs = new URLSearchParams({ fullname: firstName, email, key_valid: 'true' });
+            
+            // Preserve aid parameter if it exists
+            const aid = currentParams.get('aid') || currentParams.get('aff') || currentParams.get('affiliate_id');
+            if (aid) {
+                successQs.set('aid', aid);
+            }
+            
             openPremiumModal({
                 variant: 'success',
                 title: `🎉 Congrats, ${firstName}!`,
                 body: `You just unlocked your VIP Early FREE Access to MagicPods.<br/><br/>Your VIP access runs through Aug 19, 2025. Join the live session at 10:00 AM Eastern • 7:00 AM Pacific • 3:00 PM GMT for pro tips and bonuses.`,
                 actions: [
-                    { label: 'Secure My Seat & Activate Account Now →', href: `webinar-registration.html?${new URLSearchParams({ fullname: firstName, email, key_valid: 'true' }).toString()}`, primary: true }
+                    { label: 'Secure My Seat & Activate Account Now →', href: `webinar-registration.html?${successQs.toString()}`, primary: true }
                 ],
                 headline: 'Important Next Step...'
             });
@@ -972,7 +982,7 @@ async function performKeyValidation(goldenKey) {
             actions: [
                 { label: 'Register for the VIP Webinar', href: `webinar-registration.html?${qs}#webinar-optin`, target: '_blank', primary: true }
             ],
-            boosters: true
+            boosters: false
         });
         // Track incident
         sendLeadToN8N({
@@ -999,22 +1009,25 @@ async function performKeyValidation(goldenKey) {
 }
 
 function showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, headlineText) {
-    const qs = new URLSearchParams({ fullname: firstName, email }).toString();
-    const subHeadline = `Don't Worry — There's Still Hope To Grab One...<br/><strong>You could win 1 of 10 Golden Keys live.</strong>`;
-    const countdown = `
-        <div class="mp-countdown" id="mpCountdown">
-            <div class="mpc-item"><div class="mpc-num" id="mpc-days">00</div><div class="mpc-label">Days</div></div>
-            <div class="mpc-item"><div class="mpc-num" id="mpc-hours">00</div><div class="mpc-label">Hours</div></div>
-            <div class="mpc-item"><div class="mpc-num" id="mpc-mins">00</div><div class="mpc-label">Minutes</div></div>
-            <div class="mpc-item"><div class="mpc-num" id="mpc-secs">00</div><div class="mpc-label">Seconds</div></div>
-        </div>
-    `;
+    // Include aid parameter in the query string
+    const currentParams = new URLSearchParams(window.location.search);
+    const qs = new URLSearchParams({ fullname: firstName, email });
+    
+    // Preserve aid parameter if it exists
+    const aid = currentParams.get('aid') || currentParams.get('aff') || currentParams.get('affiliate_id');
+    if (aid) {
+        qs.set('aid', aid);
+    }
+    
+    const newBody = `No worries - There is still chance to get one.<br/><br/>
+        Simply Join our VIP Launch Webinar on August 19th @ 10:00 AM Eastern to get another chance to win a Golden Key LIVE!`;
+    
     openPremiumModal({
         variant: 'warning',
-        title: 'This Key has already been claimed by someone else...',
-        body: `${subHeadline}${countdown}`,
+        title: 'This Key has already been claimed!',
+        body: newBody,
         actions: [
-            { label: 'Secure My Seat Now', href: `webinar-registration.html?${qs}#webinar-optin`, target: '_blank', primary: true }
+            { label: 'Register for the VIP Webinar', href: `webinar-registration.html?${qs.toString()}#webinar-optin`, target: '_blank', primary: true }
         ],
         boosters: false
     });
@@ -1239,6 +1252,28 @@ window.addEventListener('load', function() {
 // Analytics helper
 function trackEvent(eventName, properties = {}) {
     console.log(`Event: ${eventName}`, properties);
+}
+
+// Helper function to navigate to webinar registration with aid parameter
+function goToWebinarRegistration(event) {
+    event.preventDefault();
+    
+    // Get current URL parameters
+    const currentParams = new URLSearchParams(window.location.search);
+    const newParams = new URLSearchParams();
+    
+    // Preserve aid parameter if it exists
+    const aid = currentParams.get('aid') || currentParams.get('aff') || currentParams.get('affiliate_id');
+    if (aid) {
+        newParams.set('aid', aid);
+    }
+    
+    // Build the URL with preserved parameters
+    const url = newParams.toString() ? 
+        `webinar-registration.html?${newParams.toString()}` : 
+        'webinar-registration.html';
+    
+    window.location.href = url;
 }
 
 // Track page interactions
