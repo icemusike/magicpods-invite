@@ -251,6 +251,14 @@ function nextStep() {
             ...aff,
             timestamp: new Date().toISOString()
         });
+        // Also push marketing pixels (Facebook + GA)
+        trackLeadEvent({
+            source: 'activation_step1',
+            firstName,
+            email,
+            aid: aff?.aid || undefined,
+            page: window.location.href
+        });
     } catch(_) { /* non-blocking */ }
 
     // Proceed to Step 2 in-place
@@ -262,6 +270,32 @@ function nextStep() {
         const keyEl = document.getElementById('goldenKey');
         if (keyEl) keyEl.focus();
     }, 100);
+}
+
+// Unified marketing event for Lead (Facebook Pixel + GA4)
+function trackLeadEvent(details) {
+    try {
+        const payload = {
+            content_name: details?.source || 'lead_submit',
+            email: details?.email,
+            first_name: details?.firstName,
+            aid: details?.aid,
+            page: details?.page
+        };
+        if (typeof fbq === 'function') {
+            fbq('track', 'Lead', payload);
+        }
+        if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+                event_category: 'Lead',
+                event_label: details?.source || 'lead_submit',
+                email: details?.email,
+                first_name: details?.firstName,
+                aid: details?.aid,
+                page_location: details?.page
+            });
+        }
+    } catch(e) { /* ignore */ }
 }
 
 function prevStep() {
