@@ -616,6 +616,18 @@ function initProgressBars() {
         progressFill.style.width = progress + '%';
 }
 
+// Keep hero bar (top of page) in sync with scarcity card numbers
+function updateHeroScarcityUI(remaining, total) {
+    const remainingEl = document.querySelector('.remaining-count, #remainingCountHero');
+    const fillEl = document.getElementById('heroScarcityFill');
+    const textEl = document.getElementById('heroScarcityText');
+    if (!remainingEl && !fillEl) return;
+    const percent = Math.max(0, Math.min(100, Math.round((remaining / total) * 100)));
+    if (remainingEl) remainingEl.textContent = String(remaining);
+    if (fillEl) fillEl.style.width = percent + '%';
+    if (textEl) textEl.textContent = percent + '% Remaining';
+}
+
 // Scroll Animations
 function initScrollAnimations() {
     const observerOptions = {
@@ -688,6 +700,8 @@ function initUrgencyCounters() {
         progressFill.setAttribute('data-progress', String(percent));
         progressFill.style.width = percent + '%';
         if (progressText) progressText.textContent = percent + '% remaining';
+        // sync hero bar
+        updateHeroScarcityUI(remaining, total);
     }
 
     function animateBump(el) {
