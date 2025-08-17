@@ -1358,5 +1358,24 @@ $(function () {
   });
   </script>
 
+  <!-- Aid retention guard: if aid is in cookie but missing in URL, re-apply without reload -->
+  <script>
+  (function reapplyAidFromCookie(){
+    try {
+      const qs = new URLSearchParams(window.location.search);
+      if (qs.get('aid')) return; // already present
+      const c = document.cookie.split('; ').find(x => x.startsWith('mp_aff='));
+      if (!c) return;
+      const data = JSON.parse(decodeURIComponent(c.split('=')[1]));
+      const aid = data && (data.aid || (data.affKey === 'aid' ? data.affVal : null));
+      if (!aid) return;
+      const newUrl = new URL(window.location);
+      newUrl.searchParams.set('aid', aid);
+      window.history.replaceState({}, '', newUrl.toString());
+      console.log('Reapplied aid from cookie to URL:', aid);
+    } catch(e) { /* noop */ }
+  })();
+  </script>
+
 </body>
 </html>
