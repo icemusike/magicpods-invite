@@ -1256,15 +1256,7 @@
     return; // Stop execution
   }
   
-  // Redirect to custom webinar page for specific affiliate
-  if (affVal === '218821') {
-    // Preserve all URL parameters for the redirect
-    const currentUrl = new URL(window.location);
-    const newUrl = new URL('webinar-registration-tim.html', window.location.origin);
-    newUrl.search = currentUrl.search; // Copy all query parameters
-    window.location.href = newUrl.href;
-    return; // Stop execution
-  }
+  // Removed legacy conditional redirects for specific affiliate IDs (e.g., 218821)
 })();
 </script>
 

@@ -1259,21 +1259,26 @@ function trackEvent(eventName, properties = {}) {
 function goToWebinarRegistration(event) {
     event.preventDefault();
     
-    // Get current URL parameters
+    // Start from existing params so we carry everything over
     const currentParams = new URLSearchParams(window.location.search);
-    const newParams = new URLSearchParams();
     
-    // Preserve aid parameter if it exists
-    const aid = currentParams.get('aid') || currentParams.get('aff') || currentParams.get('affiliate_id');
-    if (aid) {
-        newParams.set('aid', aid);
+    // Ensure 'aid' is present; if missing, try to pull from cookie/localStorage
+    if (!currentParams.get('aid')) {
+        try {
+            const c = document.cookie.split('; ').find(x => x.startsWith('mp_aff='));
+            let data = null;
+            if (c) data = JSON.parse(decodeURIComponent(c.split('=')[1]));
+            if (!data) {
+                const ls = localStorage.getItem('mp_aff');
+                if (ls) data = JSON.parse(ls);
+            }
+            const cookieAid = data && (data.aid || (data.affKey === 'aid' ? data.affVal : null));
+            if (cookieAid) currentParams.set('aid', cookieAid);
+        } catch(_) { /* noop */ }
     }
-    
-    // Build the URL with preserved parameters
-    const url = newParams.toString() ? 
-        `webinar-registration.html?${newParams.toString()}` : 
-        'webinar-registration.html';
-    
+
+    const query = currentParams.toString();
+    const url = query ? `webinar-registration.html?${query}` : 'webinar-registration.html';
     window.location.href = url;
 }
 
