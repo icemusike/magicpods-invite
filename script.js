@@ -977,8 +977,8 @@ async function performKeyValidation(goldenKey) {
         const qs = new URLSearchParams({ fullname: firstName, email }).toString();
         openPremiumModal({
             variant: 'warning',
-            title: "We couldn't verify your key right now",
-            body: 'This could be an invalid key or a temporary network issue. Join our VIP Launch Webinar on Aug 19 @ 10:00 AM Eastern to get another chance to win a Golden Key live.',
+            title: 'This Key has already been claimed!',
+            body: 'No worries - There is still chance to get one.<br/><br/>Simply Join our VIP Launch Webinar on August 19th @ 10:00 AM Eastern to get another chance to win a Golden Key LIVE!',
             actions: [
                 { label: 'Register for the VIP Webinar', href: `webinar-registration.html?${qs}#webinar-optin`, target: '_blank', primary: true }
             ],
