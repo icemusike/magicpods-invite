@@ -1227,14 +1227,34 @@
 <!-- JVZoo Pixel -->
 <img src="https://i.jvzoo.com/114157/421623/2" alt="MagicPods AI Commercial" border="0" style="display:none;"/>
 
-<!-- Conditional Redirect for Specific Affiliate -->
+<!-- JVZoo Affiliate Detection and URL Parameter Addition (Must run first) -->
 <script>
 (function () {
+  // Extract affiliate ID from JVZoo referrer FIRST, before any other processing
+  let jvzooAffiliateId = null;
+  if (document.referrer && document.referrer.includes('jvz')) {
+    const referrerMatch = document.referrer.match(/jvz\d*\.com\/c\/(\d+)/);
+    if (referrerMatch) {
+      jvzooAffiliateId = referrerMatch[1];
+      console.log('JVZoo affiliate ID extracted from referrer:', jvzooAffiliateId);
+    }
+  }
+
   const qs = new URLSearchParams(location.search);
   const affKeys = ["aid","aff","affiliate","affiliate_id","aff_id","jvz_aff","jvzoo_aff","ref"];
   
   function getFirst(keys){ for (const k of keys) { const v = qs.get(k); if (v) return [k, v]; } return [null,null]; }
   const [affKey, affVal] = getFirst(affKeys);
+  const aidVal = qs.get('aid');
+  
+  // If we have a JVZoo affiliate ID but no URL parameters, add it to URL and reload
+  if (jvzooAffiliateId && !aidVal && !affVal) {
+    const newUrl = new URL(window.location);
+    newUrl.searchParams.set('aid', jvzooAffiliateId);
+    console.log('Redirecting to add aid parameter:', newUrl.toString());
+    window.location.replace(newUrl.toString());
+    return; // Stop execution
+  }
   
   // Redirect to custom webinar page for specific affiliate
   if (affVal === '218821') {
@@ -1261,38 +1281,19 @@
   const [subKey, subVal] = getFirst(subIdKeys);
   const aidVal = qs.get('aid');
 
-  // Extract affiliate ID from JVZoo referrer if present
-  let jvzooAffiliateId = null;
-  if (document.referrer && document.referrer.includes('jvz')) {
-    const referrerMatch = document.referrer.match(/jvz\d*\.com\/c\/(\d+)/);
-    if (referrerMatch) {
-      jvzooAffiliateId = referrerMatch[1];
-      console.log('JVZoo affiliate ID extracted from referrer:', jvzooAffiliateId);
-      
-      // Add aid parameter to URL if not already present and no other affiliate params exist
-      if (!aidVal && !affVal && jvzooAffiliateId) {
-        const currentUrl = new URL(window.location);
-        currentUrl.searchParams.set('aid', jvzooAffiliateId);
-        // Update URL without page reload
-        window.history.replaceState({}, '', currentUrl.toString());
-        console.log('Added aid parameter to URL:', currentUrl.toString());
-      }
-    }
-  }
+  // JVZoo referrer processing is now handled in the first script above
+  // Use existing URL parameters (JVZoo ID should now be in URL as aid parameter)
+  const finalAffVal = affVal;
+  const finalAidVal = aidVal;
 
-  // Use JVZoo affiliate ID if no other affiliate data is present
-  const finalAffVal = affVal || jvzooAffiliateId;
-  const finalAidVal = aidVal || jvzooAffiliateId;
-
-  if (finalAffVal || finalAidVal || jvzooAffiliateId) {
+  if (finalAffVal || finalAidVal) {
     const payload = { 
-      source: jvzooAffiliateId ? "jvzoo" : "jvzoo", 
-      affKey: affKey || (jvzooAffiliateId ? "aid" : null), 
+      source: "jvzoo", 
+      affKey: affKey, 
       affVal: finalAffVal, 
       subKey, 
       subVal, 
       aid: finalAidVal,
-      jvzoo_aff_id: jvzooAffiliateId,
       ts: Date.now() 
     };
     console.log('Affiliate tracking payload:', payload);
@@ -1331,7 +1332,6 @@
       addHidden("sub_key", data.subKey || "");
       addHidden("sub_id", data.subVal || "");
       addHidden("aid", data.aid || (data.affKey==='aid'? data.affVal : ""));
-      addHidden("jvzoo_aff_id", data.jvzoo_aff_id || "");
     }
   });
 })();
