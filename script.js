@@ -782,16 +782,10 @@ function initUrgencyCounters() {
 document.addEventListener('input', function(e) {
     if (e.target.id === 'goldenKey') {
         const value = e.target.value.trim();
-        
-        // Trigger console simulation only if there's meaningful input
+        // Show simulation UI but DO NOT trigger validation until submit
         if (value.length > 3) {
             simulateKeyValidation(value);
-            // Auto-start validation with debounce once key is reasonably complete
-            if (value.length >= 6) {
-                scheduleKeyValidation(value);
-            }
         } else {
-            // Hide console if input is too short
             const console = document.getElementById('keyConsole');
             console.classList.remove('show');
         }
