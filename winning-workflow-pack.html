@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MagicPods AI - Workflow Pack | 3 Copy-Ready Systems</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Workflow Pack Specific Styles */
+        .workflow-hero {
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .workflow-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255,238,104,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(248,112,208,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .workflow-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .workflow-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 8px 16px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        .workflow-title {
+            font-family: "Syne", sans-serif;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+        
+        .workflow-subtitle {
+            color: rgba(255,255,255,0.8);
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        .workflow-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .workflow-nav-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .workflow-nav-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .workflow-section {
+            padding: 80px 0;
+            position: relative;
+        }
+        
+        .workflow-section:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .workflow-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .workflow-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px -12px rgba(0,0,0,0.15);
+        }
+        
+        .workflow-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ffee68, #f870d0);
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 24px;
+            color: #000;
+            margin-bottom: 24px;
+        }
+        
+        .workflow-card h3 {
+            font-family: "Syne", sans-serif;
+            font-weight: 700;
+            font-size: 28px;
+            margin-bottom: 16px;
+            color: #1f2937;
+        }
+        
+        .workflow-goal {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-left: 4px solid #0ea5e9;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+        }
+        
+        .workflow-step {
+            margin-bottom: 32px;
+        }
+        
+        .workflow-step h4 {
+            font-weight: 700;
+            font-size: 20px;
+            color: #374151;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .workflow-step-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #ffee68, #f870d0);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: 700;
+        }
+        
+        .workflow-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .workflow-list li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 12px;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        
+        .workflow-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        
+        .prompt-box {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border: 2px solid #f59e0b;
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            position: relative;
+        }
+        
+        .prompt-box::before {
+            content: '💡';
+            position: absolute;
+            top: -12px;
+            left: 24px;
+            background: #fff;
+            padding: 8px 12px;
+            border-radius: 50px;
+            font-size: 16px;
+        }
+        
+        .prompt-box p {
+            margin: 8px 0;
+            font-family: 'Courier New', monospace;
+            background: rgba(255,255,255,0.7);
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .roi-highlight {
+            background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+            border: 2px solid #10b981;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 24px 0;
+            text-align: center;
+        }
+        
+        .roi-highlight strong {
+            color: #065f46;
+            font-size: 18px;
+        }
+        
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+        
+        .checklist-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-card:hover {
+            border-color: #a78bfa;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(167,139,250,0.3);
+        }
+        
+        .checklist-card h4 {
+            color: #6366f1;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .planner-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 32px 0;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .planner-table th {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            padding: 16px 12px;
+            font-weight: 700;
+            text-align: left;
+            border: none;
+        }
+        
+        .planner-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+        
+        .planner-table tr:hover {
+            background: #f8fafc;
+        }
+        
+        .print-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 16px 24px;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(99,102,241,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(99,102,241,0.4);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-family: "Syne", sans-serif;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+        }
+        
+        .section-header p {
+            color: #6b7280;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .back-to-site {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 12px 20px;
+            color: #374151;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-site:hover {
+            background: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            color: #1f2937;
+            text-decoration: none;
+        }
+        
+        /* Print Styles */
+        @media print {
+            .print-btn, .back-to-site { display: none; }
+            .workflow-section { page-break-inside: avoid; }
+            .workflow-card { page-break-inside: avoid; }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .workflow-hero { padding: 60px 0 40px; }
+            .workflow-section { padding: 60px 0; }
+            .workflow-card { padding: 24px; }
+            .print-btn { bottom: 16px; right: 16px; padding: 12px 20px; }
+            .back-to-site { top: 16px; left: 16px; padding: 8px 16px; }
+        }
+    </style>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXJSDKJSFF"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+      gtag('config', 'G-YXJSDKJSFF');
+      window.gtag = gtag;
+    </script>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "swchmaa9mr");</script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1037574864976446');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1037574864976446&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <link rel="shortcut icon" type="images/png" href="images/favicon.webp"/>
+</head>
+<body>
+
+    <!-- Back to Site Button -->
+    <a href="index.html" class="back-to-site">
+        <i class="fas fa-arrow-left"></i>
+        Back to MagicPods AI
+    </a>
+
+    <!-- Print Button -->
+    <button class="print-btn" onclick="window.print()">
+        <i class="fas fa-print"></i>
+        Print Guide
+    </button>
+
+    <!-- Hero Section -->
+    <section class="workflow-hero">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center workflow-content">
+                    <div class="workflow-badge">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Exclusive Playbook</span>
+                    </div>
+                    <h1 class="workflow-title xl64 lg56 md48 sm40 xs32">MagicPods AI Workflow Pack</h1>
+                    <p class="workflow-subtitle lg20 md18 sm16 xs14">Three copy-ready systems to publish faster and profit sooner</p>
+                    
+                    <div class="workflow-nav">
+                        <a href="#workflow1" class="workflow-nav-item">Coaches & Consultants</a>
+                        <a href="#workflow2" class="workflow-nav-item">E-commerce</a>
+                        <a href="#workflow3" class="workflow-nav-item">Local Services</a>
+                        <a href="#checklist" class="workflow-nav-item">Publishing Checklist</a>
+                        <a href="#planner" class="workflow-nav-item">Weekly Planner</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Inside Section -->
+    <section class="workflow-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="xl40 lg36 md32 sm28 xs24">What's Inside This Pack</h2>
+                <p>Everything you need to turn any content into profitable podcast episodes and viral clips</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="workflow-card">
+                        <h4 class="lg24 md22 sm20 xs18 w700 mb-3">📋 Complete Workflows</h4>
+                        <ul class="workflow-list">
+                            <li>Workflow 1 – Coaches and Consultants</li>
+                            <li>Workflow 2 – E-commerce</li>
+                            <li>Workflow 3 – Local Services</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="workflow-card">
+                        <h4 class="lg24 md22 sm20 xs18 w700 mb-3">🚀 Ready-to-Use Tools</h4>
+                        <ul class="workflow-list">
+                            <li>Publishing Checklist (All Niches)</li>
+                            <li>Clip Prompts (Shorts, Reels, TikTok)</li>
+                            <li>Simple ROI Math Examples</li>
+                            <li>Weekly Planner Template</li>
+                            <li>Troubleshooting Guide</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow 1 -->
+    <section class="workflow-section" id="workflow1">
+        <div class="container">
+            <div class="workflow-card">
+                <div class="workflow-number">1</div>
+                <h3>Coaches and Consultants</h3>
+                <div class="workflow-goal">
+                    <strong>Goal:</strong> Ship a high-retention episode plus 2-3 clips in under 30 minutes and book calls.
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="workflow-step">
+                            <h4><span class="workflow-step-icon">📥</span>Input</h4>
+                            <ul class="workflow-list">
+                                <li>Your best blog or newsletter URL</li>
+                                <li>One clear offer or booking page</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="workflow-step">
+                            <h4><span class="workflow-step-icon">⚡</span>Make</h4>
+                            <ul class="workflow-list">
+                                <li>6-8 minute two-host episode</li>
+                                <li>2 vertical clips (objection + quick win)</li>
+                                <li>10-second outro CTA</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="workflow-step">
+                            <h4><span class="workflow-step-icon">🚀</span>Publish</h4>
+                            <ul class="workflow-list">
+                                <li>YouTube with timestamps</li>
+                                <li>Shorts, Reels, TikTok</li>
+                                <li>Pin booking link with UTM</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="prompt-box">
+                    <p>&gt; Turn this page into a two-host podcast that teaches 3 actionable steps. Tone: expert and friendly. Include a short outro CTA to book a strategy call: [your URL].</p>
+                    <p>&gt; Create 2 vertical clips with captions. Clip 1 addresses the top objection. Clip 2 delivers the fastest quick win.</p>
+                </div>
+                
+                <div class="roi-highlight">
+                    <strong>ROI Snapshot:</strong> One booking worth $200 covers a month of creation. Three bookings/month = $600. Weekly episodes compound pipeline growth.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow 2 -->
+    <section class="workflow-section" id="workflow2">
+        <div class="container">
+            <div class="workflow-card">
+                <div class="workflow-number">2</div>
+                <h3>E-commerce</h3>
+                <div class="workflow-goal">
+                    <strong>Goal:</strong> Drive product discovery and incremental orders from repurposed clips.
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="workflow-step">
+                            <h4><span class="workflow-step-icon">📥</span>Input</h4>
+                            <ul class="workflow-list">
+                                <li>Top 3 product pages</li>
+                                <li>Customer reviews and FAQs</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="workflow-step">
+                            <h4><span class="workflow-step-icon">⚡</span>Make</h4>
+                            <ul class="workflow-list">
+                                <li>Comparison episode (pros/cons)</li>
+                                <li>3 clips with UGC-style tone</li>
+                                <li>Micro CTAs for each product</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="workflow-step">
+                            <h4><span class="workflow-step-icon">🚀</span>Publish</h4>
+                            <ul class="workflow-list">
+                                <li>TikTok, Reels, Shorts</li>
+                                <li>Pin discount/shipping info</li>
+                                <li>Test 3-video ad set</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="prompt-box">
+                    <p>&gt; Create a two-host comparison of these 3 products. Include who it's for, standout benefit, and one surprising detail. Keep it friendly and UGC-style.</p>
+                    <p>&gt; Make 3 vertical clips with captions, one per product. Start each with: "If you are [use-case], watch this."</p>
+                </div>
+                
+                <div class="roi-highlight">
+                    <strong>ROI Snapshot:</strong> AOV $45 × 15% margin = $6.75/order. +100 orders ≈ $675 gross margin. Scale weekly around product drops.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow 3 -->
+    <section class="workflow-section" id="workflow3">
+        <div class="container">
+            <div class="workflow-card">
+                <div class="workflow-number">3</div>
+                <h3>Local Services</h3>
+                <div class="workflow-goal">
+                    <strong>Goal:</strong> Build trust, bust myths, and convert local searches into bookings.
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="workflow-step">
+                            <h4><span class="workflow-step-icon">📥</span>Input</h4>
+                            <ul class="workflow-list">
+                                <li>FAQ page + 3 common myths</li>
+                                <li>Before/after case study</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="workflow-step">
+                            <h4><span class="workflow-step-icon">⚡</span>Make</h4>
+                            <ul class="workflow-list">
+                                <li>Trust-building FAQ episode</li>
+                                <li>2 myth-busting clips</li>
+                                <li>Local CTA + new customer offer</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="workflow-step">
+                            <h4><span class="workflow-step-icon">🚀</span>Publish</h4>
+                            <ul class="workflow-list">
+                                <li>YouTube + embed on site</li>
+                                <li>Facebook/Google Business</li>
+                                <li>Boost locally with radius targeting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="prompt-box">
+                    <p>&gt; Make a two-host episode explaining our service benefits, common myths, and 3 tips to choose a provider. Add a 30-second local CTA mentioning [city].</p>
+                    <p>&gt; Create 2 vertical clips with captions. Clip 1: myth vs fact. Clip 2: quick tip with limited-time new customer offer.</p>
+                </div>
+                
+                <div class="roi-highlight">
+                    <strong>ROI Snapshot:</strong> One new job at $300 covers the month. Include referral CTA to multiply bookings.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publishing Checklist -->
+    <section class="workflow-section" id="checklist">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="xl40 lg36 md32 sm28 xs24">Publishing Checklist</h2>
+                <p>Essential steps for maximum reach and engagement across all niches</p>
+            </div>
+            
+            <div class="checklist-grid">
+                <div class="checklist-card">
+                    <h4><i class="fas fa-upload"></i>Pre-Publish</h4>
+                    <ul class="workflow-list">
+                        <li>Title includes core benefit + primary keyword</li>
+                        <li>Add timestamps for YouTube chapters</li>
+                        <li>Captions ON for vertical clips</li>
+                        <li>Pin CTA link with UTM parameters</li>
+                        <li>Create benefit + curiosity thumbnail</li>
+                        <li>Plan repurposing strategy</li>
+                    </ul>
+                </div>
+                
+                <div class="checklist-card">
+                    <h4><i class="fas fa-chart-line"></i>After Publish (24-48h)</h4>
+                    <ul class="workflow-list">
+                        <li>Reply to top comments</li>
+                        <li>Pin best Q&A</li>
+                        <li>Cross-post best clip</li>
+                        <li>Save learnings (hook, length, topic)</li>
+                        <li>Track performance metrics</li>
+                        <li>Plan next episode based on data</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clip Prompts -->
+    <section class="workflow-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="xl40 lg36 md32 sm28 xs24">Viral Clip Prompts</h2>
+                <p>Copy-paste templates for Shorts, Reels, and TikTok that drive engagement</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="workflow-card">
+                        <h4 class="lg24 md22 sm20 xs18 w700 mb-4">🎯 High-Converting Clip Formulas</h4>
+                        
+                        <div class="prompt-box">
+                            <p><strong>Hook:</strong> "If you are [role/niche] and want [result], watch this."</p>
+                            <p><strong>Myth vs Fact:</strong> "Myth: [x]. Fact: [y]. Here's the 10-second fix."</p>
+                            <p><strong>Quick Win:</strong> "Try this today: [actionable step]. Results in [time]."</p>
+                            <p><strong>Comparison:</strong> "[A] vs [B] — which is better for [use-case]?"</p>
+                            <p><strong>CTA:</strong> "Full episode link in bio, comment pinned below."</p>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-4 text-center">
+                                <div class="roi-highlight">
+                                    <strong>Coaches</strong><br>
+                                    1 call = $200<br>
+                                    3 calls/mo = $600
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="roi-highlight">
+                                    <strong>E-commerce</strong><br>
+                                    100 orders ≈ $675<br>
+                                    gross margin
+                                </div>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <div class="roi-highlight">
+                                    <strong>Local Services</strong><br>
+                                    1 job = $300<br>
+                                    covers the month
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Weekly Planner -->
+    <section class="workflow-section" id="planner">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="xl40 lg36 md32 sm28 xs24">Weekly Content Planner</h2>
+                <p>Batch your creation and schedule for maximum efficiency</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="workflow-card">
+                        <table class="planner-table">
+                            <thead>
+                                <tr>
+                                    <th>Day</th>
+                                    <th>Topic / URL</th>
+                                    <th>Episode Status</th>
+                                    <th>Clips (1/2/3)</th>
+                                    <th>Publish Channels</th>
+                                    <th>Notes / CTA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td><strong>Mon</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td><strong>Tue</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td><strong>Wed</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td><strong>Thu</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                                <tr><td><strong>Fri</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                            </tbody>
+                        </table>
+                        
+                        <div class="mt-4 p-3" style="background: #f0f9ff; border-radius: 12px; border-left: 4px solid #0ea5e9;">
+                            <p class="mb-0"><strong>💡 Pro Tip:</strong> Batch your episode generation on one day, schedule clips the next. Consistency compounds reach.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Troubleshooting -->
+    <section class="workflow-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="xl40 lg36 md32 sm28 xs24">Troubleshooting & Support</h2>
+                <p>Quick fixes for common issues and where to get help</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="workflow-card">
+                        <h4 class="lg24 md22 sm20 xs18 w700 mb-3">🔧 Common Fixes</h4>
+                        <ul class="workflow-list">
+                            <li><strong>Captions not showing?</strong> Regenerate with captions ON, strong 3-second hook</li>
+                            <li><strong>Low retention?</strong> Promise #1 outcome in 5 words, add mid-roll teaser</li>
+                            <li><strong>Links not tracked?</strong> Use UTM parameters, pin in comments</li>
+                            <li><strong>Audio pacing off?</strong> Mix slow primary + fast co-host</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="workflow-card">
+                        <h4 class="lg24 md22 sm20 xs18 w700 mb-3">📞 Get Help</h4>
+                        <ul class="workflow-list">
+                            <li>Email: support@magicpodsai.com</li>
+                            <li>Community forum for feedback</li>
+                            <li>Live chat in MagicPods dashboard</li>
+                            <li>Video tutorials in knowledge base</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- One-Page Summary -->
+    <section class="workflow-section" style="background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="xl40 lg36 md32 sm28 xs24 text-white">Quick Reference Summary</h2>
+                <p class="text-white" style="opacity: 0.8;">The entire workflow in one glance</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="workflow-card">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="lg20 md18 sm16 xs14 w700 mb-3">🎯 Process</h4>
+                                <ul class="workflow-list">
+                                    <li>Paste URL, pick two hosts, publish</li>
+                                    <li>Full episode + 2-3 clips</li>
+                                    <li>Keyworded title + timestamps</li>
+                                    <li>Captions + pinned CTA</li>
+                                    <li>Repurpose across platforms</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h4 class="lg20 md18 sm16 xs14 w700 mb-3">💰 ROI Targets</h4>
+                                <ul class="workflow-list">
+                                    <li>Coaches: 1 call ($200)</li>
+                                    <li>E-commerce: 100 orders (~$675)</li>
+                                    <li>Local: 1 job ($300)</li>
+                                    <li>Batch early, schedule mid-week</li>
+                                    <li>Review and optimize Friday</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #1f2937; padding: 40px 0; color: #fff; text-align: center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <img src="images/magicpodslogo.png" alt="MagicPods AI" style="height: 40px; margin-bottom: 20px; filter: brightness(0) invert(1);">
+                    <p class="mb-2">© 2025 MagicPods AI. All rights reserved.</p>
+                    <p style="opacity: 0.7; font-size: 14px;">Transform your content into viral podcasts in just 3 simple steps</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.workflow-nav-item').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe workflow cards for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.workflow-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Track print action
+        document.querySelector('.print-btn').addEventListener('click', () => {
+            if (typeof gtag === 'function') {
+                gtag('event', 'print_workflow_pack', {
+                    event_category: 'Engagement',
+                    event_label: 'Workflow Pack Print'
+                });
+            }
+            if (typeof fbq === 'function') {
+                fbq('track', 'ViewContent', {
+                    content_name: 'Workflow Pack Print',
+                    content_category: 'Resource'
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
