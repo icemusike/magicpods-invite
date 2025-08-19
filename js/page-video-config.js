@@ -13,6 +13,9 @@
             return {"video":{"type":"youtube","id":"Sn1-ZUcWK3s"},"placeholder":{"type":"youtube","id":"Sn1-ZUcWK3s"},"target":"all","action":"restart"};
         } else if (pathname.includes('webinar-registration')) {
             return {"video":{"type":"vimeo","id":"1107697441"},"placeholder":{"type":"vimeo","id":"1107697441"},"target":"all","action":"restart"};
+        } else if (pathname.includes('register')) {
+            // Use teaser video for the register page
+            return {"video":{"type":"vimeo","id":"1110036971"},"placeholder":{"type":"vimeo","id":"1110036971"},"target":"all","action":"restart"};
         } else if (pathname.includes('webinar-confirmation')) {
             return {"video":{"type":"vimeo","id":"1108075811"},"placeholder":{"type":"vimeo","id":"1108075811"},"target":"all","action":"restart"};
         } else {

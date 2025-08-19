@@ -50,8 +50,11 @@ function clearSimulationTimeouts() {
 
 // Webinar Registration: prefill and submit handler
 function initWebinarRegistrationPage() {
+    // Skip on dedicated webinar pages that use webinar-script.js handler
+    const path = window.location.pathname.toLowerCase();
+    if (path.includes('webinar-registration') || path.includes('register')) return;
     const form = document.querySelector('form.webinar-optin');
-    if (!form) return; // not on webinar-registration.html
+    if (!form) return;
 
     // Prefill from query params
     const params = new URLSearchParams(window.location.search);
@@ -613,8 +616,8 @@ function initTypewriterEffect() {
 
 // Countdown Timer for Webinar
 function initCountdownTimer() {
-    // Set the date we're counting down to (August 19th, 10:00 AM EST)
-    const countDownDate = new Date("Aug 19, 2025 10:00:00 EST").getTime();
+    // Set the date in UTC to represent 10:00 AM ET (EDT in August) → 14:00:00Z
+    const countDownDate = new Date("2025-08-19T14:00:00Z").getTime();
     
     const timer = setInterval(function() {
         const now = new Date().getTime();
@@ -1052,7 +1055,7 @@ function showInvalidOrClaimedUI(firstName, email, goldenKey, utm, tags, headline
         boosters: false
     });
     // Start countdown inside modal
-    startModalCountdown('Aug 19, 2025 10:00:00 EST');
+    startModalCountdown('2025-08-19T14:00:00Z');
     // Removed N8N call for invalid/claimed per request
     const submitBtn = document.querySelector('#activationForm .btn-activate');
     if (submitBtn) {

@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Countdown Timer Functionality
 function initCountdownTimers() {
-    // Set the webinar date - August 19, 2025 10:00 AM EST
-    const webinarDate = new Date('Aug 19, 2025 10:00:00 EST').getTime();
+    // 10:00 AM ET (EDT in August) is 14:00 UTC
+    const webinarDate = new Date('2025-08-19T14:00:00Z').getTime();
     
     // Update both top and bottom timers
     const topTimer = document.getElementById('top-timer');
@@ -127,6 +127,7 @@ async function handleWebinarSubmit(e) {
         await fetch('https://callflujent.app.n8n.cloud/webhook/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
+            keepalive: true,
             body: JSON.stringify({
                 event: 'webinar_registration',
                 name: fullName,
