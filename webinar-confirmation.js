@@ -16,8 +16,8 @@ function initConfirmationCountdown() {
     const countdownEl = document.getElementById('confirm-timer');
     if (!countdownEl) return;
 
-    // Set the webinar date - August 19, 2025 10:00 AM ET
-    const webinarDate = new Date('2025-08-19T10:00:00-04:00').getTime();
+    // Set the webinar date - August 19, 2025 6:00 PM ET (EDT is UTC-4)
+    const webinarDate = new Date('2025-08-19T18:00:00-04:00').getTime();
 
     // Create static timer structure once
     countdownEl.innerHTML = `
@@ -76,7 +76,7 @@ function initCalendarButtons() {
 
     calendarButtons.addEventListener('click', function(e) {
         e.preventDefault();
-        const target = e.target.closest('.btn');
+        const target = e.target.closest('.btn-calendar');
         if (!target) return;
 
         // Add click animation
@@ -86,9 +86,9 @@ function initCalendarButtons() {
         
         const eventDetails = {
             title: 'MagicPods AI Launch Webinar - Live Demo',
-            startTime: '2025-08-19T10:00:00-04:00',
-            endTime: '2025-08-19T11:00:00-04:00',
-            description: '🎙️ Join us for the live launch of MagicPods AI! Watch as we turn any text into a professional video podcast in real-time. Plus, get the chance to win 1 of 10 FREE lifetime licenses! Your unique join link has been emailed to you.',
+            startTime: '2025-08-19T18:00:00-04:00',
+            endTime: '2025-08-19T19:00:00-04:00',
+            description: '🎙️ Join us for the live launch of MagicPods AI! Watch us turn any text into a professional video podcast in real-time. Chance to win 1 of 10 FREE lifetime licenses! Your unique join link has been emailed.',
             location: 'Online Webinar'
         };
 
@@ -135,7 +135,7 @@ function initShareButtons() {
 
         const network = target.dataset.net;
         const shareUrl = window.location.origin + '/webinar-registration.html';
-        const shareText = '🚀 Just registered for the MagicPods AI Launch Webinar! Join me to see AI turn any text into engaging video podcasts live on Aug 19th! Plus chance to win FREE lifetime access! 🎙️';
+        const shareText = '🚀 I just registered for the MagicPods AI Launch Webinar on Aug 19 @ 6 PM ET! Watch them build a podcast in 60 minutes and enter to win FREE Golden Keys! 🎙️';
         let url = '';
 
         switch (network) {
