@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Countdown Timer Functionality
 function initCountdownTimers() {
-    // 10:00 AM ET (EDT in August) is 14:00 UTC
-    const webinarDate = new Date('2025-08-19T14:00:00Z').getTime();
+    // 6:00 PM ET (EDT in August) is 22:00 UTC
+    const webinarDate = new Date('2025-08-19T22:00:00Z').getTime();
     
     // Update both top and bottom timers
     const topTimer = document.getElementById('top-timer');
@@ -100,7 +100,7 @@ async function handleWebinarSubmit(e) {
     
     const form = e.target;
     const submitBtn = form.querySelector('.btn-register');
-    const fullName = form.querySelector('input[name="fullname"]').value.trim();
+    const fullName = (form.querySelector('input[name="firstName"]')?.value || form.querySelector('input[name="fullname"]')?.value || '').trim();
     const email = form.querySelector('input[name="email"]').value.trim();
     
     // Validate inputs
@@ -130,7 +130,7 @@ async function handleWebinarSubmit(e) {
             keepalive: true,
             body: JSON.stringify({
                 event: 'webinar_registration',
-                name: fullName,
+                firstName: fullName,
                 email,
                 webinar_date: form.querySelector('input[name="webinar_date"]').value,
                 page: window.location.href,
@@ -279,8 +279,22 @@ function initRecentRegistrations() {
     const names = [
         'Sarah M.', 'Mike R.', 'Jessica L.', 'David K.', 'Emma S.',
         'John D.', 'Lisa W.', 'Chris P.', 'Amanda T.', 'Mark B.',
-        'Rachel H.', 'Kevin L.', 'Sophia C.', 'Ryan M.', 'Nicole F.'
+        'Rachel H.', 'Kevin L.', 'Sophia C.', 'Ryan M.', 'Nicole F.',
+        'Daniel P.', 'Olivia R.', 'Ethan H.', 'Mia T.', 'Noah B.',
+        'Ava S.', 'Liam C.', 'Isabella K.', 'Mason G.', 'Charlotte V.'
     ];
+
+    // Shuffle helper for uniqueness cycles
+    function shuffle(arr){
+        for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()* (i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
+        return arr;
+    }
+    let pool = shuffle(names.slice());
+    let poolIdx = 0;
+    function nextUniqueName(){
+        if (poolIdx >= pool.length) { pool = shuffle(names.slice()); poolIdx = 0; }
+        return pool[poolIdx++];
+    }
     
     function updateRecentRegs() {
         const regItems = recentRegs.querySelectorAll('.reg-item');
@@ -295,14 +309,17 @@ function initRecentRegistrations() {
         }
         
         // Add new registration at top
-        const randomName = names[Math.floor(Math.random() * names.length)];
-        regItems[0].querySelector('.reg-name').textContent = randomName;
+        const uniqueName = nextUniqueName();
+        regItems[0].querySelector('.reg-name').textContent = uniqueName;
         regItems[0].querySelector('.reg-time').textContent = 'Just now';
         
         // Add animation
         regItems[0].style.animation = 'none';
         regItems[0].offsetHeight; // Trigger reflow
         regItems[0].style.animation = 'slideDown 0.3s ease';
+
+        // Increment counters: "Already Registered X / Y" and remaining seats
+        updateRegistrationCount();
     }
     
     function updateTime(timeStr) {
@@ -312,8 +329,21 @@ function initRecentRegistrations() {
         return timeStr;
     }
     
-    // Update registrations every 15-30 seconds
-    setInterval(updateRecentRegs, Math.random() * 15000 + 15000);
+    // Ensure initial remaining seats reflects count (Y - X)
+    (function syncInitialRemaining(){
+        const countEl = document.querySelector('.registered-count strong');
+        const remainingEl = document.querySelector('.seats-remaining');
+        if (!countEl || !remainingEl) return;
+        const match = countEl.textContent.match(/(\d+)\s*\/\s*(\d+)/);
+        if (!match) return;
+        const current = parseInt(match[1], 10);
+        const total = parseInt(match[2], 10);
+        const remaining = Math.max(0, total - current);
+        remainingEl.textContent = `Only ${remaining} spots remaining • live updating`;
+    })();
+
+    // Update registrations every 3 seconds
+    setInterval(updateRecentRegs, 3000);
 }
 
 function updateRegistrationCount() {
