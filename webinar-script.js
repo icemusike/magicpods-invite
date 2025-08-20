@@ -66,7 +66,8 @@ function initCountdownTimers() {
 
 // Webinar Registration Form
 function initWebinarForm() {
-    const form = document.getElementById('webinar-optin');
+    // Select the actual form element by class to avoid duplicate ID issues
+    const form = document.querySelector('form.webinar-optin');
     if (!form) return;
     
     form.addEventListener('submit', handleWebinarSubmit);
@@ -342,8 +343,16 @@ function initRecentRegistrations() {
         remainingEl.textContent = `Only ${remaining} spots remaining • live updating`;
     })();
 
-    // Update registrations every 3 seconds
-    setInterval(updateRecentRegs, 3000);
+    // Slow cadence: alternate 10s ticks (effective ~20s between increments)
+    let skipToggle = false;
+    setInterval(() => {
+        if (skipToggle) {
+            skipToggle = false; // buffer tick, do nothing
+            return;
+        }
+        skipToggle = true;
+        updateRecentRegs();
+    }, 10000);
 }
 
 function updateRegistrationCount() {
