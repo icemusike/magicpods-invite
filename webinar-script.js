@@ -106,12 +106,12 @@ async function handleWebinarSubmit(e) {
     
     // Validate inputs
     if (!fullName || !email) {
-        showFormError('Please fill in all required fields');
+        showFormError('Please fill in all required fields', form);
         return;
     }
     
     if (!isValidEmail(email)) {
-        showFormError('Please enter a valid email address');
+        showFormError('Please enter a valid email address', form);
         return;
     }
     
@@ -144,7 +144,7 @@ async function handleWebinarSubmit(e) {
         // Track registration
         trackWebinarRegistration(email, fullName);
         // Update UI
-        showRegistrationSuccess(fullName);
+        showRegistrationSuccess(form, fullName);
         updateRegistrationCount();
         // Build redirect URL passing user data and any key info from query
         const qp = new URLSearchParams(window.location.search);
@@ -203,9 +203,11 @@ function showFieldError(field, message) {
     field.parentNode.appendChild(errorEl);
 }
 
-function showFormError(message) {
+function showFormError(message, formEl) {
     // Create or update error message
-    let errorEl = document.querySelector('.form-error');
+    const form = formEl || document.getElementById('webinar-optin') || document.querySelector('form.webinar-optin');
+    if (!form) return;
+    let errorEl = form.querySelector('.form-error');
     if (!errorEl) {
         errorEl = document.createElement('div');
         errorEl.className = 'form-error';
@@ -219,7 +221,6 @@ function showFormError(message) {
             border: 1px solid #fecaca;
         `;
         
-        const form = document.getElementById('webinar-optin');
         form.insertBefore(errorEl, form.firstChild);
     }
     
@@ -233,7 +234,7 @@ function showFormError(message) {
     }, 5000);
 }
 
-function showRegistrationSuccess(name) {
+function showRegistrationSuccess(formEl, name) {
     const successEl = document.createElement('div');
     successEl.className = 'registration-success';
     successEl.style.cssText = `
@@ -256,7 +257,8 @@ function showRegistrationSuccess(name) {
         </div>
     `;
     
-    const form = document.getElementById('webinar-optin');
+    const form = formEl || document.getElementById('webinar-optin') || document.querySelector('form.webinar-optin');
+    if (!form) return;
     form.insertBefore(successEl, form.firstChild);
     
     // Auto-hide after 8 seconds
