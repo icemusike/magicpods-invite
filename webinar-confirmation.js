@@ -16,8 +16,8 @@ function initConfirmationCountdown() {
     const countdownEl = document.getElementById('confirm-timer');
     if (!countdownEl) return;
 
-    // Set the webinar date - August 19, 2025 6:00 PM ET (EDT is UTC-4)
-    const webinarDate = new Date('2025-08-19T18:00:00-04:00').getTime();
+    // Set the webinar date - August 23, 2025 10:00 AM ET (EDT is UTC-4)
+    const webinarDate = new Date('2025-08-23T10:00:00-04:00').getTime();
 
     // Create static timer structure once
     countdownEl.innerHTML = `
@@ -86,8 +86,8 @@ function initCalendarButtons() {
         
         const eventDetails = {
             title: 'MagicPods AI Launch Webinar - Live Demo',
-            startTime: '2025-08-19T18:00:00-04:00',
-            endTime: '2025-08-19T19:00:00-04:00',
+            startTime: '2025-08-23T10:00:00-04:00',
+            endTime: '2025-08-23T11:00:00-04:00',
             description: '🎙️ Join us for the live launch of MagicPods AI! Watch us turn any text into a professional video podcast in real-time. Chance to win 1 of 10 FREE lifetime licenses! Your unique join link has been emailed.',
             location: 'Online Webinar'
         };

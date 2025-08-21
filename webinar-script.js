@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Countdown Timer Functionality
 function initCountdownTimers() {
-    // 6:00 PM ET (EDT in August) is 22:00 UTC
-    const webinarDate = new Date('2025-08-19T22:00:00Z').getTime();
+    // Set the webinar date - August 23, 2025 10:00 AM EST
+    const webinarDate = new Date('Aug 23, 2025 10:00:00 EST').getTime();
     
     // Update both top and bottom timers
     const topTimer = document.getElementById('top-timer');
@@ -66,8 +66,7 @@ function initCountdownTimers() {
 
 // Webinar Registration Form
 function initWebinarForm() {
-    // Select the actual form element by class to avoid duplicate ID issues
-    const form = document.querySelector('form.webinar-optin');
+    const form = document.getElementById('webinar-optin');
     if (!form) return;
     
     form.addEventListener('submit', handleWebinarSubmit);
@@ -101,17 +100,17 @@ async function handleWebinarSubmit(e) {
     
     const form = e.target;
     const submitBtn = form.querySelector('.btn-register');
-    const fullName = (form.querySelector('input[name="firstName"]')?.value || form.querySelector('input[name="fullname"]')?.value || '').trim();
+    const fullName = form.querySelector('input[name="fullname"]').value.trim();
     const email = form.querySelector('input[name="email"]').value.trim();
     
     // Validate inputs
     if (!fullName || !email) {
-        showFormError('Please fill in all required fields', form);
+        showFormError('Please fill in all required fields');
         return;
     }
     
     if (!isValidEmail(email)) {
-        showFormError('Please enter a valid email address', form);
+        showFormError('Please enter a valid email address');
         return;
     }
     
@@ -128,10 +127,9 @@ async function handleWebinarSubmit(e) {
         await fetch('https://callflujent.app.n8n.cloud/webhook/b189d0e4-3bcc-4c54-893f-0fae5aaa1ed0', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            keepalive: true,
             body: JSON.stringify({
                 event: 'webinar_registration',
-                firstName: fullName,
+                name: fullName,
                 email,
                 webinar_date: form.querySelector('input[name="webinar_date"]').value,
                 page: window.location.href,
@@ -144,7 +142,7 @@ async function handleWebinarSubmit(e) {
         // Track registration
         trackWebinarRegistration(email, fullName);
         // Update UI
-        showRegistrationSuccess(form, fullName);
+        showRegistrationSuccess(fullName);
         updateRegistrationCount();
         // Build redirect URL passing user data and any key info from query
         const qp = new URLSearchParams(window.location.search);
@@ -203,11 +201,9 @@ function showFieldError(field, message) {
     field.parentNode.appendChild(errorEl);
 }
 
-function showFormError(message, formEl) {
+function showFormError(message) {
     // Create or update error message
-    const form = formEl || document.getElementById('webinar-optin') || document.querySelector('form.webinar-optin');
-    if (!form) return;
-    let errorEl = form.querySelector('.form-error');
+    let errorEl = document.querySelector('.form-error');
     if (!errorEl) {
         errorEl = document.createElement('div');
         errorEl.className = 'form-error';
@@ -221,6 +217,7 @@ function showFormError(message, formEl) {
             border: 1px solid #fecaca;
         `;
         
+        const form = document.getElementById('webinar-optin');
         form.insertBefore(errorEl, form.firstChild);
     }
     
@@ -234,7 +231,7 @@ function showFormError(message, formEl) {
     }, 5000);
 }
 
-function showRegistrationSuccess(formEl, name) {
+function showRegistrationSuccess(name) {
     const successEl = document.createElement('div');
     successEl.className = 'registration-success';
     successEl.style.cssText = `
@@ -257,8 +254,7 @@ function showRegistrationSuccess(formEl, name) {
         </div>
     `;
     
-    const form = formEl || document.getElementById('webinar-optin') || document.querySelector('form.webinar-optin');
-    if (!form) return;
+    const form = document.getElementById('webinar-optin');
     form.insertBefore(successEl, form.firstChild);
     
     // Auto-hide after 8 seconds
@@ -282,22 +278,8 @@ function initRecentRegistrations() {
     const names = [
         'Sarah M.', 'Mike R.', 'Jessica L.', 'David K.', 'Emma S.',
         'John D.', 'Lisa W.', 'Chris P.', 'Amanda T.', 'Mark B.',
-        'Rachel H.', 'Kevin L.', 'Sophia C.', 'Ryan M.', 'Nicole F.',
-        'Daniel P.', 'Olivia R.', 'Ethan H.', 'Mia T.', 'Noah B.',
-        'Ava S.', 'Liam C.', 'Isabella K.', 'Mason G.', 'Charlotte V.'
+        'Rachel H.', 'Kevin L.', 'Sophia C.', 'Ryan M.', 'Nicole F.'
     ];
-
-    // Shuffle helper for uniqueness cycles
-    function shuffle(arr){
-        for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()* (i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; }
-        return arr;
-    }
-    let pool = shuffle(names.slice());
-    let poolIdx = 0;
-    function nextUniqueName(){
-        if (poolIdx >= pool.length) { pool = shuffle(names.slice()); poolIdx = 0; }
-        return pool[poolIdx++];
-    }
     
     function updateRecentRegs() {
         const regItems = recentRegs.querySelectorAll('.reg-item');
@@ -312,17 +294,14 @@ function initRecentRegistrations() {
         }
         
         // Add new registration at top
-        const uniqueName = nextUniqueName();
-        regItems[0].querySelector('.reg-name').textContent = uniqueName;
+        const randomName = names[Math.floor(Math.random() * names.length)];
+        regItems[0].querySelector('.reg-name').textContent = randomName;
         regItems[0].querySelector('.reg-time').textContent = 'Just now';
         
         // Add animation
         regItems[0].style.animation = 'none';
         regItems[0].offsetHeight; // Trigger reflow
         regItems[0].style.animation = 'slideDown 0.3s ease';
-
-        // Increment counters: "Already Registered X / Y" and remaining seats
-        updateRegistrationCount();
     }
     
     function updateTime(timeStr) {
@@ -332,29 +311,8 @@ function initRecentRegistrations() {
         return timeStr;
     }
     
-    // Ensure initial remaining seats reflects count (Y - X)
-    (function syncInitialRemaining(){
-        const countEl = document.querySelector('.registered-count strong');
-        const remainingEl = document.querySelector('.seats-remaining');
-        if (!countEl || !remainingEl) return;
-        const match = countEl.textContent.match(/(\d+)\s*\/\s*(\d+)/);
-        if (!match) return;
-        const current = parseInt(match[1], 10);
-        const total = parseInt(match[2], 10);
-        const remaining = Math.max(0, total - current);
-        remainingEl.textContent = `Only ${remaining} spots remaining • live updating`;
-    })();
-
-    // Slow cadence: alternate 10s ticks (effective ~20s between increments)
-    let skipToggle = false;
-    setInterval(() => {
-        if (skipToggle) {
-            skipToggle = false; // buffer tick, do nothing
-            return;
-        }
-        skipToggle = true;
-        updateRecentRegs();
-    }, 10000);
+    // Update registrations every 15-30 seconds
+    setInterval(updateRecentRegs, Math.random() * 15000 + 15000);
 }
 
 function updateRegistrationCount() {
@@ -522,8 +480,7 @@ function getAffiliateTracking() {
         affiliate_id: affiliateIdFromUrl || saved.affVal || undefined,
         sub_key: saved.subKey || undefined,
         sub_id: subIdFromUrl || saved.subVal || undefined,
-        aid: aidFromUrl || saved.aid || (saved.affKey === 'aid' ? saved.affVal : undefined),
-        jvzoo_aff_id: saved.jvzoo_aff_id || undefined
+        aid: aidFromUrl || saved.aid || (saved.affKey === 'aid' ? saved.affVal : undefined)
     };
     return payload;
 }
