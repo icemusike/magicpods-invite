@@ -16,9 +16,12 @@
         } else if (pathname.includes('register')) {
             // Use teaser video for the register page
             return {"video":{"type":"vimeo","id":"1110036971"},"placeholder":{"type":"vimeo","id":"1110036971"},"target":"all","action":"restart"};
-        } else if (pathname.includes('webinar-confirmation')) {
-            // Use teaser video on confirmation pages
+        } else if (pathname.includes('revoicer')) {
+            // Revoicer page should use teaser video
             return {"video":{"type":"vimeo","id":"1110036971"},"placeholder":{"type":"vimeo","id":"1110036971"},"target":"all","action":"restart"};
+        } else if (pathname.includes('webinar-confirmation')) {
+            // Confirmation pages keep their original explainer video
+            return {"video":{"type":"vimeo","id":"1108075811"},"placeholder":{"type":"vimeo","id":"1108075811"},"target":"all","action":"restart"};
         } else {
             // Default for index.html and other pages
             return {"video":{"type":"vimeo","id":"1107663505"},"placeholder":{"type":"vimeo","id":"1107663505"},"target":"all","action":"restart"};
