@@ -278,41 +278,65 @@ function initRecentRegistrations() {
     const names = [
         'Sarah M.', 'Mike R.', 'Jessica L.', 'David K.', 'Emma S.',
         'John D.', 'Lisa W.', 'Chris P.', 'Amanda T.', 'Mark B.',
-        'Rachel H.', 'Kevin L.', 'Sophia C.', 'Ryan M.', 'Nicole F.'
+        'Rachel H.', 'Kevin L.', 'Sophia C.', 'Ryan M.', 'Nicole F.',
+        'Ava S.', 'Liam C.', 'Isabella K.', 'Mason G.', 'Charlotte V.'
     ];
-    
+
+    function syncInitialRemaining() {
+        const countEl = document.querySelector('.registered-count strong');
+        const remainingEl = document.querySelector('.seats-remaining');
+        if (!countEl || !remainingEl) return;
+        const match = countEl.textContent.match(/(\d+)\s*\/\s*(\d+)/);
+        if (!match) return;
+        const current = parseInt(match[1], 10);
+        const total = parseInt(match[2], 10);
+        const remaining = Math.max(0, total - current);
+        remainingEl.textContent = `Only ${remaining} spots remaining • live updating`;
+    }
+
     function updateRecentRegs() {
         const regItems = recentRegs.querySelectorAll('.reg-item');
-        
+        if (regItems.length === 0) return;
+
         // Shift existing registrations down
         for (let i = regItems.length - 1; i > 0; i--) {
             const currentName = regItems[i - 1].querySelector('.reg-name').textContent;
             const currentTime = regItems[i - 1].querySelector('.reg-time').textContent;
-            
             regItems[i].querySelector('.reg-name').textContent = currentName;
             regItems[i].querySelector('.reg-time').textContent = updateTime(currentTime);
         }
-        
+
         // Add new registration at top
         const randomName = names[Math.floor(Math.random() * names.length)];
         regItems[0].querySelector('.reg-name').textContent = randomName;
         regItems[0].querySelector('.reg-time').textContent = 'Just now';
-        
+
         // Add animation
         regItems[0].style.animation = 'none';
-        regItems[0].offsetHeight; // Trigger reflow
+        // Trigger reflow
+        void regItems[0].offsetWidth;
         regItems[0].style.animation = 'slideDown 0.3s ease';
+
+        // Increment counters
+        updateRegistrationCount();
     }
-    
+
     function updateTime(timeStr) {
         if (timeStr === 'Just now') return '1 min ago';
-        if (timeStr === '1 min ago') return '2 min ago';
-        if (timeStr === '2 min ago') return '3 min ago';
+        const match = timeStr.match(/(\d+)\s*min ago/);
+        if (match) {
+            const n = Math.min(59, parseInt(match[1], 10) + 1);
+            return `${n} min ago`;
+        }
         return timeStr;
     }
-    
-    // Update registrations every 15-30 seconds
-    setInterval(updateRecentRegs, Math.random() * 15000 + 15000);
+
+    // Sync seats immediately and perform a first update so UI feels alive
+    syncInitialRemaining();
+    updateRecentRegs();
+
+    // Continue updating every 5s
+    setInterval(updateRecentRegs, 5000);
 }
 
 function updateRegistrationCount() {
