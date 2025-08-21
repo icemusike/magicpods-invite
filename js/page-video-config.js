@@ -17,7 +17,8 @@
             // Use teaser video for the register page
             return {"video":{"type":"vimeo","id":"1110036971"},"placeholder":{"type":"vimeo","id":"1110036971"},"target":"all","action":"restart"};
         } else if (pathname.includes('webinar-confirmation')) {
-            return {"video":{"type":"vimeo","id":"1108075811"},"placeholder":{"type":"vimeo","id":"1108075811"},"target":"all","action":"restart"};
+            // Use teaser video on confirmation pages
+            return {"video":{"type":"vimeo","id":"1110036971"},"placeholder":{"type":"vimeo","id":"1110036971"},"target":"all","action":"restart"};
         } else {
             // Default for index.html and other pages
             return {"video":{"type":"vimeo","id":"1107663505"},"placeholder":{"type":"vimeo","id":"1107663505"},"target":"all","action":"restart"};
