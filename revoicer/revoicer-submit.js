@@ -42,23 +42,41 @@
 					source: 'revoicer'
 				};
 
-				var resp = await fetch('https://callflujent.app.n8n.cloud/webhook/6603d99b-0c38-4dd5-bb74-c80050ed00ac', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					keepalive: true,
-					body: JSON.stringify(payload)
-				});
 
-				if (!resp.ok) {
-					throw new Error('Webhook response not OK');
+				// Try to send without CORS preflight
+				var endpoint = 'https://callflujent.app.n8n.cloud/webhook/6603d99b-0c38-4dd5-bb74-c80050ed00ac';
+				var formBody = new URLSearchParams(payload).toString();
+
+				var sent = false;
+				try {
+					if (navigator.sendBeacon) {
+						var blob = new Blob([formBody], { type: 'application/x-www-form-urlencoded;charset=UTF-8' });
+						sent = navigator.sendBeacon(endpoint, blob);
+					}
+				} catch (_) { /* ignore */ }
+
+				if (!sent) {
+					try {
+						await fetch(endpoint, {
+							method: 'POST',
+							mode: 'no-cors',
+							headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+							keepalive: true,
+							body: formBody
+						});
+					} catch (_) { /* ignore network errors, proceed to redirect */ }
 				}
 
-				// On success, redirect to confirmation with params (project root)
+				// Redirect to confirmation with params (project root)
 				var qs = new URLSearchParams({ fullname: firstName, email: email });
 				window.location.href = '../webinar-confirmation-rv.html?' + qs.toString();
 			} catch (err) {
-				console.error('Revoicer submit error:', err);
-				alert('Registration failed. Please try again.');
+				console.error('Revoicer submit error (non-blocking):', err);
+				// Proceed with redirect even if request visibility is limited by CORS
+				try {
+					var qs2 = new URLSearchParams({ fullname: firstName, email: email });
+					window.location.href = '../webinar-confirmation-rv.html?' + qs2.toString();
+				} catch (_e) { /* ignore */ }
 			} finally {
 				if (submitBtn) {
 					submitBtn.innerHTML = originalBtnHtml;
