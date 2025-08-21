@@ -35,11 +35,13 @@
 					submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Registering...';
 				}
 
+				var qsUrl = new URLSearchParams(window.location.search);
 				var payload = {
 					firstName: firstName,
 					email: email,
 					page: window.location.href,
-					source: 'revoicer'
+					source: 'revoicer',
+					aid: qsUrl.get('aid') || undefined
 				};
 
 
@@ -69,13 +71,13 @@
 
 				// Redirect to confirmation with params (project root)
 				var qs = new URLSearchParams({ fullname: firstName, email: email });
-				window.location.href = '../webinar-confirmation-rv.html?' + qs.toString();
+				window.location.href = '/webinar-confirmation-rv.html?' + qs.toString();
 			} catch (err) {
 				console.error('Revoicer submit error (non-blocking):', err);
 				// Proceed with redirect even if request visibility is limited by CORS
 				try {
 					var qs2 = new URLSearchParams({ fullname: firstName, email: email });
-					window.location.href = '../webinar-confirmation-rv.html?' + qs2.toString();
+					window.location.href = '/webinar-confirmation-rv.html?' + qs2.toString();
 				} catch (_e) { /* ignore */ }
 			} finally {
 				if (submitBtn) {
