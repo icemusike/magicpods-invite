@@ -41,8 +41,11 @@
 					email: email,
 					page: window.location.href,
 					source: 'revoicer',
-					aid: qsUrl.get('aid') || undefined
+					aid: qsUrl.get('aid') || ''
 				};
+				if (!payload.aid) {
+					delete payload.aid;
+				}
 
 
 				// Try to send without CORS preflight
