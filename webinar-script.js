@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Countdown Timer Functionality
 function initCountdownTimers() {
-    // Set the webinar date - August 23, 2025 10:00 AM EST
-    const webinarDate = new Date('Aug 23, 2025 10:00:00 EST').getTime();
+    // Set the webinar date - August 23, 2025 10:00 AM ET (EDT is UTC-4)
+    const webinarDate = new Date('2025-08-23T10:00:00-04:00').getTime();
     
     // Update both top and bottom timers
     const topTimer = document.getElementById('top-timer');
